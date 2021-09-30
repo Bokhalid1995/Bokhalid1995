@@ -1,0 +1,229 @@
+<style>
+    .page-item:hover {
+        cursor: pointer;
+    }
+    
+    .app-body {
+        margin: 0px;
+    }
+</style>
+<div class="app-body animated fadeIn ">
+    <main class="d-block align-items-center container">
+        <div class="card row" id="RegistryForma">
+            <div class="card-header">
+                <strong><i class="icon-plus"></i> {{ 'REGISTERTITLE' | translate }}</strong>
+                <div class="card-header-actions">
+                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
+                        <small className="text-muted">docs</small>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body col-md-10 mx-auto">
+                <form #formRegister="ngForm">
+                    <p class="text-muted">{{ 'REGISTERDETAILS' | translate }}</p>
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                                </div>
+                                <input type="text" name="nameen" class="form-control" placeholder="username" #nameen="ngModel" [(ngModel)]="service.registerDetails.nameen" autocomplete="username" required>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                </div>
+                                <input type="text" name="password" class="form-control" placeholder="Password" #password="ngModel" [(ngModel)]="service.registerDetails.password" autocomplete="new-password" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div [ngClass]="{'input-group-prepend': true, 'classInvalid': classInvalid}">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                </div>
+                                <input type="text" name="repasswordcheck" [ngClass]="{'form-control': true, 'classInvalid': classInvalid}" placeholder="Re-enter Password" [(ngModel)]="repasswordcheck" autocomplete="new-password" required>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Ar</span>
+                                </div>
+                                <input type="text" name="name" class="form-control" placeholder="Arabic Name" autocomplete="" #name="ngModel" [(ngModel)]="service.registerDetails.name" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                                </div>
+                                <select class="form-control" name="unitid" #repassword="ngModel" [(ngModel)]="service.registerDetails.unitid" autocomplete="username" required>
+                                   <option value="0"   disabled ng-selected>--Select Unit--</option>
+                                   <option *ngFor="let unit of unitsData" value="{{unit.id}}"> {{unit.name}}</option>
+                                 </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
+                                </div>
+                                <select class="form-control" name="depatmentid" #repassword="ngModel" [(ngModel)]="service.registerDetails.depatmentid" autocomplete="username" required>
+                  <option value="0" selected disabled>--Select Department--</option>
+                  <option *ngFor="let dept of deptsData" value="{{dept.id}}"> {{dept.name}}</option>
+                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">ID</span>
+                                </div>
+                                <input type="text" name="id" class="form-control" placeholder="User ID" #id="ngModel" [(ngModel)]="service.registerDetails.id" autocomplete="new-password" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-map"></i></span>
+                                </div>
+                                <select class="form-control" name="sectionid" #sectionid="ngModel" [(ngModel)]="service.registerDetails.sectionid" autocomplete="username" required>
+                  <option value="0" selected disabled>--Select Section--</option>
+                  <option *ngFor="let sect of sectionData" value="{{sect.id}}"> {{sect.name}}</option>
+                </select>
+                            </div>
+                            <div class="input-group ">
+
+                                <div class="col-md-6">
+                                    <button type="button" (click)="resetForm(formRegister)" class="btn btn-block btn-outline-info">{{Reset}}  </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" (click)="onSaveRecords(formRegister)" class="btn btn-block  btn-success">{{submitt}}</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <div class="card row">
+            <div class="card-body col-md-11 mx-auto">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4> <b> Users Data</b></h4>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <form action="" method="post" class="form-inline">
+                            <div class="form-group">
+                                <input #filterBy type="email" id="if-email" name="if-email" class="form-control m-1" placeholder="Search by Username or ID" (change)="filterBy.value?getUser(filterBy.value):allUers() " autocomplete="email" required>
+                                <button type="button" data-toggle="modal" (click)="searchEmpty?allUers() : getUser(filterBy.value)" class="btn  btn-info">search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <table class="table table-sm table-bordered">
+                        <thead class="bg-info  ">
+                            <tr class="text-center mt-2">
+                                <th>User ID</th>
+                                <th>Username Arabic</th>
+                                <th>Username</th>
+                                <th>Date registered</th>
+                                <th>Preview</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of usersData" class="text-center animated fadeIn">
+                                <td>{{user.id}}</td>
+                                <td>{{user.nameen}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.creationdate | date:'mediumDate'}}</td>
+                                <td><button class="btn btn-outline-info p-1 h-50" (click)="showDataUser(user)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
+                                <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(user)"><i class="fa fa-pencil-square"></i> Update</button></td>
+                                <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(user.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex align-content-end mx-auto">
+                        <ul class="pagination">
+                            <li class="page-item "><a class="page-link bg-info" (click)="counterMinus()"><i class="fa fa-chevron-left"></i> Prev </a></li>
+                            <li class="page-item "><a class="page-link bg-info" (click)="counterPlus()"> Next <i class="fa fa-chevron-right"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+        </div>
+
+    </main>
+
+</div>
+<div bsModal #successModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" #confirmRegisterModal>
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure ?</h4>
+
+            </div>
+            <div class="modal-body">
+                <p>{{ 'REGISTUSERNAME' | translate }} : {{ service.registerDetails.nameen }}</p>
+                <p>{{ 'REGISTNATID' | translate }} : {{ service.registerDetails.password }}</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary ml-2" (click)="successModal.hide()">No</button>
+                <button type="button" (click)="onSaveRecords(formRegister)" class="btn btn-success">Yes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- /.Preview modal -->
+<div bsModal #PreviewUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="cardUser">
+                    <nav>
+
+                        Active
+
+                    </nav>
+                    <div class="photo text-left">
+                        <h2><i class="fa fa-time"></i> Created On: {{ createdOnPrev | date:'shortDate' }}</h2>
+                        <h2><i class="fa fa-user"></i> Created By: {{ createdByPrev }}</h2>
+                    </div>
+                    <div class="description">
+                        <h2><i class="fa fa-user"></i> {{ namePrev}}</h2>
+                        <h4>Name Arabic : {{ nameArPrev}}</h4>
+                        <h4>Departments : {{ deptPrev}}</h4>
+                        <p> Unit : {{ unitPrev}}</p>
+                        <button (click)="PreviewUser.hide()">Close</button>
+                        <button>login Details</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

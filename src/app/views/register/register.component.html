@@ -1,0 +1,92 @@
+<div class="app-body animated fadeIn">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto mb-2">
+                    <div class="card-group">
+                        <div class="card p-4">
+                            <img class="" src="https://fmoh.gov.sd/assets/img/header.png" alt="">
+                        </div>
+                    </div>
+                    <div class="card-group mt-2">
+                        <div class="card bg-info p-4">
+                            <div id="info" class="text-center">
+                                <h3>تسجيل بياناتك !</h3>
+                                <hr> تسجيل البيانات تسهل للمستخدم من متابعة الاجراءات اللازمه في التطبيق
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mx-auto">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <form #formRegister="ngForm">
+                                <h1>{{ 'REGISTERTITLE' | translate }}</h1>
+                                <p class="text-muted">{{ 'REGISTERDETAILS' | translate }}</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="{{ 'REGISTUSERNAME' | translate }}" autocomplete="username" name="nameen" #name="ngModel" [(ngModel)]="service.registerDetails.nameen" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="{{ 'REGISTNATID' | translate }}" autocomplete="" name="name" #name="ngModel" [(ngModel)]="service.registerDetails.name" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-phone"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" placeholder="{{ 'REGISTPHONE' | translate }}" autocomplete="new-password" name="id" #name="ngModel" [(ngModel)]="service.registerDetails.unitid" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="{{ 'REGISTPASS' | translate }}" autocomplete="new-password" name="password" #name="ngModel" [(ngModel)]="service.registerDetails.password" required>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    </div>
+                                    <input type="text" name="repasswordcheck" [ngClass]="{'form-control': true, 'classInvalid': classInvalid}" placeholder="{{ 'REGISTREPPASS' | translate }}" [(ngModel)]="repasswordcheck" autocomplete="new-password" required>
+
+                                </div>
+
+                                <button type="button" data-toggle="modal" (click)="onSaveRecords(formRegister)" [disabled]="formRegister.invalid" class="btn btn-block btn-success">{{ 'REGISTERBTN' | translate }}</button>
+                                <button type="button" routerLink="/login" class="btn btn-block btn-link px-0">{{ 'HAVEACCOUNT' | translate }}</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div bsModal #ContinuBookig="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">تم تسجيل بياناتك</h4>
+
+            </div>
+            <div class="modal-body">
+                <p>{{ 'REGISTUSERNAME' | translate }} : welcome {{ service.registerDetails.nameen }} you are registred now , you can choose your nerby center and book a day to take your vaccien </p>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary ml-2" (click)="ContinuBookig.hide()">اغلاق</button>
+                <button type="button" routerLink="/patientdata" class="btn btn-success">متابعة</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -1,0 +1,77 @@
+<div class="app-body animated fadeIn">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto mb-2">
+                    <div class="card-group">
+                        <div class="card p-4 text-center">
+                            <img class="" src="assets/img/header1.png" alt="">
+                            <div class="row d-flex justify-content-center mt-3">
+                                <div class="col-md-3 input-group">
+                                    <label class="p-2"><i class="icon-globe "></i></label>
+                                    <select class="form-control p-1 border-0" (change)="changeLang($event.target.value)">
+                    <option value="en" [selected]="lang == 'en'">English</option>
+                    <option value="ar" [selected]="lang == 'ar'">العربية</option>
+                  </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card-group">
+                        <div class="card p-4">
+                            <div class="card-body">
+                                <form #formLogin="ngForm" (submit)="onSubmitt(formLogin)">
+                                    <h4>{{ 'LOGIN-TITLE' | translate}} </h4>
+                                    <hr>
+                                    <p class="text-muted" id="header-login">{{ 'LOGIN-HEADER' | translate}}</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">ID</span>
+                                        </div>
+                                        <input type="" class="form-control" placeholder="{{ 'User ID' | translate}}" name="id" #id="ngModel" [(ngModel)]="service.loginDetails.id" (keyup.enter)="findUserName(id.value)" required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="{{ 'USERNAME' | translate}}" name="nameen" #username="ngModel" [(ngModel)]="service.loginDetails.nameen" readonly required>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-lock"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="{{ 'PASSWORD' | translate}}" name="password" #Password="ngModel" [(ngModel)]="service.loginDetails.password" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <button type="button" class="btn btn-link px-0">{{ 'FORGOTPASS' | translate}}</button>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <button type="submit" class="btn btn-primary px-4" [disabled]="formLogin.invalid">{{ 'LOGINBTN' |
+                        translate}}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-primary py-5 ">
+                            <div class="card-body text-center">
+                                <div>
+                                    <h2>{{ 'MAKEUSER' | translate}}</h2>
+                                    <p>{{ 'ABOUTAPP' | translate}}</p>
+                                    <button type="button" routerLink="/register" class="btn btn-primary active mt-3"> {{ 'REGISTERNOW' |
+                    translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
