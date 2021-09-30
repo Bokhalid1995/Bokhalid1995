@@ -11,6 +11,7 @@ import { freeSet } from '@coreui/icons';
   providers: [IconSetService],
 })
 export class AppComponent implements OnInit {
+  isAuthenticated: string;
   constructor(
     private router: Router,
     public iconSet: IconSetService
@@ -20,7 +21,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    if (this.isAuthenticated == null) {
+      this.router.navigateByUrl('/login');
+    }
     this.router.events.subscribe((evt) => {
+      this.isAuthenticated = localStorage.getItem('token');
+
       if (!(evt instanceof NavigationEnd)) {
         return;
       }

@@ -3,7 +3,7 @@ export class Vaccines {
   name:string = "";
   nameen:string = "";
   scientificname:string = "";
-  manufacturingcountry:number=null;
+  manufacturingcountry:number=0;
   numberofdoses:number=null;
   validityperioddetermine:string = "";
   validityperiod:number=null;

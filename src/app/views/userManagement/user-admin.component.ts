@@ -19,6 +19,8 @@ export class UserAdminComponent implements OnInit {
   repasswordcheck:string = '';
   classInvalid:boolean = false;
   searchEmpty:boolean = true;
+  disableFirst:string ;
+  disableLast:string ;
   lang:string = '';
   submitt:string='Create Account'
   Reset:string="Reset"
@@ -67,6 +69,20 @@ export class UserAdminComponent implements OnInit {
       this.classInvalid = true;
     } else {
       this.classInvalid = false;
+      if(this.submitt == "Update"){
+        
+        return this.service1.UpdateUser(formData.value , formData.value.id).subscribe(
+          response => {
+            formData.reset();
+            this.submitt = "Create Account";
+            this.toastr.success("Section Updated Successfully", "Done!");
+            this.allUers();
+          },
+          error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
+        );
+      
+    }else{
+      this.classInvalid = false;
       this.service.registerResponse(formData.value).subscribe(
         (res: any) => {
           this.toastr.success("Data registred Successfully", "Done!");
@@ -82,6 +98,8 @@ export class UserAdminComponent implements OnInit {
           }
         }
       );
+    }
+ 
     }
   }
 
@@ -129,7 +147,10 @@ export class UserAdminComponent implements OnInit {
       this.usersData = res as registerProcess;
       if (!Object.keys(this.usersData).length) {
         this.usersData = this.lastPage;
-        this.toastr.warning("This is The last page", "warning!");
+        if(this.pager <= 1 )
+        this.disableFirst = "disabled" ;
+        else
+        this.disableLast = "disabled" ;
       }
     });
 
@@ -137,13 +158,14 @@ export class UserAdminComponent implements OnInit {
   }
   fillForm(users:registerProcess){
     this.submitt = "Update";
-    this.Reset = "Reset"
+    
     this.Reset = "Cancel Update"
 this.service.registerDetails = Object.assign({} , users) ;
   }
   resetForm(form:NgForm){
     if(this.Reset == "Cancel Update"){
     this.submitt = "Create Account";
+    this.Reset = "Reset"
     form.reset();
   }
     else { form.reset(); }
@@ -156,6 +178,7 @@ this.service.registerDetails = Object.assign({} , users) ;
       this.pager = 1;
     } else {
       this.pager = this.pager + 1;
+      this.disableLast = "enabled" ;
       this.getUsersPgination(this.pager);
     }
     this.lastPage = this.usersData;
@@ -165,6 +188,7 @@ this.service.registerDetails = Object.assign({} , users) ;
       this.pager = 1;
     } else {
       this.pager = this.pager - 1;
+      this.disableFirst ="enabled";
       this.getUsersPgination(this.pager);
     }
     this.lastPage = this.usersData;

@@ -62,6 +62,10 @@ export class PublicServiciesService {
     const params = {'id' : id};
     return this.http.put(this.baseURL + "UserLogin/UpdateUserDeleted?id=" + id, {responseType : "text"});
  }
+ UpdateUser(form:any,id:any){
+  const params = {'id' : id};
+  return this.http.put(this.baseURL + "UserLogin/UpdatUser?Id=" + id, form ,{responseType : "blob"});
+}
  getUserBypage(page:any){
   let params = new HttpParams().set('Id',page);
   return this.http.get(this.baseURL + "UserLogin/UsersPagenation",{params:{'PageNumber': page , 'PageSize' : '7'}});

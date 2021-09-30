@@ -5,6 +5,7 @@
     "LOGIN-TITLE": "Login Details",
     "LOGIN-HEADER": "Corona Viruse Registration app",
     "USERNAME": "UserName",
+    "USERID": "User ID",
     "PASSWORD": "Password",
     "LOGINBTN": "Login",
     "FORGOTPASS": "Forgot Password?",
@@ -33,7 +34,7 @@
     "NATID": "National ID",
     "GENDER": "--select gender--",
     "ADDRESS": "Address",
-    "STATUS": "STatus",
+    "STATUS": "Status",
     "WORKININMOH": "health field Employee?",
     "YOURROLE": "Your role",
     "BOOKDETIALS": "Reservision Deatils",
@@ -44,7 +45,11 @@
     "DOSET": "--Dose Type--",
     "DOSEN": "--Dose Name--",
     "ATTDATE": "Attendas Date",
-    "BOOKBTN": "Book Now"
+    "BOOKBTN": "Book Now",
+
+    "STATESCREEN": "------------comment---------------",
+    "STATEAR": "State Name Arabic",
+    "STATEEN": "State Name English"
 
 
 }

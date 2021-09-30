@@ -11,7 +11,7 @@ import { PublicServiciesService } from '../../shared/public-servicies.service';
   templateUrl: './vaccines.component.html'
 })
 export class VaccinesComponent implements OnInit {
-
+  Reset:string="Reset"
   submitt:string = "Create Vaccine";
   VaccinesData:Vaccines = new Vaccines();
   
@@ -27,7 +27,8 @@ export class VaccinesComponent implements OnInit {
         return this.service.UpdateVaccine(formVaccine.value , formVaccine.value.id).subscribe(
           response => {
             formVaccine.reset();
-            this.submitt = "Create Vaccine";
+            this.Reset = "Reset"
+            this.submitt = "Create New";
             this.toastr.success("Vaccine Updated Successfully", "Done!");
             this.ShowAll();
           },
@@ -64,6 +65,16 @@ export class VaccinesComponent implements OnInit {
     );
 
   }
+  resetForm(form:NgForm){
+    if(this.Reset == "Cancel Update"){
+    this.submitt = "Create New";
+    this.Reset = "Reset"
+    form.reset();
+  }
+    else { form.reset(); }
+    
+
+  }
   
   ShowAll(){
     this.service.getVaccines().subscribe((res: {}) => {
@@ -72,6 +83,7 @@ export class VaccinesComponent implements OnInit {
   }
   fillForm(Vaccines:Vaccines){
     this.submitt = "Update";
+    this.Reset = "Cancel Update"
     this.service.VaccinesData = Object.assign({} , Vaccines);
   }
 

@@ -55,9 +55,28 @@ html:lang(ar) {
     .tab-area tabset ul {
         padding: 0px;
     }
-    .main {
+    .main .container-fluid {
         margin-left: 0px !important;
         margin-right: 200px !important;
+        text-align: right;
+    }
+    cui-breadcrumb .breadcrumb {
+        margin-left: 0px !important;
+        margin-right: 200px !important;
+        text-align: right;
+        width: 100%;
+    }
+    .sidebar-nav {
+        text-align: right;
+        direction: rtl;
+        .nav-icon {
+            margin-left: 5px;
+        }
+    }
+    app-footer {
+        margin-left: 0px !important;
+        margin-right: 200px !important;
+        text-align: right;
     }
 }
 
@@ -65,6 +84,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+a {
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
 }
 
 
