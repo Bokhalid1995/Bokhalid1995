@@ -21,12 +21,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.isAuthenticated = localStorage.getItem('token');
     if (this.isAuthenticated == null) {
       this.router.navigateByUrl('/login');
     }
     this.router.events.subscribe((evt) => {
-      this.isAuthenticated = localStorage.getItem('token');
+    
 
       if (!(evt instanceof NavigationEnd)) {
         return;

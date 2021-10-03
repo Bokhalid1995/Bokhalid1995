@@ -25,189 +25,108 @@
                     </div>
                 </div>
                 <div class="col-md-6 mx-auto">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <!-- <h1>{{ 'REGISTERTITLE' | translate }}</h1>-->
+                            <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'BOOKDETIALS' | translate }}</h4>
+                            <hr class="my-2">
+                            <form #formRegister="ngForm" id="registerForma" class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="name" class="mb-1">{{ 'NATID' |  translate }}</label>
+                                        <div class="input-group  mb-2">
+                                            <input type="text" class="form-control" placeholder="" autocomplete="Username" required>
+                                        </div>
+
+                                        <label for="name" class="mb-1">{{ 'LOCALAREA' |  translate }}</label>
+                                        <div class="input-group mb-2">
+                                            <select class="form-control p-1" autocomplete="new-password" required>
+                                                   
+                                                        <option *ngFor="let locality of localitiesData" value="">{{ locality.nameen }}</option>
+                                                </select>
+                                        </div>
+
+                                        <label for="name" class="mb-1">{{ 'DOSEN' |  translate }}</label>
+                                        <div class="input-group ">
+                                            <select class="form-control p-1" autocomplete="new-password" required>
+                                               
+                                                <option *ngFor="let vaccine of vaccinesData" value="">{{ vaccine.nameen }}</option>
+                                     
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="name" class="mb-1">{{ 'STATE' |  translate }}</label>
+                                        <div class="input-group mb-2">
+                                            <select class="form-control p-1" name="stateid" autocomplete="new-password" (change)="getCitiesByState(stateid.value)" required>
+                                                    <option *ngFor="let state of statesData" value="{{ state.id }}">{{ state.nameen }}</option>
+                                               
+                                                </select>
+                                        </div>
+
+                                        <label for="name" class="mb-1">{{ 'CENTERS' |  translate }}</label>
+                                        <div class="input-group mb-2">
+                                            <select class="form-control p-1" autocomplete="new-password" required>
+                                                   
+                                                    <option *ngFor="let center of statesData" value="">{{ center.nameen }}</option>
+                                                </select>
+                                        </div>
+
+                                        <label for="name" class="mb-1">{{ 'DOSET' |  translate }}</label>
+                                        <div class="input-group">
+                                            <select class="form-control p-1" autocomplete="new-password" required>
+                                            
+                                                <option value="">Dose 1</option>
+                                                <option value="">Dose 2</option>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="name" class="mb-1">Chronic Disease</label>
+                                        <div class="input-group ">
+                                            <ng-select class="form-control p-0 border-0" style="border: 0px solid #eee;" name="chronicDisease" [items]="list" bindLabel="name" placeholder="" appendTo="body" [multiple]="true">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 ">
+
+                                        <label class="">{{ 'ATTDATE' | translate }}</label>
+
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" autocomplete="username" required>
+                                            <input type="time" class="form-control" id="appt" name="appt" min="09:00" max="18:00" required>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <button type="button" class="btn btn-block btn-info" (click)="stepper.reset()"><i class="fa fa-arrow-left mr-3"></i>{{ 'Back' |
+                                                translate }}</button>
+
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <button type="button" routerLink="/dataentry" class="btn btn-block btn-success">{{ 'BOOKBTN' |
+                                                translate }}<i class="fa fa-check ml-3"></i></button>
+
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
 
                     <!-- Nav tabs -->
-                    <mat-horizontal-stepper orientation="vertical" [linear]="" #stepper class="mx-1">
-                        <mat-step [stepControl]="" label="{{ 'BOOKTITLE' | translate }}">
-                            <div class="card mx-4">
-                                <div class="card-body ">
-                                    <form>
-                                        <div class="row">
-                                            <div class="input-group col-md-12 ">
-
-                                                <input type="text" class="form-control" placeholder="{{ 'FULLNAME' |  translate }}" autocomplete="username" required>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="text" class="form-control" placeholder="{{ 'AGE' |  translate }}" autocomplete="username" required>
-                                                </div>
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="text" class="form-control" placeholder="{{ 'NATIONALITY' |  translate }}" autocomplete="email" required>
-                                                </div>
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="password" class="form-control" placeholder="{{ 'NATID' |  translate }}" autocomplete="new-password" required>
-                                                </div>
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="password" class="form-control" placeholder="{{ 'ADDRESS' |  translate }}" autocomplete="new-password" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="text" class="form-control" placeholder="{{ 'PHONE' |  translate }}" autocomplete="username" required>
-                                                </div>
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="text" class="form-control" placeholder="{{ 'JOB' |  translate }}" autocomplete="email" required>
-                                                </div>
-                                                <div class="input-group  mb-2">
-                                                    <select class="form-control p-1" autocomplete="new-password" required>
-                                                            <option value="" selected disabled>{{ 'GENDER' | translate
-                                                                }}</option>
-                                                            <option value="">male</option>
-                                                            <option value="">female</option>
-                                                        </select>
-                                                </div>
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="password" class="form-control" placeholder="{{ 'STATUS' |  translate }}" autocomplete="new-password" required>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-group col-md-6 px-3  mb-2">
-                                                <div class="form-check form-check-inline ">
-                                                    <input type="checkbox" class="form-check-input p-0" placeholder="Full Name" autocomplete="username" required>
-                                                    <label class="col-form-label">{{ 'WORKININMOH' | translate }}</label>
-                                                </div>
-
-                                            </div>
-                                            <div class="input-group col-md-6  mb-2">
-
-                                                <input type="text" class="form-control" placeholder="{{ 'YOURROLE' |  translate }}" autocomplete="username" required>
-                                            </div>
-                                        </div>
-                                        <div class="row d-flex justify-content-end">
-                                            <button type="button" id="nextStep" mat-button matStepperNext class="btn btn-success float-right ">{{ 'Next' | translate }}  <i class="fa fa-arrow-right ml-3"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-
-                        </mat-step>
-                        <mat-step [stepControl]="" label="{{ 'BOOKDETIALS' | translate }}">
-                            <div class="card mx-4" id="patientdata">
-                                <div class="card-body ">
-                                    <form>
-                                        <div class="row">
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-
-                                                <div class="input-group  mb-2">
-
-                                                    <input type="text" class="form-control" placeholder="{{ 'NATID' |  translate }}" autocomplete="Username" required>
-                                                </div>
-                                                <div class="input-group mb-2">
-
-                                                    <select class="form-control p-1" autocomplete="new-password" required>
-                                                            <option value="" selected disabled>{{ 'LOCALAREA' |
-                                                                translate }}</option>
-                                                                <option *ngFor="let locality of localitiesData" value="">{{ locality.nameen }}</option>
-                                                        </select>
-                                                </div>
-
-
-                                                <div class="input-group ">
-                                                    <select class="form-control p-1" autocomplete="new-password" required>
-                                                        <option value="" selected disabled>{{ 'DOSEN' | translate }}
-                                                        </option>
-                                                        <option *ngFor="let vaccine of vaccinesData" value="">{{ vaccine.nameen }}</option>
-                                             
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group mb-2">
-                                                    <select class="form-control p-1" name="stateid" autocomplete="new-password" required>
-                                                            <option value="" selected disabled>{{ 'STATE' | translate }}
-                                                            </option>
-                                                            <option *ngFor="let state of statesData" value="{{ state.id }}">{{ state.nameen }}</option>
-                                                       
-                                                        </select>
-                                                </div>
-
-                                                <div class="input-group mb-2">
-
-                                                    <select class="form-control p-1" autocomplete="new-password" required>
-                                                            <option value="" selected disabled>{{ 'CENTERS' | translate
-                                                                }}</option>
-                                                            <option *ngFor="let center of statesData" value="">{{ center.nameen }}</option>
-                                                        </select>
-                                                </div>
-                                                <div class="input-group">
-                                                    <select class="form-control p-1" autocomplete="new-password" required>
-                                                        <option value="" selected disabled>{{ 'DOSET' | translate }}
-                                                        </option>
-                                                        <option value="">Dose 1</option>
-                                                        <option value="">Dose 2</option>
-                                                    </select>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="input-group col-md-12 ">
-                                                <ng-select class="form-control p-0 border-0" style="border: 0px solid #eee;" name="chronicDisease" [items]="list" bindLabel="name" placeholder="Chronic Disease" appendTo="body" [multiple]="true">
-                                                </ng-select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="input-group mx-1">
-                                                    <label class="">{{ 'ATTDATE' | translate }}</label>
-                                                </div>
-                                                <div class="input-group">
-                                                    <input type="date" class="form-control" autocomplete="username" required>
-                                                    <input type="time" class="form-control" id="appt" name="appt" min="09:00" max="18:00" required>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                <button type="button" class="btn btn-block btn-info" mat-button matStepperPrevious (click)="stepper.reset()"><i class="fa fa-arrow-left mr-3"></i>{{ 'Back' |
-                                                        translate }}</button>
-
-                                            </div>
-                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                <button type="button" routerLink="/dataentry" class="btn btn-block btn-success">{{ 'BOOKBTN' |
-                                                        translate }}<i class="fa fa-check ml-3"></i></button>
-
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </mat-step>
-
-
-                    </mat-horizontal-stepper>
 
 
                 </div>

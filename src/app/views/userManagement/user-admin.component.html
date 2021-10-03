@@ -19,8 +19,19 @@
                 </div>
             </div>
             <div class="card-body col-md-10 mx-auto">
-                <form #formRegister="ngForm">
-                    <p class="text-muted">{{ 'REGISTERDETAILS' | translate }}</p>
+                <form #formRegister="ngForm" class="container">
+                    <div class="row">
+                        <p class="text-muted col-md-6">{{ 'REGISTERDETAILS' | translate }}</p>
+                        <div class="col-md-6 text-right">
+                            <label class="switch switch-label switch-success">
+                             <input type="checkbox" class="switch-input" checked>
+                             <span class="switch-slider" data-checked="Active" data-unchecked="Disable"></span>
+                               </label>
+
+                        </div>
+
+                    </div>
+
                     <div class="row">
 
                         <div class="col-md-4">

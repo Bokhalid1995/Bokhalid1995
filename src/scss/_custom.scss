@@ -15,7 +15,8 @@ html:lang(ar) {
     h5,
     p,
     b,
-    table {
+    table,
+    form {
         text-align: right;
         font-family: 'cairo'!important;
     }
@@ -106,6 +107,10 @@ input[type=number] {
     padding: 5px;
     padding-left: 5px !important;
     padding-right: 5px !important;
+}
+
+.mat-horizontal-content-container {
+    padding: 0px !important;
 }
 
 body {
@@ -258,7 +263,7 @@ table {
 table::-webkit-scrollbar {
     width: 2px;
     height: 8px;
-    background-color: #aaa;
+    background-color: #aaeeea;
 }
 
 .tab-area tabset tab::-webkit-scrollbar-thumb,
@@ -266,9 +271,14 @@ table::-webkit-scrollbar-thumb {
     background: #2F96B4;
 }
 
-.form-control {
+#registerForma .form-control {
     outline: none;
     box-shadow: none !important;
+    border-bottom: 4px solid #eee;
+}
+
+#registerForma .form-control:focus {
+    border-bottom: 4px solid #63c2de;
 }
 
 #header {

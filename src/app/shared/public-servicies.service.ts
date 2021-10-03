@@ -63,8 +63,9 @@ export class PublicServiciesService {
     return this.http.put(this.baseURL + "UserLogin/UpdateUserDeleted?id=" + id, {responseType : "text"});
  }
  UpdateUser(form:any,id:any){
-  const params = {'id' : id};
-  return this.http.put(this.baseURL + "UserLogin/UpdatUser?Id=" + id, form ,{responseType : "blob"});
+  const params = {'id' : id , 'status' : 'Active'};
+  const Data = Object.assign(form, params);
+  return this.http.put(this.baseURL + "UserLogin/UpdatUser?Id=" + id, Data ,{responseType : "blob"});
 }
  getUserBypage(page:any){
   let params = new HttpParams().set('Id',page);
@@ -87,7 +88,8 @@ getVaccines(){
   return this.http.get(this.baseURL + "Vaccine/Vaccines");
 }
 addCityResponse(form:any){
-  return this.http.post(this.baseURL + "City/Create City" , form , {responseType: "blob"} );
+ 
+  return this.http.post(this.baseURL + "City/Create City" , form  , {responseType: "blob"} );
 }
 deleteCity(id:any){
   const params = {'id' : id};
@@ -151,7 +153,7 @@ deleteVaccine(id:any){
 }
 UpdateVaccine(form:any,id:any){
   const params = {'id' : id};
-  return this.http.put(this.baseURL + "Vaccine/UpdateVaccine?Id=" + id, form ,{responseType : "blob"});
+  return this.http.put(this.baseURL + "Vaccine/UpdateVaccine?Id=" + id, form  ,{responseType : "blob"});
 }
 
 }

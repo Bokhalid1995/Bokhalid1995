@@ -32,6 +32,8 @@ export class LoginProcessService {
           localStorage.setItem('token', user.token);
           this.decodeToken= this.jwtHelper.decodeToken(user.token);
           localStorage.setItem('username',this.decodeToken.unique_name);
+          localStorage.setItem('userid',this.decodeToken.nameid);
+          console.log(this.decodeToken);
         }
       })
     );
@@ -41,8 +43,14 @@ export class LoginProcessService {
     return this.http.get(this.baseURL + "GetUserName",{params:{'Id': id} , responseType: 'text'});
   }
   registerResponse(registerDetails:any) {
+
     return this.http.post(this.baseURL + "Register" , registerDetails );
   }
+  registerAdminResponse(registerDetails:any,enteredbyid:any) {
+    const params = {'enteredbyid' : enteredbyid };
+     const Data = Object.assign(registerDetails, params);
+     return this.http.post(this.baseURL + "Register" , Data );
+   }
     
     
 }

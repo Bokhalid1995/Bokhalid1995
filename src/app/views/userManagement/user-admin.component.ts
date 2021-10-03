@@ -45,7 +45,7 @@ export class UserAdminComponent implements OnInit {
   ngOnInit(): void {
     this.getUsersPgination(this.pager);
     this.isAuthenticated = localStorage.getItem('token');
-
+    this.useractive = localStorage.getItem('userid');
     if (this.isAuthenticated == null) {
       this.rout.navigateByUrl('/login');
     }
@@ -83,7 +83,7 @@ export class UserAdminComponent implements OnInit {
       
     }else{
       this.classInvalid = false;
-      this.service.registerResponse(formData.value).subscribe(
+      this.service.registerAdminResponse(formData.value , this.useractive).subscribe(
         (res: any) => {
           this.toastr.success("Data registred Successfully", "Done!");
           this.allUers();

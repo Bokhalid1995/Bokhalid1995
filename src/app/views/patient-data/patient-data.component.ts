@@ -37,7 +37,7 @@ export class PatientDataComponent implements OnInit {
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
 
-    this.service.getStates().subscribe((res: {}) => {
+    /*this.service.getStates().subscribe((res: {}) => {
       this.statesData = res as States;
     })
     this.service.getCities().subscribe((res: {}) => {
@@ -51,9 +51,13 @@ export class PatientDataComponent implements OnInit {
     })
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;
+    })*/
+  }
+  getCitiesByState(Stateid:number){
+    this.service.getCitiesState(Stateid).subscribe((res: {}) => {
+      this.citiesData = res as Cities;
     })
   }
-
   
 
 }
