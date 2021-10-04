@@ -37,10 +37,13 @@ export class PatientDataComponent implements OnInit {
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
 
-    /*this.service.getStates().subscribe((res: {}) => {
+   this.service.getStates().subscribe((res: {}) => {
       this.statesData = res as States;
     })
-    this.service.getCities().subscribe((res: {}) => {
+    this.service.getVaccines().subscribe((res: {}) => {
+      this.vaccinesData = res as Vaccines;
+    })
+   /* this.service.getCities().subscribe((res: {}) => {
       this.citiesData = res as Cities;
     })
     this.service.getLocalities().subscribe((res: {}) => {
@@ -49,15 +52,26 @@ export class PatientDataComponent implements OnInit {
     this.service.getCenters().subscribe((res: {}) => {
       this.CentersData = res as Centers;
     })
-    this.service.getVaccines().subscribe((res: {}) => {
-      this.vaccinesData = res as Vaccines;
-    })*/
+    */
   }
   getCitiesByState(Stateid:number){
     this.service.getCitiesState(Stateid).subscribe((res: {}) => {
       this.citiesData = res as Cities;
     })
   }
-  
-
+  getLocalBycity(cityid:number){
+    this.service.getLocalCity(cityid).subscribe((res: {}) => {
+      this.localitiesData = res as Localities;
+    })
+  }
+  getUnitByLocal(localid:number){
+    this.service.getUnitLocality(localid).subscribe((res: {}) => {
+      this.CentersData = res as Centers;
+    })
+  }
+  getVaccineByUnit(center:number){
+    this.service.getVaccineUnit(center).subscribe((res: {}) => {
+      this.vaccinesData = res as Vaccines;
+    })
+  }
 }

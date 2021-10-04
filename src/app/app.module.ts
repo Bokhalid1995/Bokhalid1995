@@ -61,6 +61,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from "@ng-select/ng-select";
+import { LoginPublicComponent } from './views/login-public/login-public.component';
 
 @NgModule({
   imports: [
@@ -105,6 +106,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
     RegisterComponent,
     PatientDataComponent,
     DataentryComponent,
+    LoginPublicComponent,
     
     
     

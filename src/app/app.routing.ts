@@ -7,6 +7,7 @@ import { DataentryComponent } from './views/dataentry/dataentry.component';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
+import { LoginPublicComponent } from './views/login-public/login-public.component';
 import { LoginComponent } from './views/login/login.component';
 import { PatientDataComponent } from './views/patient-data/patient-data.component';
 import { RegisterComponent } from './views/register/register.component';
@@ -35,6 +36,13 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
+    path: 'login-public',
+    component: LoginPublicComponent,
     data: {
       title: 'Login Page'
     }

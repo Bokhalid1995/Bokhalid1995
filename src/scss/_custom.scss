@@ -139,6 +139,12 @@ body {
     border-radius: 5px;
 }
 
+.classInvalidRegist {
+    border: #BD362F 1px solid;
+    border-bottom: 4px solid #BD362F !important;
+    border-radius: 5px;
+}
+
 .app-body {
     overflow: visible;
 }
@@ -283,8 +289,8 @@ table::-webkit-scrollbar-thumb {
 
 #header {
     background-color: #42b0d1;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    // border-bottom-left-radius: 15px;
+    //   border-bottom-right-radius: 15px;
     padding-bottom: 5px;
     padding-top: 5px;
     color: #fff !important;
@@ -292,13 +298,16 @@ table::-webkit-scrollbar-thumb {
     nav ul li a {
         color: #fff !important;
     }
+    img {
+        height: 60px;
+        width: 180px;
+    }
 }
 
-#main .card {
-    border-top-left-radius: 15px!important;
-    border-top-right-radius: 15px!important;
-}
-
+//#main .card {
+//  border-top-left-radius: 15px!important;
+//  border-top-right-radius: 15px!important;
+//}
 mat-step {
     color: #BD362F;
 }

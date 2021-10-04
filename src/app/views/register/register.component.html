@@ -27,54 +27,58 @@
                     <div class="card ">
                         <div class="card-body ">
                             <!-- <h1>{{ 'REGISTERTITLE' | translate }}</h1>-->
-                            <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'REGISTERDETAILS' | translate }}</h4>
+                            <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'recieptiestDetails' | translate }}</h4>
                             <hr class="my-2">
                             <form #formRegister="ngForm" id="registerForma" class="container">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <label for="name" class="mb-1">{{ 'FULLNAME' |  translate }}</label>
                                         <div class="input-group ">
 
-                                            <input type="text" class="form-control" placeholder="" autocomplete="username" required>
+                                            <input type="text" name="nameen" #nameen="ngModel" [(ngModel)]="service.recieptiestDetails.nameen" class="form-control" autocomplete="username" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="name" class="mb-1">{{ 'FULLNAME' |  translate }} (Arabic)</label>
+                                        <div class="input-group ">
+
+                                            <input type="text" name="name" #name="ngModel" [(ngModel)]="service.recieptiestDetails.name" class="form-control" autocomplete="username" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <label for="name" class="mb-1">{{ 'NATIONALITY' |  translate }}</label>
+                                        <div class="input-group  mb-1">
+                                            <select class="form-control p-1" name="nationalityid" #nationalityid="ngModel" [(ngModel)]="service.recieptiestDetails.nationalityid" autocomplete="new-password" required>
+                                                <option value="1">Sudanese</option>
+                                                <option value="1">Others</option>
+                                            </select>
+                                        </div>
+
+                                        <label for="name" class="mb-1">{{ 'Identity Type' |  translate }}</label>
+                                        <div class="input-group  mb-1">
+                                            <select class="form-control p-1" name="identificationdetailid" #identificationdetailid="ngModel" [(ngModel)]="service.recieptiestDetails.identificationdetailid" autocomplete="new-password" required>
+                                                <option *ngFor="let idtype of IdTypes"  value="{{ idtype.id }}">{{ idtype.nameen }}</option>
+                                                
+                                            </select>
+                                        </div>
+
                                         <label for="name" class="mb-1">{{ 'NATID' |  translate }}</label>
                                         <div class="input-group  mb-1">
-                                            <input type="text" class="form-control" placeholder="" autocomplete="new-password" required>
+                                            <input type="text" class="form-control" name="nationalnumber" #nationalnumber="ngModel" [(ngModel)]="service.recieptiestDetails.nationalnumber" autocomplete="new-password" required>
                                         </div>
-                                        <label for="name" class="mb-1">{{ 'NATIONALITY' |  translate }}</label>
 
-                                        <div class="input-group  mb-1">
-                                            <select class="form-control p-1" autocomplete="new-password" required>
-                                                <option value="" selected disabled></option>
-                                                <option value="">Sudanese</option>
-                                                <option value="">Others</option>
-                                            </select>
-                                        </div>
-                                        <label for="name" class="mb-1">{{ 'Identity Type' |  translate }}</label>
-
-                                        <div class="input-group  mb-1">
-                                            <select class="form-control p-1" autocomplete="new-password" required>
-                                                <option value="" selected disabled></option>
-                                                <option value="">Passbord</option>
-                                                <option value="">National ID</option>
-                                            </select>
-                                        </div>
                                         <label for="name" class="mb-1">{{ 'DOB' |  translate }}</label>
-                                        <div class="input-group  mb-1">
-
-                                            <input type="date" class="form-control" placeholder="" onfocus="(this.type='date')" autocomplete="username" required>
-
+                                        <div class="input-group mb-1">
+                                            <input type="date" class="form-control" name="dateofbirth" #dateofbirth="ngModel" [(ngModel)]="service.recieptiestDetails.dateofbirth" onfocus="(this.type='date')" autocomplete="username" required>
                                         </div>
-                                        <label for="name" class="mb-1">{{ 'GENDER' | translate }}</label>
 
+                                        <label for="name" class="mb-1">{{ 'GENDER' | translate }}</label>
                                         <div class="input-group  mb-1">
-                                            <select class="form-control p-1" autocomplete="new-password" required>
-                                                    <option value="">male</option>
-                                                    <option value="">female</option>
+                                            <select class="form-control p-1" name="gender" #gender="ngModel" [(ngModel)]="service.recieptiestDetails.gender" autocomplete="new-password" required>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                         </div>
 
@@ -82,32 +86,32 @@
                                     <div class="col-md-6">
                                         <label for="name" class="mb-1">{{ 'PHONE' |  translate }}</label>
                                         <div class="input-group  mb-1">
-
-                                            <input type="text" class="form-control" placeholder="" autocomplete="username" required>
+                                            <input type="text" class="form-control" name="mobilenumber" #mobilenumber="ngModel" [(ngModel)]="service.recieptiestDetails.mobilenumber" autocomplete="username" required>
                                         </div>
+
                                         <label for="name" class="mb-1">{{ 'EMAIL' | translate }}</label>
                                         <div class="input-group  mb-1">
-
-                                            <input type="text" name="repasswordcheck" class="form-control" placeholder="" autocomplete="new-password" required>
+                                            <input type="text" name="repasswordcheck" class="form-control" name="email" #email="ngModel" [(ngModel)]="service.recieptiestDetails.email" autocomplete="new-password" required>
                                         </div>
+
+                                        <label for="name" class="mb-1">{{ 'ADDRESS' | translate }}</label>
+                                        <div class="input-group mb-1">
+                                            <input type="text" class="form-control" autocomplete="new-password" name="addressid" #addressid="ngModel" [(ngModel)]="service.recieptiestDetails.addressid" required>
+                                        </div>
+
                                         <label for="name" class="mb-1">{{ 'REGISTPASS' | translate }}</label>
                                         <div class="input-group mb-1">
-                                            <input type="password" class="form-control" placeholder="" autocomplete="new-password" name="password" #name="ngModel" [(ngModel)]="service.registerDetails.password" required>
-
+                                            <input type="text" class="form-control" autocomplete="new-password" name="password" #password="ngModel" [(ngModel)]="service.recieptiestDetails.password" required>
                                         </div>
 
                                         <label for="name" class="mb-1">{{ 'REGISTREPPASS' | translate }}</label>
                                         <div class="input-group mb-1">
-
-                                            <input type="text" name="repasswordcheck" [ngClass]="{'form-control': true, 'classInvalid': classInvalid}" placeholder="" [(ngModel)]="repasswordcheck" autocomplete="new-password" required>
+                                            <input type="text" name="repasswordcheck" [ngClass]="{'form-control': true, 'classInvalidRegist': classInvalidRegist}" [(ngModel)]="repasswordcheck" autocomplete="new-password" required>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="row">
 
-
-                                </div>
                                 <div class="row d-flex justify-content-end">
                                     <button type="button" data-toggle="modal" (click)="onSaveRecords(formRegister)" [disabled]="formRegister.invalid" class="btn btn-block btn-success">{{ 'REGISTERBTN' | translate }}</button>
                                     <button type="button" routerLink="/login" class="btn btn-block btn-link px-0">{{ 'HAVEACCOUNT' | translate }}</button>
@@ -129,20 +133,16 @@
 </div>
 
 <div bsModal #ContinuBookig="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-success" role="document">
+    <div class="modal-dialog modal-success modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">تم تسجيل بياناتك</h4>
 
-            </div>
-            <div class="modal-body">
-                <p>{{ 'REGISTUSERNAME' | translate }} : welcome {{ service.registerDetails.nameen }} you are registred now , you can choose your nerby center and book a day to take your vaccien </p>
+            <div class="modal-body bg-success">
+                <h4 class="modal-title">Your Data Has Been Registred :</h4>
+                <hr>
+                <p>{{ 'REGISTUSERNAME' | translate }} : welcome {{ service.recieptiestDetails.nameen }} you are registred now , you can choose your nerby center and book a day to take your vaccien </p>
 
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary ml-2" (click)="ContinuBookig.hide()">اغلاق</button>
-                <button type="button" routerLink="/patientdata" class="btn btn-success">متابعة</button>
+                <button type="button" class="btn btn-secondary ml-2" (click)="ContinuBookig.hide()">Close</button>
+                <button type="button" routerLink="/patientdata" class="btn btn-success">Continu</button>
             </div>
         </div>
         <!-- /.modal-content -->

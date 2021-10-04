@@ -8,6 +8,8 @@ import { LoginProcessService } from '../../shared/login-process.service';
 import { PublicServiciesService } from '../../shared/public-servicies.service';
 import { registerProcess } from '../../shared/models/Register-process.model';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { BookingService } from '../../shared/booking.service';
+import { IdTypes } from '../../shared/models/IdTypes.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,22 +18,27 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 export class RegisterComponent implements OnInit {
   lang:string;
   repasswordcheck: string = '';
-  classInvalid: boolean = false;
+  classInvalidRegist: boolean = false;
+  IdTypes:IdTypes = new IdTypes();
    @ViewChild('ContinuBookig') modal: ModalDirective;
-  constructor(public translate:TranslateService,private rout: Router, public service: LoginProcessService, public service1: PublicServiciesService, private toastr: ToastrService) {
+  constructor(public translate:TranslateService,private rout: Router, public service: BookingService, public service1: PublicServiciesService, private toastr: ToastrService) {
    
    }
   ngOnInit() {
     this.lang=localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
+
+    this.service.getIdType().subscribe((res: {}) => {
+      this.IdTypes = res as IdTypes;
+    })
   }
   onSaveRecords(formData: NgForm) {
-    if (this.repasswordcheck != this.service.registerDetails.password) {
-      this.classInvalid = true;
+    if (this.repasswordcheck != this.service.recieptiestDetails.password) {
+      this.classInvalidRegist = true;
     } else {
-      this.classInvalid = false;
-      this.service.registerResponse(formData.value).subscribe(
+      this.classInvalidRegist = false;
+      this.service.registerRecieptionService(formData.value).subscribe(
         (res: any) => {
           formData.reset();
           this.modal.show();
