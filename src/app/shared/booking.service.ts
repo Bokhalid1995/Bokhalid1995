@@ -42,7 +42,9 @@ export class BookingService {
    getVaccineUnit(unitid:any){
     return this.http.get(this.baseURL + "Healthunit/HealthUnitByunitId?Id=" + unitid);
    }
-
+   getUnitDetails(unitid:any){
+    return this.http.get(this.baseURL + "Healthunit/GetHealthunitById?Id=" + unitid);
+   }
    registerRecieptionService(form:any){
     return this.http.post(this.baseURL + "Servicerecipient/CreateServicerecipient" , form , {responseType: "blob"} );
    }

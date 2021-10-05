@@ -2,8 +2,9 @@
     #info {
         height: 301px;
     }
+    
     .input-group-append:hover {
-        cursor:pointer;
+        cursor: pointer;
     }
 </style>
 <div class="app-body mt-5 animated fadeIn">
@@ -76,9 +77,9 @@
                                                    
                                                     <option *ngFor="let center of CentersData" value="{{ center.id }}">{{ center.nameen }}</option>
                                                 </select>
-                                                 <div class="input-group-append">
-                                            <span class="input-group-text"><i class="icon-info"></i></span>
-                                        </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" (click)="getCenterDetails(healthunitid.value)"><i class="icon-info"></i></span>
+                                            </div>
                                         </div>
 
                                         <label for="name" class="mb-1">{{ 'DOSEN' |  translate }}</label>
@@ -145,4 +146,28 @@
             </div>
         </div>
     </main>
+
+    <div bsModal #UnitDetails="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body bg-default">
+                    <h4 class="modal-title">{{this.centerDetails.nameen}} <span class="badge badge-danger badge-pill  ml-auto">{{this.centerDetails.capacity}}</span>
+                    </h4>
+                    <hr>
+                    <p>Works Days : {{this.centerDetails.fromday}} - {{this.centerDetails.today}}</p>
+                    <p>Works Hours : {{this.centerDetails.fromhour}} - {{this.centerDetails.tohour}}</p>
+                    <h3><i class="icon-phone"></i> {{this.centerDetails.fromhour}}</h3>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary ml-2" (click)="UnitDetails.hide()">Close</button>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>

@@ -1,8 +1,9 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { BookingService } from '../../shared/booking.service';
 import { Centers } from '../../shared/models/Centers.model';
@@ -29,6 +30,9 @@ export class PatientDataComponent implements OnInit {
   localitiesData:Localities = new Localities();
   CentersData:Centers = new Centers();
   vaccinesData:Vaccines = new Vaccines();
+  centerDetails:Centers = new Centers();
+  @ViewChild('UnitDetails') modal: ModalDirective;
+
   constructor(public translate:TranslateService , public service:BookingService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -84,6 +88,14 @@ export class PatientDataComponent implements OnInit {
       this.CentersData = res as Centers;
     })
   }
+  
+  }
+  getCenterDetails(centerid:any){
+    this.service.getUnitDetails(centerid).subscribe((res: {}) => {
+      this.centerDetails = res as Centers;
+
+    })
+    this.modal.show();
   }
   getVaccineByUnit(center:string){
     this.service.getVaccineUnit(center).subscribe((res: {}) => {
