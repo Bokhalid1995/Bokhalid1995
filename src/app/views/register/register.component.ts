@@ -17,6 +17,7 @@ import { IdTypes } from '../../shared/models/IdTypes.model';
 })
 export class RegisterComponent implements OnInit {
   lang:string;
+  list :any[];
   repasswordcheck: string = '';
   classInvalidRegist: boolean = false;
   IdTypes:IdTypes = new IdTypes();
@@ -25,6 +26,13 @@ export class RegisterComponent implements OnInit {
    
    }
   ngOnInit() {
+    this.list = 
+    [
+      {name :'Sugar',checked : false},
+      {name :'Presure',checked : false},
+    
+    ];
+
     this.lang=localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
@@ -46,9 +54,9 @@ export class RegisterComponent implements OnInit {
         },
         err => {
           if (localStorage.getItem('lang') == 'en') {
-            this.toastr.error(err.error, "Warning!");
+            this.toastr.error("Error Data Enserted", "Warning!");
           } else {
-            this.toastr.error(err.error ,"خطأ!");
+            this.toastr.error("خطأ" ," خطأ في ادخال البيانات   !");
           }
         }
       )

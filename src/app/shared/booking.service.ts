@@ -1,12 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServiceRecipient } from './models/Servicerecipient.model';
+import { VaccinesDoses } from './models/VaccinesDoses.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
   recieptiestDetails:ServiceRecipient = new ServiceRecipient();
+  bookingDetails:VaccinesDoses = new VaccinesDoses();
   readonly baseURL = 'https://localhost:5001/api/';
  
   constructor(private http: HttpClient) { 
@@ -43,6 +45,17 @@ export class BookingService {
 
    registerRecieptionService(form:any){
     return this.http.post(this.baseURL + "Servicerecipient/CreateServicerecipient" , form , {responseType: "blob"} );
+   }
+   registerRecieptionBook(form:any ,hours:any){
+     const params ={ 'servicerecipientid' : 3 , 'bookinghour' : hours};
+     const data = Object.assign(params , form)
+    return this.http.post(this.baseURL + "Servicerecipientvaccinedose/CreateServicerecipientvaccinedose" , data , {responseType: "blob"} );
+   }
+   getVacinneDoses(){
+    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/Servicerecipientvaccinedose");
+   }
+   getListBypage(page:any){
+    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/ServiceRecipientVaccineDosePagedList",{params:{'PageNumber': page , 'PageSize' : '10'}});
    }
    getIdType(){
     return this.http.get(this.baseURL + "IdType/IdTypes");

@@ -1,4 +1,4 @@
-<div class="app-body animated fadeIn">
+<div class="app-body mt-3 animated fadeIn">
     <main class="main d-flex align-items-center">
         <div class="container">
             <div class="row">
@@ -33,7 +33,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">ID</span>
                                         </div>
-                                        <input type="" class="form-control" placeholder="{{ 'USERID' | translate}}" name="id" #id="ngModel" [(ngModel)]="service.loginDetails.id" (keyup.enter)="findUserName(id.value)" required>
+                                        <input type="" class="form-control" placeholder="{{ 'National ID Or Phone Number' | translate}}" name="id" #id="ngModel" [(ngModel)]="service.loginDetails.id" (keyup.enter)="findUserName(id.value)" required>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -59,7 +59,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="card text-white  py-5 " style="background-image: url('assets/img/mancovid.jpg'); background-size:100% 100%;">
+                        <div class="card text-white  py-5 " style="background-image: url('assets/img/cover.jpg'); background-size:150% 100%;">
                             <div class="card-body text-center">
                                 <div>
                                     <h2>{{ 'MAKEUSER' | translate}}</h2>

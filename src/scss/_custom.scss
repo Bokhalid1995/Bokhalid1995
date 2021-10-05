@@ -47,6 +47,7 @@ html:lang(ar) {
         border-radius: 0px;
         border-top-left-radius: 5px!important;
         border-bottom-left-radius: 5px!important;
+        transition: all 0.5s;
     }
     .tab-area tabset tab {
         justify-content: flex-end;

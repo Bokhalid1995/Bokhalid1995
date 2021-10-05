@@ -1,6 +1,9 @@
 <style>
     #info {
-        height: 341px;
+        height: 301px;
+    }
+    .input-group-append:hover {
+        cursor:pointer;
     }
 </style>
 <div class="app-body mt-5 animated fadeIn">
@@ -30,7 +33,7 @@
                             <!-- <h1>{{ 'REGISTERTITLE' | translate }}</h1>-->
                             <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'BOOKDETIALS' | translate }}</h4>
                             <hr class="my-2">
-                            <form #formRegister="ngForm" id="registerForma" class="container">
+                            <form #formBook="ngForm" id="registerForma" class="container">
                                 <div class="row">
                                     <div class="col-md-12 py-0">
                                         <label for="name" class="mb-1">{{ 'NATID' |  translate }}</label>
@@ -68,16 +71,19 @@
 
                                     <div class="col-md-6">
                                         <label for="name" class="mb-1">{{ 'CENTERS' |  translate }}</label>
-                                        <div class="input-group mb-2">
-                                            <select class="form-control p-1" #Centers (click)="getVaccineByUnit(Centers.value)" autocomplete="new-password" required>
+                                        <div class="input-group  mb-2">
+                                            <select class="form-control p-1" name="healthunitid" #healthunitid="ngModel" [(ngModel)]="service.bookingDetails.healthunitid" autocomplete="new-password" required>
                                                    
                                                     <option *ngFor="let center of CentersData" value="{{ center.id }}">{{ center.nameen }}</option>
                                                 </select>
+                                                 <div class="input-group-append">
+                                            <span class="input-group-text"><i class="icon-info"></i></span>
+                                        </div>
                                         </div>
 
                                         <label for="name" class="mb-1">{{ 'DOSEN' |  translate }}</label>
                                         <div class="input-group mb-2">
-                                            <select class="form-control p-1" autocomplete="new-password" required>
+                                            <select class="form-control p-1" name="vaccineid" #vaccineid="ngModel" [(ngModel)]="service.bookingDetails.vaccineid" autocomplete="new-password" required>
                                                
                                                 <option *ngFor="let vaccine of vaccinesData" value="{{ vaccine.id }}">{{ vaccine.nameen }}</option>
                                      
@@ -86,47 +92,41 @@
 
                                         <label for="name" class="mb-1">{{ 'DOSET' |  translate }}</label>
                                         <div class="input-group">
-                                            <select class="form-control p-1" autocomplete="new-password" required>
+                                            <select class="form-control p-1" name="dosenumber" #dosenumber="ngModel" [(ngModel)]="service.bookingDetails.dosenumber" autocomplete="new-password" required>
                                             
-                                                <option value="">Dose 1</option>
-                                                <option value="">Dose 2</option>
+                                                <option value="1">Dose 1</option>
+                                                <option value="2">Dose 2</option>
                                             </select>
 
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 py-0">
-                                        <label for="name" class="mb-1">Chronic Disease</label>
-                                        <div class="input-group ">
-                                            <ng-select class="form-control p-0 border-0" style="border: 0px solid #eee;" name="chronicDisease" [items]="list" bindLabel="name" placeholder="" appendTo="body" [multiple]="true">
-                                            </ng-select>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="col-md-12 py-0">
 
                                         <label class="">{{ 'ATTDATE' | translate }}</label>
 
                                         <div class="input-group">
-                                            <input type="date" class="form-control" autocomplete="username" required>
-                                            <input type="time" class="form-control" id="appt" name="appt" min="09:00" max="18:00" required>
+                                            <input type="date" class="form-control" name="bookingdate" #bookingdate="ngModel" [(ngModel)]="service.bookingDetails.bookingdate" autocomplete="username" required>
+                                            <input type="time" class="form-control" name="bookinghour" #bookinghour (change)="getHours(bookinghour.value)" id="appt" min="09:00" max="18:00" required>
 
                                         </div>
                                     </div>
+
                                 </div>
 
-                                <div class="row">
+                                <div class="row mt-3">
 
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <button type="button" class="btn btn-block btn-info" (click)="stepper.reset()"><i class="fa fa-home mr-3"></i>{{ 'Home' |
+
+                                        <button type="button" class="btn btn-block btn-info"><i class="fa fa-home mr-3"></i>{{ 'Home' |
                                                 translate }}</button>
 
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <button type="button" routerLink="/dataentry" class="btn btn-block btn-success">{{ 'BOOKBTN' |
+                                        <button type="button" (click)="onSaveRecords(formBook)" class="btn btn-block btn-success">{{ 'BOOKBTN' |
                                                 translate }}<i class="fa fa-check ml-3"></i></button>
 
                                     </div>
