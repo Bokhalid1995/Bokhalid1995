@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnInit, Renderer2, ViewChild }
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CollapseDirective } from 'ngx-bootstrap/collapse';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { BookingService } from '../../shared/booking.service';
 import { VaccinesDoses } from '../../shared/models/VaccinesDoses.model';
@@ -15,14 +16,17 @@ export class DataentryComponent implements OnInit {
   collapsed = true;
   isLinear = true;
   pager: number = 1;
+  Status:string="Requested";
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
   lastPage:VaccinesDoses = new VaccinesDoses();
+
+  @ViewChild('ConfirmVaccine') modal: ModalDirective;
   constructor(public service: BookingService,private rout:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
-    this.getDataPgination(this.pager);
+    this.getDataPgination(this.pager , this.Status);
   }
 
   ShowAll(){
@@ -30,9 +34,9 @@ export class DataentryComponent implements OnInit {
       this.serviceReciepsData = res as VaccinesDoses;
     })
   }
-  getDataPgination(page: number) {
+  getDataPgination(page: number , status:string) {
 
-    this.service.getListBypage(page).subscribe((res: {}) => {
+    this.service.getListBypage(page ,status).subscribe((res: {}) => {
 
       this.serviceReciepsData = res as VaccinesDoses;
       if (!Object.keys(this.serviceReciepsData).length) {
@@ -43,6 +47,7 @@ export class DataentryComponent implements OnInit {
 
 
   }
+ 
   counterPlus() {
 
     if (this.pager < 1) {
@@ -50,7 +55,7 @@ export class DataentryComponent implements OnInit {
     } else {
       this.pager = this.pager + 1;
   
-      this.getDataPgination(this.pager);
+      this.getDataPgination(this.pager, this.Status);
     }
     this.lastPage = this.serviceReciepsData;
   }
@@ -60,7 +65,7 @@ export class DataentryComponent implements OnInit {
     } else {
       this.pager = this.pager - 1;
 
-      this.getDataPgination(this.pager);
+      this.getDataPgination(this.pager, this.Status);
     }
     this.lastPage = this.serviceReciepsData;
   }
