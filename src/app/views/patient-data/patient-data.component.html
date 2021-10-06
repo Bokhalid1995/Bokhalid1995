@@ -37,9 +37,9 @@
                             <form #formBook="ngForm" id="registerForma" class="container">
                                 <div class="row">
                                     <div class="col-md-12 py-0">
-                                        <label for="name" class="mb-1">{{ 'NATID' |  translate }}</label>
+                                        <label for="name" class="mb-1">{{ 'Full Name' |  translate }}</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="" autocomplete="Username" required>
+                                            <input type="text" class="form-control" value="{{ NameRecieption }}" placeholder="" autocomplete="Username" disabled required>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
 
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <button type="button" (click)="onSaveRecords(formBook)" class="btn btn-block btn-success">{{ 'BOOKBTN' |
+                                        <button type="button" (click)="onSaveRecords(formBook)" class="btn btn-block btn-success" [disabled]="formBook.invalid">{{ 'BOOKBTN' |
                                                 translate }}<i class="fa fa-check ml-3"></i></button>
 
                                     </div>
@@ -159,7 +159,7 @@
                     <p>Works Hours : {{this.centerDetails.fromhour}} - {{this.centerDetails.tohour}}</p>
                     <h3><i class="icon-phone"></i> {{this.centerDetails.fromhour}}</h3>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary ml-2" (click)="UnitDetails.hide()">Close</button>
+                        <button type="button" class="btn btn-secondary m-2" (click)="UnitDetails.hide()">Close</button>
 
 
                     </div>

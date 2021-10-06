@@ -27,10 +27,10 @@ export class LoginPublicComponent implements OnInit {
     document.documentElement.lang = lang;
   }
   onSubmitt(formData:NgForm){
-    this.service.loginResponse(formData.value).subscribe(
+    this.service.loginPublicResponse(formData.value).subscribe(
       (res:any) => {
       
-        this.rout.navigateByUrl('/dashboard');
+        this.rout.navigateByUrl('/patientdata');
         formData.reset();
         console.log(res); },
       err => {
@@ -42,14 +42,16 @@ export class LoginPublicComponent implements OnInit {
       }
     )
   }
-  findUserName(searchid:number){
-    return this.service.getUserName(searchid).subscribe((res: {}) => {
+  findName(searchid:string){
+    return this.service.getNameRecieption(searchid).subscribe((res: {}) => {
      this.userselected = res as string;
+    
+
      if (this.userselected == "Username Not Found"){
       this.service.loginDetails.nameen = ""
       this.toastr.error(this.userselected as string, "Warning!");
      }else{
-      this.service.loginDetails.nameen = this.userselected;
+      this.service.loginPublic.nameen = this.userselected;
      }
    })
 }

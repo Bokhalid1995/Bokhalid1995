@@ -31,6 +31,8 @@ export class PatientDataComponent implements OnInit {
   CentersData:Centers = new Centers();
   vaccinesData:Vaccines = new Vaccines();
   centerDetails:Centers = new Centers();
+  NameRecieption:string;
+  IDRecieption:string;
   @ViewChild('UnitDetails') modal: ModalDirective;
 
   constructor(public translate:TranslateService , public service:BookingService, private toastr: ToastrService) { }
@@ -52,6 +54,8 @@ export class PatientDataComponent implements OnInit {
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;
     })
+    this.NameRecieption = localStorage.getItem('fullname')
+    this.IDRecieption = localStorage.getItem('userid')
    /* this.service.getCities().subscribe((res: {}) => {
       this.citiesData = res as Cities;
     })
@@ -104,10 +108,10 @@ export class PatientDataComponent implements OnInit {
   }
   onSaveRecords(formData: NgForm) {
  
-      this.service.registerRecieptionBook(formData.value , this.hours).subscribe(
+      this.service.registerRecieptionBook(formData.value , this.hours , this.IDRecieption).subscribe(
         (res: any) => {
           formData.reset();
-          this.toastr.success("Confirmed Successfully", "Warning!");
+          this.toastr.success("Confirmed Successfully", "Done!");
           console.log(res);
         },
         err => {

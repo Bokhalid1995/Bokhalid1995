@@ -6,6 +6,23 @@
     a:hover {
         cursor: pointer;
     }
+    
+    .form-inline button,
+    .form-inline input {
+        height: 30px !important;
+        padding: 5px;
+    }
+    
+    #Requseted {
+        color: rgb(206, 162, 52);
+        font-weight: bold;
+        /* p-21112 */
+    }
+    
+    #confirmed {
+        color: rgb(21, 204, 21);
+        font-weight: bold;
+    }
 </style>
 <div class=".container-fluid animated fadeIn">
     <div id="header" class="fixed-top">
@@ -26,7 +43,7 @@
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown" dropdown>
-                            <a id="link-dropdown" class="nav-link dropdown-toggle" href dropdownToggle (click)="false" aria-controls="your-dropdown"><i class="icon-user mx-2"></i> User Name
+                            <a id="link-dropdown" class="nav-link dropdown-toggle" dropdownToggle (click)="false" aria-controls="your-dropdown"><i class="icon-user mx-2"></i> User Name
                             </a>
                             <div id="your-dropdown" class="dropdown-menu animated fadeIn" aria-labelledby="link-dropdown" *dropdownMenu>
                                 <a class="dropdown-item" style="color: black!important;" href="#"><i
@@ -43,7 +60,7 @@
     </div>
     <div id="main" class="">
         <div class="card p-4 ">
-            <div class="alert alert-warning container-fluid">
+            <div class="alert alert-info container-fluid">
                 <div class="row mt-1">
                     <div class="">
                         <p><b>Regisertation Form</b></p>
@@ -69,14 +86,23 @@
                 <div class="card row">
                     <div class="card-body col-md-11 mx-auto">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-3">
                                 <h4> <b>Service Recieptions in wait</b></h4>
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">
                                 <form action="" method="post" class="form-inline">
                                     <div class="form-group">
-                                        <input #filterBy type="email" id="if-email" name="if-email" class="form-control m-1" placeholder="Search by Username or ID" (change)="filterBy.value?getUser(filterBy.value):allUers() " autocomplete="email" required>
-                                        <button type="button" data-toggle="modal" (click)="searchEmpty?allUers() : getUser(filterBy.value)" class="btn  btn-info">search</button>
+                                        <label class="form-check-label mx-1" for="inlineRadio1"><b>Status:</b></label>
+                                        <div class="form-check form-check-inline mr-1" id="inline-radios" id="Requseted">
+                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value)" checked value="Requested">
+                                            <label class="form-check-label" for="inlineRadio1">Requested</label>
+                                        </div>
+                                        <div class="form-check form-check-inline  mx-2" id="confirmed">
+                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value)" value="DoseTaken">
+                                            <label class="form-check-label" for="inlineRadio2">Confirmed</label>
+                                        </div>
+                                        <input #filterBy type="email" class="form-control mx-1" placeholder="Search by Username or ID" (change)="filterBy.value?getUser(filterBy.value):allUers() " autocomplete="email" required>
+                                        <button type="button" (click)="searchEmpty?allUers() : getUser(filterBy.value)" class="btn  btn-info"><i class="fa fa-search mx-2"></i>search</button>
                                     </div>
                                 </form>
                             </div>
@@ -87,6 +113,7 @@
                                     <tr class="text-center mt-2">
                                         <th> ID</th>
                                         <th>Full Name Arabic</th>
+                                        <th>Full Name English</th>
                                         <th>Vaccine needed</th>
                                         <th>Date registered</th>
                                         <th>Preview</th>
@@ -96,14 +123,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let serviceReciep of serviceReciepsData" class="text-center animated fadeIn">
-                                        <td>{{serviceReciep.id}}</td>
-                                        <td>{{serviceReciep.nameen}}</td>
-                                        <td>{{serviceReciep.vaccineNameAr}}</td>
-                                        <td>{{serviceReciep.bookingdate | date:'mediumDate'}}</td>
-                                        <td><button class="btn btn-outline-info p-1 h-50" (click)="showDataUser(user)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
-                                        <td><button class="btn btn-outline-success  p-1 h-50" (click)="fillForm(user)"><i class="fa fa-check"></i> Confirm</button></td>
-                                        <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(user.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                                    <tr *ngFor="let data of serviceReciepsData" class="text-center animated fadeIn">
+                                        <td>{{data.id}}</td>
+                                        <td>{{data.serviceRecipientNameAr}}</td>
+                                        <td>{{data.serviceRecipientNameEn}}</td>
+                                        <td>{{data.vaccineNameAr}}</td>
+                                        <td>{{data.bookingdate | date:'mediumDate'}}</td>
+                                        <td><button class="btn btn-outline-info p-1 h-50"><i class="fa fa-address-card-o" ></i> Preview</button></td>
+                                        <td><button class="btn btn-outline-success  p-1 h-50" (click)="confirmShow(data)"><i class="fa fa-check"></i> Confirm</button></td>
+                                        <td><button class="btn btn-danger  p-1 h-50"><i class="fa fa-trash" ></i> Delete</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -121,5 +149,88 @@
             </div>
         </div>
 
+        <!--MoDAAAAAAAAAAAAAAl-->
+        <div bsModal #ConfirmVaccine="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="cardUser">
+                            <nav>
+                                <i class="fa fa-check mx-2"></i> Confirm Vaccine Doses :
+
+                            </nav>
+                            <div class="px-5 py-2">
+                                <form #formConfirm="ngForm" id="registerForma" class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 py-0">
+                                            <label for="name" class="mb-1">{{ 'Full Name' |  translate }}</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="{{ nameConfirm }}" placeholder="" autocomplete="Username" disabled required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <label for="name" class="mb-1">{{ 'DOSEN' |  translate }}</label>
+                                            <div class="input-group mb-2">
+                                                <select class="form-control p-1" name="vaccineid" #vaccineid="ngModel" [(ngModel)]="service.bookingDetails.vaccineid" autocomplete="new-password" required>
+                                                   
+                                                    <option *ngFor="let vaccine of vaccinesData" value="{{ vaccine.id }}">{{ vaccine.nameen }}</option>
+                                         
+                                                </select>
+                                            </div>
+
+                                            <label class="mb-1">{{ 'Dose Date' | translate }}</label>
+
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" name="dosedate" #dosedate="ngModel" [(ngModel)]="service.bookingDetails.dosedate" autocomplete="username" required>
+                                                <input type="time" class="form-control" name="dosehour" #dosehour (change)="getHours(dosehour.value)" id="appt" min="09:00" max="18:00" required>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <label for="name" class="mb-1">{{ 'DOSET' |  translate }}</label>
+                                            <div class="input-group mb-2">
+                                                <select class="form-control p-1" name="dosenumber" #dosenumber="ngModel" [(ngModel)]="service.bookingDetails.dosenumber" autocomplete="new-password" required>
+                                                
+                                                    <option value="1">Dose 1</option>
+                                                    <option value="2">Dose 2</option>
+                                                </select>
+                                            </div>
+
+                                            <label for="name" class="mb-1">{{ 'Batch Number' |  translate }}</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="batchnumber" #batchnumber="ngModel" [(ngModel)]="service.bookingDetails.batchnumber" placeholder="" autocomplete="Username" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+
+                                        <div class="col-md-12">
+                                            <div class="row mx-auto">
+                                                <button type="button" class="btn btn-danger col-sm-5 mx-auto" (click)="ConfirmVaccine.hide()"><i class="fa fa-close mr-3"></i>{{ 'Close' | translate }}</button>
+                                                <button type="button" (click)="confirmVaccineDose(formConfirm)" class="btn btn-success col-sm-5 mx-auto" [disabled]="formConfirm.invalid">{{ 'Confirm' |
+                                                    translate }}<i class="fa fa-check ml-3"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
 </div>
