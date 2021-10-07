@@ -11,5 +11,6 @@ export class ServiceRecipient {
     email:string =  "";
     identificationdetailid:number = 0;
     addressid:number = null;
+    
 
 }

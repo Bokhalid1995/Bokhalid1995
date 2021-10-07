@@ -1,6 +1,31 @@
 <style>
     #main {
         margin-top: 110px;
+        border-top: 5px solid #ddd;
+        border-bottom: 5px solid #ddd;
+    }
+    
+    #Statics .card {
+        transition: top 0.7s;
+        top: 0px;
+    }
+    
+    #Statics .card:hover {
+        top: 10px;
+    }
+    
+    table {
+        transition: background-color 0.5s;
+    }
+    
+    table tr {
+        height: 25px !important;
+        transition: all 0.5s;
+    }
+    
+    table tr:hover {
+        cursor: pointer;
+        background-color: #eee;
     }
     
     a:hover {
@@ -11,17 +36,6 @@
     .form-inline input {
         height: 30px !important;
         padding: 5px;
-    }
-    
-    #Requseted {
-        color: rgb(206, 162, 52);
-        font-weight: bold;
-        /* p-21112 */
-    }
-    
-    #confirmed {
-        color: rgb(21, 204, 21);
-        font-weight: bold;
     }
 </style>
 <div class=".container-fluid animated fadeIn">
@@ -48,7 +62,7 @@
                             <div id="your-dropdown" class="dropdown-menu animated fadeIn" aria-labelledby="link-dropdown" *dropdownMenu>
                                 <a class="dropdown-item" style="color: black!important;" href="#"><i
                                         class="icon-screen-desktop mx-2"></i>Employee Panel</a>
-                                <a class="dropdown-item" style="color: black!important;" href="#"><i
+                                <a class="dropdown-item" style="color: black!important;" routerLink="/login"><i
                                         class="icon-logout mx-2"></i>Log Out</a>
 
                             </div>
@@ -60,9 +74,9 @@
     </div>
     <div id="main" class="">
         <div class="card p-4 ">
-            <div class="alert alert-info container-fluid">
+            <div class="alert  container-fluid">
                 <div class="row mt-1">
-                    <div class="">
+                    <div class="text-center">
                         <p><b>Regisertation Form</b></p>
                     </div>
                     <hr>
@@ -72,14 +86,73 @@
                         </button>
                     </div>
                 </div>
+                <div class="row" id="Statics">
+                    <div class="col-sm-6 col-lg-3 ">
+                        <div class="card text-white bg-info">
+                            <div class="card-body ">
+                                <div class="btn-group float-right">
+                                    <button type="button" class="btn btn-transparent  p-0">
+                              <i class="icon-user"></i>
+                            </button>
 
-                <div class="row mt-1">
-                    <div class="">
-                        <p> <b>Number of Registration Today :
-                                <span class="badge badge-danger badge-pill">136</span></b>
-                        </p>
+                                </div>
+                                <div class="text-value">9.823</div>
+                                <div>Members Deal with Unit Health</div>
+                            </div>
+
+                        </div>
                     </div>
+                    <!--/.col-->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-success">
+                            <div class="card-body ">
+                                <button type="button" class="btn btn-transparent p-0 float-right">
+                            <i class="icon-check"></i>
+                          </button>
+                                <div class="text-value">9.823</div>
+                                <div>Members Take Vaccine</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-warning">
+                            <div class="card-body ">
+                                <div class="btn-group float-right">
+                                    <button type="button" class="btn btn-transparent  p-0">
+                              <i class="icon-list"></i>
+                            </button>
+
+
+                                </div>
+                                <div class="text-value">9.823</div>
+                                <div>Members Booking Today</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-danger">
+                            <div class="card-body ">
+                                <div class="btn-group float-right">
+                                    <button type="button" class="btn btn-transparent  p-0">
+                              <i class="icon-close"></i>
+                            </button>
+
+                                </div>
+                                <div class="text-value">9.823</div>
+                                <div>Members Canceled</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.col-->
                 </div>
+                <!--/.row-->
+
+
             </div>
 
             <div class="container-fluid">
@@ -93,7 +166,7 @@
                                 <form action="" method="post" class="form-inline">
                                     <div class="form-group">
                                         <label class="form-check-label mx-1" for="inlineRadio1"><b>Status:</b></label>
-                                        <div class="form-check form-check-inline mr-1" id="inline-radios" id="Requseted">
+                                        <div class="form-check form-check-inline mx-2" id="inline-radios" id="Requseted">
                                             <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value)" checked value="Requested">
                                             <label class="form-check-label" for="inlineRadio1">Requested</label>
                                         </div>
@@ -101,8 +174,8 @@
                                             <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value)" value="DoseTaken">
                                             <label class="form-check-label" for="inlineRadio2">Confirmed</label>
                                         </div>
-                                        <input #filterBy type="email" class="form-control mx-1" placeholder="Search by Username or ID" (change)="filterBy.value?getUser(filterBy.value):allUers() " autocomplete="email" required>
-                                        <button type="button" (click)="searchEmpty?allUers() : getUser(filterBy.value)" class="btn  btn-info"><i class="fa fa-search mx-2"></i>search</button>
+                                        <input #filterBy type="email" class="form-control mx-1" placeholder="Search by Username or ID" (change)="filterBy.value?getDataByNatid(filterBy.value):getDataByNatid(filterBy.value) " autocomplete="email" required>
+                                        <button type="button" (click)="searchEmpty?filterStatus(Requseted.value) : getDataByNatid(filterBy.value)" class="btn  btn-info"><i class="fa fa-search mx-2" style="color: aliceblue;"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -112,26 +185,32 @@
                                 <thead class="bg-info  ">
                                     <tr class="text-center mt-2">
                                         <th> ID</th>
+                                        <th>National Number</th>
                                         <th>Full Name Arabic</th>
                                         <th>Full Name English</th>
                                         <th>Vaccine needed</th>
-                                        <th>Date registered</th>
+                                        <th>Date Booking</th>
+                                        <th>Accepted Date</th>
+                                        <th>Status</th>
                                         <th>Preview</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                                        <th>confirm</th>
+                                        <th>Cancel</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let data of serviceReciepsData" class="text-center animated fadeIn">
                                         <td>{{data.id}}</td>
+                                        <td>{{data.nationalNumber}}</td>
                                         <td>{{data.serviceRecipientNameAr}}</td>
                                         <td>{{data.serviceRecipientNameEn}}</td>
                                         <td>{{data.vaccineNameAr}}</td>
                                         <td>{{data.bookingdate | date:'mediumDate'}}</td>
-                                        <td><button class="btn btn-outline-info p-1 h-50"><i class="fa fa-address-card-o" ></i> Preview</button></td>
-                                        <td><button class="btn btn-outline-success  p-1 h-50" (click)="confirmShow(data)"><i class="fa fa-check"></i> Confirm</button></td>
-                                        <td><button class="btn btn-danger  p-1 h-50"><i class="fa fa-trash" ></i> Delete</button></td>
+                                        <td>{{data.dosedate | date:'mediumDate'}}</td>
+                                        <td [class]="statusColor">{{data.status}}</td>
+                                        <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(data)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
+                                        <td><button class="btn btn-outline-success  p-1 h-50" (click)="confirmShow(data)" [disabled]="disableConfirm"><i class="fa fa-check"></i> Confirm</button></td>
+                                        <td><button class="btn btn-danger  p-1 h-50"><i class="fa fa-trash" ></i> Cancel</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -222,6 +301,34 @@
 
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div bsModal #PreviewData="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="cardUser">
+                            <nav>
+
+                                Active
+
+                            </nav>
+                            <div class="container">
+                                <ul class="list-group" *ngFor="let deatils of datalist">
+
+                                    <li class="list-group-item list-group-item-info">Booking Date : {{ deatils.bookingdate | date:'mediumDate' }}</li>
+                                    <li class="list-group-item list-group-item-info">Booking Date : {{ deatils.bookingdate | date:'mediumDate' }}</li>
+                                </ul>
                             </div>
                         </div>
 

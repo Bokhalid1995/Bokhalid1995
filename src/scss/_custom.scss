@@ -264,6 +264,42 @@ body {
     }
 }
 
+#Requseted {
+    font-weight: normal;
+    padding: 0px !important;
+    transition: all 0.5s;
+}
+
+#Requseted:hover {
+    border-bottom: 3px solid rgb(206, 162, 52);
+    color: rgb(206, 162, 52);
+    
+}
+
+#confirmed {
+    font-weight: normal;
+    padding: 0px !important;
+    transition: all 0.5s;
+}
+
+#confirmed:hover {
+    border-bottom: 3px solid rgb(21, 204, 21);
+    color: rgb(21, 204, 21);
+    
+}
+
+.statusGreen {
+    background-color: #15cc15 !important;
+    font-weight: bold;
+    color: #eee;
+}
+
+.statusYellow {
+    background-color: rgb(206, 162, 52) !important;
+    font-weight: bold;
+    color: #eee;
+}
+
 .tab-area tabset tab {
     height: 410px;
     border-right: #2F96B4 2px solid;

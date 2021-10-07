@@ -19,15 +19,20 @@ export class DataentryComponent implements OnInit {
   pager: number = 1;
   hours:string;
   idConfirm:number;
+  statusColor:string = "statusYellow"
+  searchEmpty:boolean = true;
   nameConfirm:string;
+  datalist:VaccinesDoses = new VaccinesDoses();
+  disableConfirm:boolean;
   Status:string="Requested";
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
-  lastPage:VaccinesDoses = new VaccinesDoses();
+  lastPage:VaccinesDoses  = new VaccinesDoses();
   vaccinesData:Vaccines = new Vaccines();
 
-  @ViewChild('ConfirmVaccine') modal: ModalDirective;
+  @ViewChild('ConfirmVaccine') modal1: ModalDirective;
+  @ViewChild('PreviewData') modal2: ModalDirective;
   constructor(public service: BookingService,private rout:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
@@ -43,7 +48,11 @@ export class DataentryComponent implements OnInit {
     })
   }
   getDataPgination(page: number , status:string) {
-
+if (status == "Requested"){
+this.statusColor = "statusYellow"
+}else {
+this.statusColor = "statusGreen"
+}
     this.service.getListBypage(page ,status).subscribe((res: {}) => {
 
       this.serviceReciepsData = res as VaccinesDoses;
@@ -51,12 +60,26 @@ export class DataentryComponent implements OnInit {
         this.serviceReciepsData = this.lastPage;
       
       }
+      
     });
 
 
   }
+  getDataByNatid(natid:string) {
+
+    this.service.getVaccineDoseByNatID(natid).subscribe((res: {}) => {
+      this.serviceReciepsData = res as VaccinesDoses;
+    });
+  }
   filterStatus(status:string){
+    this.pager = 1;
     this.getDataPgination(this.pager , status);
+    if (status == "DoseTaken"){
+      this.disableConfirm = true ;
+    }else {
+      this.disableConfirm = false ;
+    }
+   
   }
 
   confirmVaccineDose(form:NgForm){
@@ -65,13 +88,20 @@ export class DataentryComponent implements OnInit {
         form.reset();
         this.toastr.success("Section Updated Successfully", "Done!");
         this.getDataPgination(this.pager , this.Status);
+        this.modal1.hide();
       },
       error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
     );
   
   }
  
-
+  showData(data: any) {
+    this.service.getVaccineDoseByNatID(data.nationalNumber).subscribe((res: {}) => {
+      this.datalist = res as VaccinesDoses;
+      console.log(res);
+    });
+    this.modal2.show();
+  }
   getHours(timedata:any){
     
     this.hours = timedata.substring(0, 2);
@@ -101,7 +131,9 @@ export class DataentryComponent implements OnInit {
   confirmShow(data:any){
     this.idConfirm = data.id;
     this.nameConfirm = data.serviceRecipientNameEn;
-    this.modal.show();
+    this.service.bookingDetails.vaccineid = data.vaccineid;
+    this.service.bookingDetails.dosenumber = data.dosenumber;
+    this.modal1.show();
       }
   
 }

@@ -12,5 +12,7 @@ export class VaccinesDoses {
   dosedate:string =  "";
   dosehour:number =  0;
   dosebyid:number =  0;
+  status:string = "";
+  
 
 }

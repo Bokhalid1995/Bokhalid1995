@@ -59,6 +59,9 @@ export class BookingService {
    getListBypage(page:any ,status:any){
     return this.http.get(this.baseURL + "Servicerecipientvaccinedose/ServiceRecipientVaccineDosePagedList",{params:{'PageNumber': page , 'PageSize' : '10' ,'status' : status}});
    }
+   getVaccineDoseByNatID(natid:any){
+    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/GetServicerecipientvaccinedoseNationalNumber?nationalNumber=" + natid);
+   }
    getIdType(){
     return this.http.get(this.baseURL + "IdType/IdTypes");
   }
