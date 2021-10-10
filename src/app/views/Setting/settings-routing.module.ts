@@ -10,6 +10,8 @@ import { SectionsComponent } from './sections.component';
 import { VaccinesComponent } from './vaccines.component';
 import { HealthUnits } from '../../shared/models/HealthUnits.model';
 import { HealthUnitComponent } from './health-unit.component';
+import { Localities } from '../../shared/models/Localities.model';
+import { LocalitiesComponent } from './localities.component';
 
 const routes: Routes = [
   {
@@ -70,6 +72,13 @@ const routes: Routes = [
         component: HealthUnitComponent,
         data: {
           title: 'Health Units Control'
+        }
+      },
+      {
+        path: 'Localities',
+        component: LocalitiesComponent,
+        data: {
+          title: 'Localities Control'
         }
       }
 

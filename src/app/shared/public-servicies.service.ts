@@ -104,6 +104,17 @@ UpdateCity(form:any,id:any){
   const params = {'id' : id};
   return this.http.put(this.baseURL + "City/UpdateCity?Id=" + id, form ,{responseType : "blob"});
 }
+addLocalityResponse(form:any){
+  return this.http.post(this.baseURL + "Locality/CreateLocality" , form  , {responseType: "blob"} );
+}
+deleteLocality(id:any){
+  const params = {'id' : id};
+  return this.http.delete(this.baseURL + "Locality/DeleteLocality?Id=" + id, {responseType : "blob"});
+}
+UpdateLocality(form:any,id:any){
+  const params = {'id' : id};
+  return this.http.put(this.baseURL + "Locality/UpdateLocality?Id=" + id, form ,{responseType : "blob"});
+}
 addStateResponse(form:any){
   return this.http.post(this.baseURL + "State/CreateState" , form , {responseType: "blob"} );
 }
@@ -160,16 +171,21 @@ UpdateVaccine(form:any,id:any){
   const params = {'id' : id};
   return this.http.put(this.baseURL + "Vaccine/UpdateVaccine?Id=" + id, form  ,{responseType : "blob"});
 }
-addHealthUnitResponse(form:any){
-  return this.http.post(this.baseURL + "HealthUnit/CreateHealthUnit" , form , {responseType: "blob"} );
+addHealthUnitResponse(form:any ,fromhour:any ,tohour:any){
+ 
+  const params = {'fromhour' : fromhour , 'tohour' : tohour};
+  const data = Object.assign(form , params);
+  return this.http.post(this.baseURL + "HealthUnit/CreateHealthUnit" , data , {responseType: "blob"} );
 }
 deleteHealthUnit(id:any){
   const params = {'id' : id};
   return this.http.delete(this.baseURL + "HealthUnit/DeleteHealthUnit?Id=" + id, {responseType : "blob"});
 }
-UpdateHealthUnit(form:any,id:any){
-  const params = {'id' : id};
-  return this.http.put(this.baseURL + "HealthUnit/UpdateVaccine?Id=" + id, form  ,{responseType : "blob"});
+UpdateHealthUnit(form:any,id:any,fromhour:any ,tohour:any){
+ 
+  const params = {'fromhour' : fromhour , 'tohour' : tohour};
+  const data = Object.assign(form , params);
+  return this.http.put(this.baseURL + "HealthUnit/UpdateHealthUnit?Id=" + id, form  ,{responseType : "blob"});
 }
 
 }

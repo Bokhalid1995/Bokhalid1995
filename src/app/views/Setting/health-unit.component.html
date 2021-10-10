@@ -11,7 +11,7 @@
     <main class="d-block align-items-center container">
         <div class="card row" id="RegistryForma">
             <div class="card-header">
-                <strong><i class="icon-plus"></i> Add new Unit Health</strong>
+                <strong><i class="icon-plus"></i> Add new Health Unit</strong>
                 <div class="card-header-actions">
                     <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
                         <small className="text-muted">docs</small>
@@ -22,17 +22,16 @@
                 <form #formUnitHealth="ngForm" class="container">
 
                     <div class="row">
-
-
+                        <input type="text" name="id" class="form-control" #id="ngModel" [(ngModel)]="service.HealthUnitsData.id" autocomplete="username" hidden>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Unit Health Name Arabic</label>
+                            <label for="name" class="mx-1">Health Unit Name Arabic</label>
                             <div class="input-group ">
 
                                 <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="service.HealthUnitsData.name" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Unit Health Name English</label>
+                            <label for="name" class="mx-1">Health Unit Name English</label>
                             <div class="input-group ">
                                 <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="service.HealthUnitsData.nameen" required>
                             </div>
@@ -53,8 +52,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
 
+                    <div class="row">
                         <div class="col-md-3">
                             <label for="name" class="mx-1">Working All Days</label>
                             <div class="input-group ">
@@ -65,7 +64,6 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <label for="name" class="mx-1">Working All Hours</label>
                             <div class="input-group ">
@@ -104,20 +102,19 @@
                                 </select>
                             </div>
                         </div>
-
                     </div>
-                    <div class="row">
 
+                    <div class="row">
                         <div class="col-md-3">
                             <label for="name" class="mx-1">From Hour</label>
                             <div class="input-group ">
-                                <input type="time" class="form-control" name="fromhour" #fromhour="ngModel" [(ngModel)]="service.HealthUnitsData.fromhour" autocomplete="username" min="09:00" max="18:00" required>
+                                <input type="time" class="form-control" name="fromhour" #fromhour="ngModel" [(ngModel)]="service.HealthUnitsData.fromhour" (change)="getHoursFrom(fromhour.value)" autocomplete="username" min="09:00" max="18:00" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="name" class="mx-1">To Hour</label>
                             <div class="input-group ">
-                                <input type="time" class="form-control" name="tohour" #tohour="ngModel" [(ngModel)]="service.HealthUnitsData.tohour" autocomplete="username" min="09:00" max="18:00" required>
+                                <input type="time" class="form-control" name="tohour" #tohour="ngModel" [(ngModel)]="service.HealthUnitsData.tohour" (change)="getHoursTo(tohour.value)" autocomplete="username" min="09:00" max="18:00" required>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -130,14 +127,10 @@
                             <label for="name" class="mx-1">Address</label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="addressid" autocomplete="new-password" #addressid="ngModel" [(ngModel)]="service.HealthUnitsData.addressid" required>
-                                    <option value="Yes" selected>Yes </option>
-                                    <option value="No">No</option>
-                               
+                                    <option *ngFor="let Localit of LocalityData" value="{{ Localit.id }}">{{ Localit.nameen }}</option>
                                 </select>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="row">
@@ -147,17 +140,15 @@
                         </div>
 
                         <div class="col-md-3 ">
-                            <label for="name" class="" style="color: aliceblue;">---</label>
-                            <div class="input-group ">
 
+                            <div class="input-group ">
                                 <button type="button" (click)="resetForm(formUnitHealth)" class="btn btn-block btn-outline-info">{{Reset}} </button>
                             </div>
                         </div>
                         <div class="col-md-3 ">
-                            <label for="name" class="" style="color: aliceblue;">--</label>
-                            <div class="input-group ">
 
-                                <button type="button" (click)="onSaveUnitHealth(formUnitHealth)" class="btn btn-block btn-success">{{submitt}}</button>
+                            <div class="input-group ">
+                                <button type="button" (click)="onSaveHealthUnit(formUnitHealth)" class="btn btn-block btn-success">{{submitt}}</button>
                             </div>
                         </div>
 
@@ -170,14 +161,17 @@
             <hr>
             <div class="card-body p-0 ">
                 <div class="row m-2">
-                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>  All Unit Healths Details</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">Show All<i class="icon-refresh mx-2"></i></button>
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>  All Health Units Details</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">Show All<i class="icon-refresh mx-2"></i></button>
                     </h4>
                     <table class="table table-sm table-bordered">
                         <thead class="bg-info  ">
                             <tr class="text-center mt-2">
-                                <th>Unit Health ID</th>
+                                <th>#</th>
                                 <th>name Arabic</th>
                                 <th>name English</th>
+                                <th>Capacity</th>
+                                <th>Phone</th>
+                                <th>Working All Days</th>
                                 <th>Preview</th>
                                 <th>Update</th>
                                 <th>Delete</th>
@@ -189,6 +183,9 @@
                                 <td>{{UnitHealth.id}}</td>
                                 <td>{{UnitHealth.nameen}}</td>
                                 <td>{{UnitHealth.name}}</td>
+                                <td>{{UnitHealth.capacity}}</td>
+                                <td>{{UnitHealth.phonenumber}}</td>
+                                <td>{{UnitHealth.workingalldays}}</td>
                                 <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(UnitHealth)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
                                 <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(UnitHealth)"><i class="fa fa-pencil-square"></i> Update</button></td>
                                 <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(UnitHealth.id)"><i class="fa fa-trash" ></i> Delete</button></td>
@@ -248,7 +245,7 @@
                         <h2><i class="fa fa-user"></i> </h2>
                         <h4>Name Arabic :</h4>
                         <h4>Departments : </h4>
-                        <p> Unit Health : </p>
+                        <p> Health Unit : </p>
                         <button (click)="PreviewUser.hide()">Close</button>
                         <button>login Details</button>
                     </div>

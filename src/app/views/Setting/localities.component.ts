@@ -3,43 +3,50 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { Vaccines } from '../../shared/models/Vaccines.model';
+import { Cities } from '../../shared/models/Cities.model';
+import { Localities } from '../../shared/models/Localities.model';
 import { PublicServiciesService } from '../../shared/public-servicies.service';
 
 @Component({
-  selector: 'app-vaccines',
-  templateUrl: './vaccines.component.html'
+  selector: 'app-localities',
+  templateUrl: './localities.component.html'
 })
-export class VaccinesComponent implements OnInit {
-  Reset:string="Reset"
+export class LocalitiesComponent implements OnInit {
+  Reset:string="Reset";
   submitt:string = "Create New";
-  VaccinesData:Vaccines = new Vaccines();
-  
- 
+
+  citiesData:Cities = new Cities();
+  localitiesData:Localities = new Localities();
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
-     this.ShowAll();
+    this.service.getStates().subscribe((res: {}) => {
+      this.citiesData = res as Cities;
+    })
+  
+    this.service.getLocalities().subscribe((res: {}) => {
+      this.localitiesData = res as Localities;
+    })
+  this.ShowAll();
   }
-  onSaveVaccine(formVaccine:NgForm){
+  onSaveLocality(formLocality:NgForm){
     if(this.submitt == "Update"){
      
-        return this.service.UpdateVaccine(formVaccine.value , formVaccine.value.id).subscribe(
+        return this.service.UpdateLocality(formLocality.value , formLocality.value.id).subscribe(
           response => {
-            formVaccine.reset();
-            this.Reset = "Reset"
+            formLocality.reset();
             this.submitt = "Create New";
-            this.toastr.success("Vaccine Updated Successfully", "Done!");
+            this.toastr.success("Locality Updated Successfully", "Done!");
             this.ShowAll();
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
         );
       
     }else{
-      this.service.addVaccineResponse(formVaccine.value).subscribe(
+      this.service.addLocalityResponse(formLocality.value).subscribe(
         (res) => {
-          formVaccine.reset();
-          this.toastr.success("Added Sucssed", "Done!");
+          formLocality.reset();
+          this.toastr.success("Added Locality Sucssed", "Done!");
           this.ShowAll();
           console.log(res);
         },
@@ -56,35 +63,24 @@ export class VaccinesComponent implements OnInit {
   }
   onDelete(id:number) {
 
-    return this.service.deleteVaccine(id).subscribe(
+    return this.service.deleteLocality(id).subscribe(
       response => {
-        this.toastr.warning("Vaccine deleted Successfully", "Done!");
+        this.toastr.warning("Locality deleted Successfully", "Done!");
         this.ShowAll();
       },
       error => { this.toastr.error("Data cant be deleted", "error!"); }
     );
 
   }
-  resetForm(form:NgForm){
-    if(this.Reset == "Cancel Update"){
-    this.submitt = "Create New";
-    this.Reset = "Reset"
-    form.reset();
-  }
-    else { form.reset(); }
-    
-
-  }
   
   ShowAll(){
-    this.service.getVaccines().subscribe((res: {}) => {
-      this.VaccinesData = res as Vaccines;
+    this.service.getCities().subscribe((res: {}) => {
+      this.citiesData = res as Cities;
     })
   }
-  fillForm(Vaccines:Vaccines){
+  fillForm(Localities:Localities){
     this.submitt = "Update";
-    this.Reset = "Cancel Update"
-    this.service.VaccinesData = Object.assign({} , Vaccines);
+this.service.localitiesData = Object.assign({} , Localities) ;
   }
 
 }

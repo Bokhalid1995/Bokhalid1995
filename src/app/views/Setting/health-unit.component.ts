@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { HealthUnits } from '../../shared/models/HealthUnits.model';
+import { Localities } from '../../shared/models/Localities.model';
 import { PublicServiciesService } from '../../shared/public-servicies.service';
 
 @Component({
@@ -12,18 +13,24 @@ import { PublicServiciesService } from '../../shared/public-servicies.service';
 })
 export class HealthUnitComponent implements OnInit {
   Reset:string="Reset";
-  submitt:string = "Create HealthUnit";
+  submitt:string = "Create New";
+  hoursFrom:string;
+  hoursTo:string;
+  LocalityData:Localities = new Localities();
   HealthUnitsData:HealthUnits = new HealthUnits();
   formDataUpdate:HealthUnits = new HealthUnits();
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
+    this.service.getLocalities().subscribe((res: {}) => {
+      this.LocalityData = res as Localities;
+    })
     this.ShowAll();
   }
- onSaveHealthUnit(formHealthUnit:NgForm){
+  onSaveHealthUnit(formHealthUnit:NgForm){
     if(this.submitt == "Update"){
      
-        return this.service.UpdateHealthUnit(formHealthUnit.value , formHealthUnit.value.id).subscribe(
+        return this.service.UpdateHealthUnit(formHealthUnit.value , formHealthUnit.value.id ,this.hoursFrom , this.hoursTo ).subscribe(
           response => {
             formHealthUnit.reset();
             this.Reset = "Reset"
@@ -31,11 +38,11 @@ export class HealthUnitComponent implements OnInit {
             this.toastr.success("HealthUnit Updated Successfully", "Done!");
             this.ShowAll();
           },
-          error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
+          error => { this.toastr.warning("Wrong Editing Data", "Warn!"); }
         );
       
     }else{
-      this.service.addHealthUnitResponse(formHealthUnit.value).subscribe(
+      this.service.addHealthUnitResponse(formHealthUnit.value , this.hoursFrom , this.hoursTo ).subscribe(
         (res) => {
           formHealthUnit.reset();
           this.toastr.success("Added Sucssed", "Done!");
@@ -63,6 +70,14 @@ export class HealthUnitComponent implements OnInit {
       error => { this.toastr.error("Data cant be deleted", "error!"); }
     );
 
+  }
+  getHoursFrom(timedata:any){
+    
+    this.hoursFrom = timedata.substring(0, 2);
+  }
+  getHoursTo(timedata:any){
+    
+    this.hoursTo = timedata.substring(0, 2);
   }
   resetForm(form:NgForm){
     if(this.Reset == "Cancel Update"){

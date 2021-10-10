@@ -30,6 +30,11 @@ export const navItems: INavData[] = [
         icon: 'caret-right'
       },
       {
+        name: 'Localities',
+        url: '/Setting/Localities',
+        icon: 'caret-right'
+      },
+      {
         name: 'Health Unit',
         url: '/Setting/Health-Units',
         icon: 'caret-right'
@@ -42,7 +47,6 @@ export const navItems: INavData[] = [
       {
         divider: true
       },
-  
       {
         name: 'Departments',
         url: '/Setting/Departments',
