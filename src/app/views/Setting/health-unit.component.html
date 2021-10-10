@@ -1,0 +1,264 @@
+<style>
+    .page-item:hover {
+        cursor: pointer;
+    }
+    
+    .app-body {
+        margin: 0px;
+    }
+</style>
+<div class="app-body animated fadeIn ">
+    <main class="d-block align-items-center container">
+        <div class="card row" id="RegistryForma">
+            <div class="card-header">
+                <strong><i class="icon-plus"></i> Add new Unit Health</strong>
+                <div class="card-header-actions">
+                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
+                        <small className="text-muted">docs</small>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body col-md-12 mx-auto">
+                <form #formUnitHealth="ngForm" class="container">
+
+                    <div class="row">
+
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Unit Health Name Arabic</label>
+                            <div class="input-group ">
+
+                                <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="service.HealthUnitsData.name" autocomplete="username" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Unit Health Name English</label>
+                            <div class="input-group ">
+                                <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="service.HealthUnitsData.nameen" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Capacity</label>
+                            <div class="input-group ">
+                                <input type="text" name="capacity" class="form-control" autocomplete="" #capacity="ngModel" [(ngModel)]="service.HealthUnitsData.capacity" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Health Unit Classfication</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="healtunitclassficationid" autocomplete="new-password" #healtunitclassficationid="ngModel" [(ngModel)]="service.HealthUnitsData.healtunitclassficationid" required>
+                                    <option value="1" selected>1 </option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Working All Days</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="workingalldays" autocomplete="new-password" #workingalldays="ngModel" [(ngModel)]="service.HealthUnitsData.workingalldays" required>
+                                    <option value="Yes" selected>Yes </option>
+                                    <option value="No">No</option>
+                               
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Working All Hours</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="workingallhours" autocomplete="new-password" #workingallhours="ngModel" [(ngModel)]="service.HealthUnitsData.workingallhours" required>
+                                    <option value="Yes" selected>Yes </option>
+                                    <option value="No">No</option>
+                               
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">From Day </label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="fromday" autocomplete="new-password" #fromday="ngModel" [(ngModel)]="service.HealthUnitsData.fromday" required>
+                                    <option value="1" selected>Saturday </option>
+                                    <option value="2" selected>Sunday </option>
+                                    <option value="3" selected>Monday </option>
+                                    <option value="4" selected>Tuesday </option>
+                                    <option value="5" selected>Wednesday </option>
+                                    <option value="6" selected>Thursday </option>
+                                    <option value="7" selected>Friday </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">To Day </label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="today" autocomplete="new-password" #today="ngModel" [(ngModel)]="service.HealthUnitsData.today" required>
+                                    <option value="1" selected>Saturday </option>
+                                    <option value="2" selected>Sunday </option>
+                                    <option value="3" selected>Monday </option>
+                                    <option value="4" selected>Tuesday </option>
+                                    <option value="5" selected>Wednesday </option>
+                                    <option value="6" selected>Thursday </option>
+                                    <option value="7" selected>Friday </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">From Hour</label>
+                            <div class="input-group ">
+                                <input type="time" class="form-control" name="fromhour" #fromhour="ngModel" [(ngModel)]="service.HealthUnitsData.fromhour" autocomplete="username" min="09:00" max="18:00" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">To Hour</label>
+                            <div class="input-group ">
+                                <input type="time" class="form-control" name="tohour" #tohour="ngModel" [(ngModel)]="service.HealthUnitsData.tohour" autocomplete="username" min="09:00" max="18:00" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Phone Number</label>
+                            <div class="input-group ">
+                                <input type="number" name="phonenumber" class="form-control" autocomplete="" #phonenumber="ngModel" [(ngModel)]="service.HealthUnitsData.phonenumber" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Address</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="addressid" autocomplete="new-password" #addressid="ngModel" [(ngModel)]="service.HealthUnitsData.addressid" required>
+                                    <option value="Yes" selected>Yes </option>
+                                    <option value="No">No</option>
+                               
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 ">
+
+                        </div>
+
+                        <div class="col-md-3 ">
+                            <label for="name" class="" style="color: aliceblue;">---</label>
+                            <div class="input-group ">
+
+                                <button type="button" (click)="resetForm(formUnitHealth)" class="btn btn-block btn-outline-info">{{Reset}} </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <label for="name" class="" style="color: aliceblue;">--</label>
+                            <div class="input-group ">
+
+                                <button type="button" (click)="onSaveUnitHealth(formUnitHealth)" class="btn btn-block btn-success">{{submitt}}</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+            </div>
+            <hr>
+            <div class="card-body p-0 ">
+                <div class="row m-2">
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>  All Unit Healths Details</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">Show All<i class="icon-refresh mx-2"></i></button>
+                    </h4>
+                    <table class="table table-sm table-bordered">
+                        <thead class="bg-info  ">
+                            <tr class="text-center mt-2">
+                                <th>Unit Health ID</th>
+                                <th>name Arabic</th>
+                                <th>name English</th>
+                                <th>Preview</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let UnitHealth of HealthUnitsData" class="text-center animated fadeIn">
+                                <td>{{UnitHealth.id}}</td>
+                                <td>{{UnitHealth.nameen}}</td>
+                                <td>{{UnitHealth.name}}</td>
+                                <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(UnitHealth)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
+                                <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(UnitHealth)"><i class="fa fa-pencil-square"></i> Update</button></td>
+                                <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(UnitHealth.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+<div bsModal #successModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" #confirmRegisterModal>
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure ?</h4>
+
+            </div>
+            <div class="modal-body">
+                <p>{{ 'REGISTUSERNAME' | translate }} : </p>
+                <p>{{ 'REGISTNATID' | translate }} : </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary ml-2" (click)="successModal.hide()">No</button>
+                <button type="button" class="btn btn-success">Yes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- /.Preview modal -->
+<div bsModal #PreviewUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="cardUser">
+                    <nav>
+
+                        Active
+
+                    </nav>
+                    <div class="photo text-left">
+                        <h2><i class="fa fa-time"></i> Created On:</h2>
+                        <h2><i class="fa fa-user"></i> Created By: </h2>
+                    </div>
+                    <div class="description">
+                        <h2><i class="fa fa-user"></i> </h2>
+                        <h4>Name Arabic :</h4>
+                        <h4>Departments : </h4>
+                        <p> Unit Health : </p>
+                        <button (click)="PreviewUser.hide()">Close</button>
+                        <button>login Details</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

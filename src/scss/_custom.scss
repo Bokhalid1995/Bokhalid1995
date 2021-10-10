@@ -75,6 +75,19 @@ html:lang(ar) {
             margin-left: 5px;
         }
     }
+    button span::before {
+        content: '<-';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        font-weight: bolder;
+        right: -20px;
+        transition: 0.5s;
+    }
+    button span::after {
+        content: none;
+        position: absolute;
+    }
     app-footer {
         margin-left: 0px !important;
         margin-right: 200px !important;
@@ -273,7 +286,6 @@ body {
 #Requseted:hover {
     border-bottom: 3px solid rgb(206, 162, 52);
     color: rgb(206, 162, 52);
-    
 }
 
 #confirmed {
@@ -285,7 +297,6 @@ body {
 #confirmed:hover {
     border-bottom: 3px solid rgb(21, 204, 21);
     color: rgb(21, 204, 21);
-    
 }
 
 .statusGreen {
@@ -304,6 +315,19 @@ body {
     height: 410px;
     border-right: #2F96B4 2px solid;
     overflow: auto;
+}
+
+.errorValidationMessage {
+    color: #BD362F;
+}
+
+.img-header {
+    width: 100%;
+    transition: all 0.7s;
+}
+
+.img-header:hover {
+    transform: scale(1.05);
 }
 
 table {
@@ -349,12 +373,105 @@ table::-webkit-scrollbar-thumb {
     }
 }
 
+// menu Language
+.dropbtn {
+    color: #63c2de;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+    display: none;
+    transition: all 0.7s;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 5px;
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.5s;
+}
+
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+    /*box-shadow: 1px 1px 5px #999;*/
+    background-color: #42b0d1;
+    color: #fff;
+}
+
+
+/* Show the dropdown menu on hover */
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+.dropdown:hover .dropbtn {
+    background-color: #fff;
+}
+
 //#main .card {
 //  border-top-left-radius: 15px!important;
 //  border-top-right-radius: 15px!important;
 //}
 mat-step {
     color: #BD362F;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button span:after {
+    content: '→';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    font-weight: bolder;
+    right: -20px;
+    transition: 0.5s;
+}
+
+button:hover span {
+    padding-right: 25px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
 }
 
 

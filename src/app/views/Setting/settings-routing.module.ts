@@ -8,6 +8,8 @@ import { UnitsComponent } from './units.component';
 import { DepartmentsComponent } from './departments.component';
 import { SectionsComponent } from './sections.component';
 import { VaccinesComponent } from './vaccines.component';
+import { HealthUnits } from '../../shared/models/HealthUnits.model';
+import { HealthUnitComponent } from './health-unit.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,13 @@ const routes: Routes = [
         component: VaccinesComponent,
         data: {
           title: 'Vaccines Control'
+        }
+      },
+      {
+        path: 'Health-Units',
+        component: HealthUnitComponent,
+        data: {
+          title: 'Health Units Control'
         }
       }
 

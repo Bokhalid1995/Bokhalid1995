@@ -10,6 +10,7 @@ import { UnitsComponent } from './units.component';
 import { DepartmentsComponent } from './departments.component';
 import { SectionsComponent } from './sections.component';
 import { VaccinesComponent } from './vaccines.component';
+import { HealthUnitComponent } from './health-unit.component';
 
 
 
@@ -28,7 +29,8 @@ import { VaccinesComponent } from './vaccines.component';
     UnitsComponent,
     DepartmentsComponent,
     SectionsComponent,
-    VaccinesComponent
+    VaccinesComponent,
+    HealthUnitComponent
   ]
   
 })

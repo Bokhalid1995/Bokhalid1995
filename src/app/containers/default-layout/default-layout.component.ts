@@ -15,6 +15,7 @@ export class DefaultLayoutComponent implements OnInit{
   }
   ngOnInit(): void {
     this.useractive = localStorage.getItem('username')
+    
   }
 
   toggleMinimize(e) {

@@ -16,7 +16,7 @@
 
                     <div class="card-group">
                         <div class="card p-4">
-                            <img class="" src="assets/img/header1.png" alt="">
+                            <img class="img-header" src="assets/img/header1.png" alt="">
                         </div>
                     </div>
                     <div class="card-group mt-2">
@@ -78,7 +78,7 @@
                                                     <option *ngFor="let center of CentersData" value="{{ center.id }}">{{ center.nameen }}</option>
                                                 </select>
                                             <div class="input-group-append">
-                                                <span class="input-group-text" (click)="getCenterDetails(healthunitid.value)"><i class="icon-info"></i></span>
+                                                <span class="input-group-text" (click)="getCenterDetails(healthunitid.value)">Center Details</span>
                                             </div>
                                         </div>
 
@@ -107,11 +107,11 @@
                                 <div class="row">
                                     <div class="col-md-12 py-0">
 
-                                        <label class="">{{ 'ATTDATE' | translate }}</label>
+                                        <label class="d-flex">{{ 'ATTDATE' | translate }} <small class="ml-auto float-right errorValidationMessage"> {{validMessage }}</small></label>
 
                                         <div class="input-group">
-                                            <input type="date" class="form-control" name="bookingdate" #bookingdate="ngModel" [(ngModel)]="service.bookingDetails.bookingdate" autocomplete="username" required>
-                                            <input type="time" class="form-control" name="bookinghour" #bookinghour (change)="getHours(bookinghour.value)" id="appt" min="09:00" max="18:00" required>
+                                            <input type="date" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalid}" name="bookingdate" #bookingdate="ngModel" [(ngModel)]="service.bookingDetails.bookingdate" (change)="checkDate(bookingdate.value)" autocomplete="username" required>
+                                            <input type="time" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalid}" name="bookinghour" #bookinghour (change)="getHours(bookinghour.value)" id="appt" min="09:00" max="18:00" required>
 
                                         </div>
                                     </div>

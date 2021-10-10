@@ -1,12 +1,39 @@
+<style>
+    button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+    
+    button span:after {
+        content: '→';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        font-weight: bolder;
+        right: -20px;
+        transition: 0.5s;
+    }
+    
+    button:hover span {
+        padding-right: 25px;
+    }
+    
+    button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+</style>
 <div class="app-body animated fadeIn">
     <main class="main d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto mb-2">
-                    <div class="card-group">
-                        <div class="card p-4 text-center">
-                            <img class="" src="assets/img/header1.png" alt="">
-                            <div class="row d-flex justify-content-center mt-3">
+                    <div class="card-group mt-2">
+                        <div class="card px-4 py-2 text-center">
+                            <img class="img-header" src="assets/img/header1.png" alt="">
+                            <div class="row d-flex justify-content-center">
                                 <div class="col-md-3 input-group">
                                     <label class="p-2"><i class="icon-globe "></i></label>
                                     <select class="form-control p-1 border-0" (change)="changeLang($event.target.value)">
@@ -52,19 +79,20 @@
                                             <button type="button" class="btn btn-link px-0">{{ 'FORGOTPASS' | translate}}</button>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <button type="submit" class="btn btn-primary px-4" [disabled]="formLogin.invalid">{{ 'LOGINBTN' |
-                                                         translate}}</button>
+                                            <button type="submit" class="btn btn-primary px-4" [disabled]="formLogin.invalid"><span>{{ 'LOGINBTN' |
+                                                         translate}}</span></button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="card text-white bg-primary py-5 ">
+                        <div class="card text-white bg-primary ">
                             <div class="card-body text-center">
                                 <div>
                                     <h2>{{ 'MAKEUSER' | translate}}</h2>
-                                    <p>{{ 'ABOUTAPP' | translate}}</p>
-                                    <button type="button" routerLink="/register" class="btn btn-primary active mt-3"> {{ 'REGISTERNOW' |
+                                    <p>{{ 'ABOUTAPP' | translate}} <br><br> <img src="assets/img/ready.gif" width="110" height="110"></p>
+
+                                    <button type="button" class="btn btn-primary active mt-1"> {{ 'Home Page' |
                     translate}}</button>
                                 </div>
                             </div>

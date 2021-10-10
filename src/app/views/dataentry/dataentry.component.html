@@ -57,12 +57,12 @@
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown" dropdown>
-                            <a id="link-dropdown" class="nav-link dropdown-toggle" dropdownToggle (click)="false" aria-controls="your-dropdown"><i class="icon-user mx-2"></i> User Name
+                            <a id="link-dropdown" class="nav-link dropdown-toggle" dropdownToggle (click)="false" aria-controls="your-dropdown"><i class="icon-user mx-2"></i> {{ NameRecieption }}
                             </a>
                             <div id="your-dropdown" class="dropdown-menu animated fadeIn" aria-labelledby="link-dropdown" *dropdownMenu>
                                 <a class="dropdown-item" style="color: black!important;" href="#"><i
                                         class="icon-screen-desktop mx-2"></i>Employee Panel</a>
-                                <a class="dropdown-item" style="color: black!important;" routerLink="/login"><i
+                                <a class="dropdown-item" style="color: black!important;" routerLink="/login-public"><i
                                         class="icon-logout mx-2"></i>Log Out</a>
 
                             </div>
@@ -221,6 +221,7 @@
 
                                 </ul>
                             </div>
+                            <!-- <button class="btn btn-success" (click)="scrollTo('Statics')"> scrooll</button>-->
                         </div>
                     </div>
 

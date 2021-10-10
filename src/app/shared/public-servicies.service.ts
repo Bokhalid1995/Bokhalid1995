@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Centers } from './models/Centers.model';
 import { Cities } from './models/Cities.model';
 import { Departments } from './models/Departments.model';
+import { HealthUnits } from './models/HealthUnits.model';
 import { Localities } from './models/Localities.model';
 import { Sections } from './models/Sections.model';
 import { States } from './models/States.model';
@@ -22,6 +23,7 @@ export class PublicServiciesService {
   CentersData:Centers = new Centers();
   VaccinesData:Vaccines = new Vaccines();
   UnitsData:Units = new Units();
+  HealthUnitsData:HealthUnits = new HealthUnits();
   DeptsData:Departments = new Departments();
   SectionsData:Sections = new Sections();
 
@@ -86,6 +88,9 @@ getCenters(){
 }
 getVaccines(){
   return this.http.get(this.baseURL + "Vaccine/Vaccines");
+}
+getHealthUnits(){
+  return this.http.get(this.baseURL + "Healthunit/HealthUnits");
 }
 addCityResponse(form:any){
  
@@ -154,6 +159,17 @@ deleteVaccine(id:any){
 UpdateVaccine(form:any,id:any){
   const params = {'id' : id};
   return this.http.put(this.baseURL + "Vaccine/UpdateVaccine?Id=" + id, form  ,{responseType : "blob"});
+}
+addHealthUnitResponse(form:any){
+  return this.http.post(this.baseURL + "HealthUnit/CreateHealthUnit" , form , {responseType: "blob"} );
+}
+deleteHealthUnit(id:any){
+  const params = {'id' : id};
+  return this.http.delete(this.baseURL + "HealthUnit/DeleteHealthUnit?Id=" + id, {responseType : "blob"});
+}
+UpdateHealthUnit(form:any,id:any){
+  const params = {'id' : id};
+  return this.http.put(this.baseURL + "HealthUnit/UpdateVaccine?Id=" + id, form  ,{responseType : "blob"});
 }
 
 }

@@ -25,6 +25,8 @@ export class DataentryComponent implements OnInit {
   datalist:VaccinesDoses = new VaccinesDoses();
   disableConfirm:boolean;
   Status:string="Requested";
+NameRecieption:string;
+IDRecieption:string;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
@@ -40,6 +42,8 @@ export class DataentryComponent implements OnInit {
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;
     })
+    this.NameRecieption = localStorage.getItem('fullname')
+    this.IDRecieption = localStorage.getItem('userid')
   }
 
   ShowAll(){
@@ -135,5 +139,8 @@ this.statusColor = "statusGreen"
     this.service.bookingDetails.dosenumber = data.dosenumber;
     this.modal1.show();
       }
-  
+      scrollTo(id:any){
+        let el = document.getElementById(id);
+        el.scrollIntoView();
+      }
 }

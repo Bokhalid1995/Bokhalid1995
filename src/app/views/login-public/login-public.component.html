@@ -5,14 +5,21 @@
                 <div class="col-md-8 mx-auto mb-2">
                     <div class="card-group">
                         <div class="card p-4 text-center">
-                            <img class="" src="assets/img/header1.png" alt="">
+                            <img class="img-header" src="assets/img/header1.png" alt="">
                             <div class="row d-flex justify-content-center mt-3">
                                 <div class="col-md-3 input-group">
-                                    <label class="p-2"><i class="icon-globe "></i></label>
-                                    <select class="form-control p-1 border-0" (change)="changeLang($event.target.value)">
+
+                                    <div class="dropdown">
+                                        <button class="dropbtn"><i class="icon-globe mx-2"></i>Choose langauge</button>
+                                        <div class="dropdown-content">
+                                            <a href="#" [ngClass]="lang == 'en'?ActiveLang : inActiveLang" (click)="changeLang('en')">English</a>
+                                            <a href="#" [ngClass]="lang == 'ar'?ActiveLang : inActiveLang" (click)="changeLang('ar')">العربية</a>
+                                        </div>
+                                    </div>
+                                    <!-- <select class="form-control p-1 border-0" (change)="changeLang($event.target.value)">
                                     <option value="en" [selected]="lang == 'en'">English</option>
                                     <option value="ar" [selected]="lang == 'ar'">العربية</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                         </div>
@@ -52,8 +59,8 @@
                                             <button type="button" class="btn btn-link px-0">{{ 'FORGOTPASS' | translate}}</button>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <button type="submit" class="btn btn-primary px-4" [disabled]="formLogin.invalid">{{ 'LOGINBTN' |
-                                                         translate}}</button>
+                                            <button type="submit" class="btn btn-primary px-4" [disabled]="formLogin.invalid"><span>{{ 'LOGINBTN' |
+                                                         translate}}</span></button>
                                         </div>
                                     </div>
                                 </form>

@@ -1,4 +1,5 @@
 
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,8 +24,10 @@ export class PatientDataComponent implements OnInit {
   lang:string;
   list :any[];
   dropdownSettings:IDropdownSettings={};
-
+  currentDate:Date = new Date();
   hours:number;
+  validMessage:string;
+  classInvalid:boolean = false;
   statesData:States = new States();
   citiesData:Cities = new Cities();
   localitiesData:Localities = new Localities();
@@ -123,5 +126,16 @@ export class PatientDataComponent implements OnInit {
         }
       )
     
+  }
+
+  checkDate(date:Date){
+  
+if( new Date(date) <= this.currentDate ){
+  this.validMessage = "Your date is incorrect please check!";
+  this.classInvalid = true ;
+}else {
+  this.validMessage = ""
+  this.classInvalid = false ;
+}
   }
 }

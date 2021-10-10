@@ -18,8 +18,20 @@ import { IdTypes } from '../../shared/models/IdTypes.model';
 export class RegisterComponent implements OnInit {
   lang:string;
   list :any[];
+
+  validPassword:string;
+  validEmail:string;
+  validIdendityID:string;
+  validPhone:string;
+
+  BODitilite:Date = new Date("1995-01-01");
   repasswordcheck: string = '';
-  classInvalidRegist: boolean = false;
+
+  classInvalidEmail:boolean = false;
+  classInvalidPass:boolean = false
+  classInvalidIdendityID: boolean = false;
+  classInvalidPhone: boolean = false;
+
   IdTypes:IdTypes = new IdTypes();
    @ViewChild('ContinuBookig') modal: ModalDirective;
   constructor(public translate:TranslateService,private rout: Router, public service: BookingService, public service1: PublicServiciesService, private toastr: ToastrService) {
@@ -43,9 +55,9 @@ export class RegisterComponent implements OnInit {
   }
   onSaveRecords(formData: NgForm) {
     if (this.repasswordcheck != this.service.recieptiestDetails.password) {
-      this.classInvalidRegist = true;
+    
     } else {
-      this.classInvalidRegist = false;
+      
       this.service.registerRecieptionService(formData.value).subscribe(
         (res: any) => {
           formData.reset();
@@ -62,6 +74,47 @@ export class RegisterComponent implements OnInit {
       )
     }
   }
+
+  /* Validations */
+
+  checkEmail(email:string){
+    if(email.includes("@")){
+      this.validEmail = "";
+      this.classInvalidEmail = false ;
+    }else{
+      this.classInvalidEmail = true ;
+      this.validEmail = "Enter Valid Email";
+    }
+  }
+
+  checkRetypePassword(pass:string){
+    if(pass == this.service.recieptiestDetails.password){
+      this.validPassword = "";
+      this.classInvalidPass = false ;
+    }else{
+      this.classInvalidPass = true ;
+      this.validPassword = "Password Not Matching";
+    }
+  }
+  checkLIdendityID(id:string , idType:string){
+    if(idType == "National Id" && (id.length <= 0 || id.length != 10)){
+      this.classInvalidIdendityID = true ;
+      this.validIdendityID = "Idendity must be 10 chars";
+    }else{
+      this.validIdendityID = "";
+      this.classInvalidIdendityID = false ;
+    }
+  }
     
+  checkPhone(phone:string){
+    phone.toString()
+    if(phone.toString().length != 0 && phone.toString().length == 9){
+      this.validPhone = "";
+      this.classInvalidPhone = false ;
+    }else{
+      this.classInvalidPhone = true ;
+      this.validPhone = "Phone must be 10 chars";
+    }
+  }
 
 }

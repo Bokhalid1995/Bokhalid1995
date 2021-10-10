@@ -29,7 +29,11 @@ export const navItems: INavData[] = [
         url: '/Setting/cities',
         icon: 'caret-right'
       },
-  
+      {
+        name: 'Health Unit',
+        url: '/Setting/Health-Units',
+        icon: 'caret-right'
+      },
       {
         name: 'Units',
         url: '/Setting/Units',

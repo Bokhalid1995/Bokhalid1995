@@ -67,6 +67,7 @@ export class BookingService {
   }
   confirmVaccineDose(form:any ,serviceseciptid:any){
     const params = {'acceptedbyid' : localStorage.getItem('userid')};
-    return this.http.put(this.baseURL + "Servicerecipientvaccinedose/Confirm?Id=" + serviceseciptid, form ,{responseType : "blob"});
+    const data = Object.assign(params , form)
+    return this.http.put(this.baseURL + "Servicerecipientvaccinedose/Confirm?Id=" + serviceseciptid, data ,{responseType : "blob"});
   }
 }
