@@ -12,6 +12,8 @@ import { SectionsComponent } from './sections.component';
 import { VaccinesComponent } from './vaccines.component';
 import { HealthUnitComponent } from './health-unit.component';
 import { LocalitiesComponent } from './localities.component';
+import { VaccinesDistributionComponent } from './vaccines-distribution.component';
+import { AddressesComponent } from './addresses.component';
 
 
 
@@ -32,7 +34,9 @@ import { LocalitiesComponent } from './localities.component';
     SectionsComponent,
     VaccinesComponent,
     HealthUnitComponent,
-    LocalitiesComponent
+    LocalitiesComponent,
+    VaccinesDistributionComponent,
+    AddressesComponent
   ]
   
 })

@@ -61,6 +61,11 @@ export const navItems: INavData[] = [
         name: 'Vaccines',
         url: '/Setting/Vaccines',
         icon: 'caret-right'
+      },
+      {
+        name: 'Vaccines Distribution',
+        url: '/Setting/Vaccine-Distribution',
+        icon: 'caret-right'
       }
     ]
   },

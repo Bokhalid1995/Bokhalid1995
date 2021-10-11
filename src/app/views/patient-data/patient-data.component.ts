@@ -110,7 +110,6 @@ export class PatientDataComponent implements OnInit {
     })
   }
   onSaveRecords(formData: NgForm) {
- 
       this.service.registerRecieptionBook(formData.value , this.hours , this.IDRecieption).subscribe(
         (res: any) => {
           formData.reset();

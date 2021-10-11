@@ -10,6 +10,7 @@ import { Sections } from './models/Sections.model';
 import { States } from './models/States.model';
 import { Units } from './models/Units.model';
 import { Vaccines } from './models/Vaccines.model';
+import { VaccinesDistribution } from './models/VaccinesDistribution.model';
 
 
 @Injectable({
@@ -26,6 +27,7 @@ export class PublicServiciesService {
   HealthUnitsData:HealthUnits = new HealthUnits();
   DeptsData:Departments = new Departments();
   SectionsData:Sections = new Sections();
+  VaccinesDistData:VaccinesDistribution = new VaccinesDistribution();
 
   
   constructor(private http: HttpClient) { 
@@ -92,6 +94,9 @@ getVaccines(){
 getHealthUnits(){
   return this.http.get(this.baseURL + "Healthunit/HealthUnits");
 }
+getVaccinesDist(){
+  return this.http.get(this.baseURL + "VaccineDistribution/VaccineDistribution");
+}
 addCityResponse(form:any){
  
   return this.http.post(this.baseURL + "City/Create City" , form  , {responseType: "blob"} );
@@ -104,6 +109,10 @@ UpdateCity(form:any,id:any){
   const params = {'id' : id};
   return this.http.put(this.baseURL + "City/UpdateCity?Id=" + id, form ,{responseType : "blob"});
 }
+getCitiesState(stateid:any){
+    
+  return this.http.get(this.baseURL + "City/GetCityStateId?Id=" + stateid);
+ }
 addLocalityResponse(form:any){
   return this.http.post(this.baseURL + "Locality/CreateLocality" , form  , {responseType: "blob"} );
 }
@@ -186,6 +195,17 @@ UpdateHealthUnit(form:any,id:any,fromhour:any ,tohour:any){
   const params = {'fromhour' : fromhour , 'tohour' : tohour};
   const data = Object.assign(form , params);
   return this.http.put(this.baseURL + "HealthUnit/UpdateHealthUnit?Id=" + id, form  ,{responseType : "blob"});
+}
+addVaccinesDistResponse(form:any){
+  return this.http.post(this.baseURL + "VaccineDistribution/CreateVaccineDistribution" , form  , {responseType: "blob"} );
+}
+deleteVaccinesDist(id:any){
+  const params = {'id' : id};
+  return this.http.delete(this.baseURL + "VaccineDistribution/DeleteVaccineDistribution?Id=" + id, {responseType : "blob"});
+}
+UpdateVaccinesDist(form:any,id:any){
+  const params = {'id' : id};
+  return this.http.put(this.baseURL + "VaccineDistribution/UpdateVaccineDistribution?Id=" + id, form ,{responseType : "blob"});
 }
 
 }
