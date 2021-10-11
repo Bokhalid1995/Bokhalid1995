@@ -77,7 +77,7 @@
             <div class="alert  container-fluid">
                 <div class="row mt-1">
                     <div class="text-center">
-                        <p><b>Regisertation Form</b></p>
+                        <p><b>Statics For All Members In System</b></p>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-end">
@@ -167,11 +167,11 @@
                                     <div class="form-group">
                                         <label class="form-check-label mx-1" for="inlineRadio1"><b>Status:</b></label>
                                         <div class="form-check form-check-inline mx-2" id="inline-radios" id="Requseted">
-                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value)" checked value="Requested">
+                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value)" [checked]="isRequseted" value="Requested">
                                             <label class="form-check-label" for="inlineRadio1">Requested</label>
                                         </div>
                                         <div class="form-check form-check-inline  mx-2" id="confirmed">
-                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value)" value="DoseTaken">
+                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value)" [checked]="isConfirmed" value="DoseTaken">
                                             <label class="form-check-label" for="inlineRadio2">Confirmed</label>
                                         </div>
                                         <input #filterBy type="email" class="form-control mx-1" placeholder="Search by Username or ID" (change)="filterBy.value?getDataByNatid(filterBy.value):getDataByNatid(filterBy.value) " autocomplete="email" required>
@@ -221,7 +221,7 @@
 
                                 </ul>
                             </div>
-                            <!-- <button class="btn btn-success" (click)="scrollTo('Statics')"> scrooll</button>-->
+                            <!-- <button class="btn btn-success" (click)="scrollTo('Statics')"> scrooll</button>*/-->
                         </div>
                     </div>
 

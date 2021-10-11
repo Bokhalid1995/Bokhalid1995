@@ -20,25 +20,16 @@
             </div>
             <div class="card-body col-md-12 mx-auto">
                 <form #formCity="ngForm" class="container">
-
                     <div class="row">
-
-                        <div class="col-md-3">
-                            <label for="name" class="mx-1">ID</label>
-                            <div class="input-group mb-3">
-
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class=""></i>ID</span>
-                                </div>
-                                <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.citiesData.id" autocomplete="username" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="name" class="mx-1">City Name Arabic</label>
                             <div class="input-group mb-3">
+                                <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.citiesData.id" autocomplete="username" hidden required>
+
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class=""></i>Ar</span>
                                 </div>
+
                                 <input type="text" name="name" class="form-control" placeholder="City Name Arabic" #name="ngModel" [(ngModel)]="service.citiesData.name" autocomplete="username" required>
                             </div>
                         </div>
@@ -54,17 +45,17 @@
 
 
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="name" class="mx-1">City Name English</label>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">En</span>
                                 </div>
-                                <input type="text" name="nameen" class="form-control" placeholder="City Name English" autocomplete="" #nameen="ngModel" [(ngModel)]="service.citiesData.nameen" required>
+                                <input type="text" name="nameen" class="form-control" placeholder="City Name English" #nameen="ngModel" [(ngModel)]="service.citiesData.nameen" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="name" class="mx-1">State Located</label>
 
                             <div class="input-group mb-1">
@@ -72,23 +63,18 @@
                                         <option value="0"  disabled selected>{{ 'STATE' | translate }}
                                         </option>
                                         <option *ngFor="let state of statesData" value="{{ state.id }}">{{ state.nameen }}</option>
-                                   
                                     </select>
                             </div>
                             <div class="input-group">
                                 <div class="col-md-6">
                                     <button type="button" (click)="ShowAll()" class="btn btn-block btn-outline-info">All cities</button>
-
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" (click)="onSavecity(formCity)" class="btn btn-block btn-success">{{submitt}}</button>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </form>
             </div>
             <div class="card-body p-0 ">

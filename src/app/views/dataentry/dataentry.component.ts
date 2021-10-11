@@ -21,12 +21,14 @@ export class DataentryComponent implements OnInit {
   idConfirm:number;
   statusColor:string = "statusYellow"
   searchEmpty:boolean = true;
+  isRequseted:boolean = true;
+  isConfirmed:boolean = false;
   nameConfirm:string;
   datalist:VaccinesDoses = new VaccinesDoses();
   disableConfirm:boolean;
   Status:string="Requested";
-NameRecieption:string;
-IDRecieption:string;
+  NameRecieption:string;
+  IDRecieption:string;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
@@ -42,7 +44,7 @@ IDRecieption:string;
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;
     })
-    this.NameRecieption = localStorage.getItem('fullname')
+    this.NameRecieption = localStorage.getItem('username')
     this.IDRecieption = localStorage.getItem('userid')
   }
 
@@ -69,7 +71,7 @@ this.statusColor = "statusGreen"
 
 
   }
-  getDataByNatid(natid:string) {
+  getDataByNatid(natid:string ) {
 
     this.service.getVaccineDoseByNatID(natid).subscribe((res: {}) => {
       this.serviceReciepsData = res as VaccinesDoses;
@@ -79,8 +81,12 @@ this.statusColor = "statusGreen"
     this.pager = 1;
     this.getDataPgination(this.pager , status);
     if (status == "DoseTaken"){
+      this.isRequseted = false;
+      this.isConfirmed = true;
       this.disableConfirm = true ;
     }else {
+      this.isRequseted = true;
+      this.isConfirmed = false;
       this.disableConfirm = false ;
     }
    
@@ -116,9 +122,14 @@ this.statusColor = "statusGreen"
     if (this.pager < 1) {
       this.pager = 1;
     } else {
-      this.pager = this.pager + 1;
-  
-      this.getDataPgination(this.pager, this.Status);
+      if(this.isConfirmed == true){
+        this.pager = this.pager + 1;
+        this.getDataPgination(this.pager, 'DoseTaken');
+      }else{
+        this.pager = this.pager + 1;
+        this.getDataPgination(this.pager, 'Requested');
+      }
+     
     }
     this.lastPage = this.serviceReciepsData;
   }
@@ -126,9 +137,13 @@ this.statusColor = "statusGreen"
     if (this.pager < 1) {
       this.pager = 1;
     } else {
-      this.pager = this.pager - 1;
-
-      this.getDataPgination(this.pager, this.Status);
+      if(this.isConfirmed == true){
+        this.pager = this.pager - 1;
+        this.getDataPgination(this.pager, 'DoseTaken');
+      }else{
+        this.pager = this.pager - 1;
+        this.getDataPgination(this.pager, 'Requested');
+      }  
     }
     this.lastPage = this.serviceReciepsData;
   }

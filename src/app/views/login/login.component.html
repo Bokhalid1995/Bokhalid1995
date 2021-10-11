@@ -34,12 +34,14 @@
                         <div class="card px-4 py-2 text-center">
                             <img class="img-header" src="assets/img/header1.png" alt="">
                             <div class="row d-flex justify-content-center">
-                                <div class="col-md-3 input-group">
-                                    <label class="p-2"><i class="icon-globe "></i></label>
-                                    <select class="form-control p-1 border-0" (change)="changeLang($event.target.value)">
-                                    <option value="en" [selected]="lang == 'en'">English</option>
-                                    <option value="ar" [selected]="lang == 'ar'">العربية</option>
-                                    </select>
+                                <div class="col-md-3 input-group my-2">
+                                    <div class="dropdown">
+                                        <button class="dropbtn"><i class="icon-globe mx-2"></i>Choose langauge</button>
+                                        <div class="dropdown-content">
+                                            <a href="#" [ngClass]="lang == 'en'?ActiveLang : inActiveLang" (click)="changeLang('en')">English</a>
+                                            <a href="#" [ngClass]="lang == 'ar'?ActiveLang : inActiveLang" (click)="changeLang('ar')">العربية</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
