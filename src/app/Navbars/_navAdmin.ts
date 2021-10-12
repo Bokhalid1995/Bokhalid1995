@@ -1,6 +1,6 @@
 import { INavData } from '@coreui/angular';
 
-export const navItems: INavData[] = [
+export const navItemsAdmin: INavData[] = [
   {
     name: 'Vaccine Management System',
     url: '/dashboard',
@@ -34,7 +34,7 @@ export const navItems: INavData[] = [
         url: '/Setting/Localities',
         icon: 'caret-right'
       },
-      {
+      /* {
         name: 'Health Unit',
         url: '/Setting/Health-Units',
         icon: 'caret-right'
@@ -44,7 +44,7 @@ export const navItems: INavData[] = [
         url: '/Setting/Addresses',
         icon: 'caret-right'
       },
-      /*{
+     {
         name: 'Units',
         url: '/Setting/Units',
         icon: 'caret-right'

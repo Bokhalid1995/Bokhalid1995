@@ -13,6 +13,7 @@ import { HealthUnitComponent } from './health-unit.component';
 import { Localities } from '../../shared/models/Localities.model';
 import { LocalitiesComponent } from './localities.component';
 import { VaccinesDistributionComponent } from './vaccines-distribution.component';
+import { AddressesComponent } from './addresses.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,13 @@ const routes: Routes = [
         component: VaccinesDistributionComponent,
         data: {
           title: 'Vaccine Distribution Control'
+        }
+      },
+      {
+        path: 'Addresses',
+        component: AddressesComponent,
+        data: {
+          title: 'Addresses Control'
         }
       }
 

@@ -1,1 +1,191 @@
-<p>addresses works!</p>
+<style>
+    .page-item:hover {
+        cursor: pointer;
+    }
+    
+    .app-body {
+        margin: 0px;
+    }
+</style>
+<div class="app-body animated fadeIn">
+    <main class="d-block align-items-center container">
+        <div class="card row" id="RegistryForma">
+            <div class="card-header">
+                <strong><i class="icon-plus"></i>New Vaccines Distribution</strong>
+                <div class="card-header-actions">
+                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
+                        <small className="text-muted">docs</small>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body col-md-12 mx-auto">
+                <form #formAddress="ngForm" class="container">
+
+
+                    <div class="row">
+
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1 mb-1">{{ 'STATE' | translate }} </label>
+                            <div class="input-group mb-1">
+                                <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service1.AddressData.id" autocomplete="username" hidden required>
+                                <select class="form-control p-1" autocomplete="new-password" name="stateid" #stateid="ngModel" [(ngModel)]="service1.AddressData.stateid" (click)="getCitiesByState(stateid.value)" required>
+                                        <option *ngFor="let state of statesData" value="{{ state.id }}">{{ state.nameen }}</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mb-1">{{ 'CITIES' |  translate }}</label>
+                            <div class="input-group mb-2">
+                                <select class="form-control p-1" name="cityid" #cityid="ngModel" [(ngModel)]="service1.AddressData.cityid" autocomplete="new-password" (click)="getLocalBycity(cityid.value)" required>
+                                        <option *ngFor="let city of citiesData" value="{{ city.id }}">{{ city.nameen }}</option>
+                                    </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mb-1">{{ 'LOCALAREA' |  translate }}</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="localityid" #localityid="ngModel" [(ngModel)]="service1.AddressData.localityid" autocomplete="new-password" (click)="getUnitByLocal(localityid.value)" required>
+                                            <option *ngFor="let Locality of localitiesData" value="{{ Locality.id }}">{{ Locality.nameen }}</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Area Name </label>
+                            <div class="input-group mb-3">
+                                <input type="text" name="areaname" class="form-control" autocomplete="" #areaname="ngModel" [(ngModel)]="service1.AddressData.areaname" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group mb-3">
+                                <label for="name" class="mx-1">{{ 'Street Name' | translate }} </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="streetname" class="form-control" autocomplete="" #streetname="ngModel" [(ngModel)]="service1.AddressData.streetname" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Block Number</label>
+                            <div class="input-group mb-3">
+                                <input type="text" name="blocknumber" class="form-control" autocomplete="" #blocknumber="ngModel" [(ngModel)]="service1.AddressData.blocknumber" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Postal Code</label>
+                            <div class="input-group mb-3">
+                                <input type="text" name="postalcode" class="form-control" autocomplete="" #postalcode="ngModel" [(ngModel)]="service1.AddressData.postalcode" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">Post Box</label>
+                            <div class="input-group mb-3">
+                                <input type="text" name="pobox" class="form-control" autocomplete="" #pobox="ngModel" [(ngModel)]="service1.AddressData.pobox" required>
+                            </div>
+                            <div class="input-group">
+                                <div class="col-md-6">
+                                    <button type="button" (click)="resetForm(formAddress)" class="btn btn-block btn-outline-info">{{Reset}}</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" (click)="onSaveAddress(formAddress)" class="btn btn-block btn-success">{{submitt}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="card-body p-0">
+                <div class=" mx-auto">
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>  All Vaccines Details</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">Show All<i class="icon-refresh mx-2"></i></button>
+                    </h4>
+                    <table class="table table-sm table-bordered">
+                        <thead class="bg-info">
+                            <tr class="text-center mt-2">
+                                <th>ID</th>
+                                <th>Area Name </th>
+                                <th>Street Name</th>
+                                <th>Postal Code </th>
+                                <th>Status</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Address of AddressData" class="text-center animated fadeIn">
+                                <td>{{Address.id}}</td>
+                                <td>{{Address.areaname}}</td>
+                                <td>{{Address.streetname}}</td>
+                                <td>{{Address.postalcode}}</td>
+                                <td>{{Address.status}}</td>
+                                <td><button class="btn btn-success p-1 h-50" (click)="fillForm(Address)"><i class="fa fa-pencil-square"></i> Update</button></td>
+                                <td><button class="btn btn-danger p-1 h-50" (click)="onDelete(Address.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div bsModal #successModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" #confirmRegisterModal>
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure ?</h4>
+
+            </div>
+            <div class="modal-body">
+                <p>{{ 'REGISTUSERNAME' | translate }} : </p>
+                <p>{{ 'REGISTNATID' | translate }} : </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary ml-2" (click)="successModal.hide()">No</button>
+                <button type="button" class="btn btn-success">Yes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- /.Preview modal -->
+<div bsModal #PreviewUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="cardUser">
+                    <nav>
+
+                        Active
+
+                    </nav>
+                    <div class="photo text-left">
+                        <h2><i class="fa fa-time"></i> Created On:</h2>
+                        <h2><i class="fa fa-user"></i> Created By: </h2>
+                    </div>
+                    <div class="description">
+                        <h2><i class="fa fa-user"></i> </h2>
+                        <h4>Name Arabic :</h4>
+                        <h4>Departments : </h4>
+                        <p> Unit : </p>
+                        <button (click)="PreviewUser.hide()">Close</button>
+                        <button>login Details</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

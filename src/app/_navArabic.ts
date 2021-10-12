@@ -1,8 +1,8 @@
 import { INavData } from '@coreui/angular';
 
-export const navItems: INavData[] = [
+export const navItemsArabic: INavData[] = [
   {
-    name: 'Vaccine Management System',
+    name: 'نظام تلقيح الكورونا',
     url: '/dashboard',
     icon: 'icon-speedometer',
     badge: {

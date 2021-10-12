@@ -15,6 +15,8 @@ import { PublicServiciesService } from '../../shared/public-servicies.service';
 
 })
 export class CitiesComponent implements OnInit {
+  lang:string;
+  useractive:string;
   submitt:string = "Create City";
   statesData:States = new States();
   citiesData:Cities = new Cities();
@@ -22,6 +24,12 @@ export class CitiesComponent implements OnInit {
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
+    this.useractive = localStorage.getItem('username')
+    this.lang=localStorage.getItem('lang') || 'en';
+  /*  this.isAuthenticated = localStorage.getItem('token');*/
+    if (this.useractive == null) {
+      this.rout.navigateByUrl('/login');
+    }
     this.service.getStates().subscribe((res: {}) => {
       this.statesData = res as States;
     })

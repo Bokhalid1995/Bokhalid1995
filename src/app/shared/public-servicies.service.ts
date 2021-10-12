@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Addresses } from './models/Addresses.model';
 import { Centers } from './models/Centers.model';
 import { Cities } from './models/Cities.model';
 import { Departments } from './models/Departments.model';
@@ -28,6 +29,7 @@ export class PublicServiciesService {
   DeptsData:Departments = new Departments();
   SectionsData:Sections = new Sections();
   VaccinesDistData:VaccinesDistribution = new VaccinesDistribution();
+  AddressData:Addresses = new Addresses();
 
   
   constructor(private http: HttpClient) { 
@@ -96,6 +98,9 @@ getHealthUnits(){
 }
 getVaccinesDist(){
   return this.http.get(this.baseURL + "VaccineDistribution/VaccineDistribution");
+}
+getAddress(){
+  return this.http.get(this.baseURL + "Address/Addresses");
 }
 addCityResponse(form:any){
  
@@ -206,6 +211,18 @@ deleteVaccinesDist(id:any){
 UpdateVaccinesDist(form:any,id:any){
   const params = {'id' : id};
   return this.http.put(this.baseURL + "VaccineDistribution/UpdateVaccineDistribution?Id=" + id, form ,{responseType : "blob"});
+}
+addAddressResponse(form:any){
+  const params = {'countryid' : 1};
+  return this.http.post(this.baseURL + "Address/CreateAddress" , Object.assign(params ,form)   , {responseType: "blob"} );
+}
+deleteAddress(id:any){
+  const params = {'id' : id};
+  return this.http.delete(this.baseURL + "Address/DeleteAddress?Id=" + id, {responseType : "blob"});
+}
+UpdateAddress(form:any,id:any){
+  const params = {'id' : id};
+  return this.http.put(this.baseURL + "Address/UpdateAddress?Id=" + id, form ,{responseType : "blob"});
 }
 
 }
