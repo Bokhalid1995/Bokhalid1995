@@ -49,9 +49,9 @@
                                     <div class="col-md-6">
                                         <label for="name" class="mb-1">{{ 'NATIONALITY' |  translate }}</label>
                                         <div class="input-group  mb-1">
-                                            <select class="form-control p-1" name="nationalityid" #nationalityid="ngModel" [(ngModel)]="service.recieptiestDetails.nationalityid" autocomplete="new-password" required>
-                                                <option value="Sudanese">Sudanese</option>
-                                                <option value="Others">Others</option>
+                                            <select [ngClass]=" {'form-control' : true , 'p-1' : true , 'filled' : isFilled }" name="nationalityid" #nationalityid="ngModel" [(ngModel)]="service.recieptiestDetails.nationalityid" autocomplete="new-password" required>
+                                                <option value="1">Sudanese</option>
+                                                <option value="2">Others</option>
                                             </select>
                                         </div>
 
@@ -59,7 +59,7 @@
                                         <div class="input-group  mb-1">
                                             <select class="form-control p-1" name="identificationdetailid" #identificationdetailid="ngModel" [(ngModel)]="service.recieptiestDetails.identificationdetailid" (change)="checkLIdendityID(nationalnumber.value ,identificationdetailid.value)" autocomplete="new-password"
                                                 required>
-                                                <option *ngFor="let idtype of IdTypes"  value="{{ idtype.nameen }}">{{ idtype.nameen }}</option>
+                                                <option *ngFor="let idtype of IdTypes"  value="{{ idtype.id }}">{{ idtype.nameen }}</option>
                                                 
                                             </select>
                                         </div>

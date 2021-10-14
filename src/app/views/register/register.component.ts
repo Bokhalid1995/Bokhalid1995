@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
   classInvalidPass:boolean = false
   classInvalidIdendityID: boolean = false;
   classInvalidPhone: boolean = false;
+  isFilled:boolean = false;
 
   IdTypes:IdTypes = new IdTypes();
    @ViewChild('ContinuBookig') modal: ModalDirective;
@@ -54,8 +55,12 @@ export class RegisterComponent implements OnInit {
     })
   }
   onSaveRecords(formData: NgForm) {
-    if (this.repasswordcheck != this.service.recieptiestDetails.password) {
-    
+    if (!this.classInvalidEmail  || !this.classInvalidPass || !this.classInvalidIdendityID || !this.classInvalidPhone) {
+      if (localStorage.getItem('lang') == 'en') {
+        this.toastr.error("You Must Fill All Data", "Warning!");
+      } else {
+        this.toastr.error("خطأ" ," خطأ في ادخال البيانات   !");
+      }
     } else {
       
       this.service.registerRecieptionService(formData.value).subscribe(
@@ -80,8 +85,10 @@ export class RegisterComponent implements OnInit {
   checkEmail(email:string){
     if(email.includes("@")){
       this.validEmail = "";
+     // this.isFilled = true
       this.classInvalidEmail = false ;
     }else{
+     // this.isFilled = false;
       this.classInvalidEmail = true ;
       this.validEmail = "Enter Valid Email";
     }
@@ -97,7 +104,7 @@ export class RegisterComponent implements OnInit {
     }
   }
   checkLIdendityID(id:string , idType:string){
-    if(idType == "National Id" && (id.length <= 0 || id.length != 10)){
+    if(idType == "1" && (id.length <= 0 || id.length != 10)){
       this.classInvalidIdendityID = true ;
       this.validIdendityID = "Idendity must be 10 chars";
     }else{
