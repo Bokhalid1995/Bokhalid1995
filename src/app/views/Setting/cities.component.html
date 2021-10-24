@@ -11,7 +11,7 @@
     <main class="d-block align-items-center container">
         <div class="card row" id="RegistryForma">
             <div class="card-header">
-                <strong><i class="icon-plus"></i> Add new City</strong>
+                <strong><i class="icon-plus"></i>{{ 'ADDNEWCITY' | translate }}</strong>
                 <div class="card-header-actions">
                     <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
                         <small className="text-muted">docs</small>
@@ -22,7 +22,7 @@
                 <form #formCity="ngForm" class="container">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="name" class="mx-1">City Name Arabic</label>
+                            <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
                             <div class="input-group mb-3">
                                 <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.citiesData.id" autocomplete="username" hidden required>
 
@@ -46,7 +46,7 @@
 
 
                         <div class="col-md-4">
-                            <label for="name" class="mx-1">City Name English</label>
+                            <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="name" class="mx-1">State Located</label>
+                            <label for="name" class="mx-1">{{ 'STATE' | translate }}</label>
 
                             <div class="input-group mb-1">
                                 <select class="form-control p-1" name="stateid" autocomplete="new-password" #stateid="ngModel" [(ngModel)]="service.citiesData.stateid" required>

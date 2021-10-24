@@ -80,10 +80,10 @@
     </div>
     <div id="main" class="">
         <div class="card p-4 ">
-            <div class="alert  container-fluid">
-                <div class="row mt-1">
+            <div class="alert">
+                <div class="mt-1">
                     <div class="text-center">
-                        <p><b>Statics For All Members In System</b></p>
+                        <h2>{{ 'STATICSDE' | translate }}</h2>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-end">
@@ -103,7 +103,7 @@
 
                                 </div>
                                 <div class="text-value">9.823</div>
-                                <div>Members Deal with Unit Health</div>
+                                <div>{{ 'MWITHUH' | translate }}</div>
                             </div>
 
                         </div>
@@ -116,7 +116,7 @@
                             <i class="icon-check"></i>
                           </button>
                                 <div class="text-value">9.823</div>
-                                <div>Members Take Vaccine</div>
+                                <div>{{ 'MWITHUHVACC' | translate }}</div>
                             </div>
 
                         </div>
@@ -133,7 +133,7 @@
 
                                 </div>
                                 <div class="text-value">9.823</div>
-                                <div>Members Booking Today</div>
+                                <div>{{ 'MWITHUHBOOK' | translate }}</div>
                             </div>
 
                         </div>
@@ -149,7 +149,7 @@
 
                                 </div>
                                 <div class="text-value">9.823</div>
-                                <div>Members Canceled</div>
+                                <div>{{ 'MWITHUHREJ' | translate }}</div>
                             </div>
 
                         </div>
@@ -166,7 +166,7 @@
                     <div class="card-body col-md-11 mx-auto">
                         <div class="row" id="searchArea">
                             <div class="col-md-6 mt-3">
-                                <h4> <b>Service Recieptions in wait</b></h4>
+                                <h4> <b>{{ 'LISTWAIT' | translate }}</b></h4>
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">
                                 <form action="" method="post" class="form-inline">
@@ -325,18 +325,23 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
-                        <div class="cardUser">
+                        <div class="cardUser" *ngFor="let deatils of datalist">
                             <nav>
 
-                                Active
+                                Preview Data :
 
                             </nav>
-                            <div class="container">
-                                <ul class="list-group" *ngFor="let deatils of datalist">
-
-                                    <li class="list-group-item list-group-item-info">Booking Date : {{ deatils.bookingdate | date:'mediumDate' }}</li>
-                                    <li class="list-group-item list-group-item-info">Booking Date : {{ deatils.bookingdate | date:'mediumDate' }}</li>
-                                </ul>
+                            <div class="photo text-left">
+                                <h2><i class="fa fa-time"></i> Created On: </h2>
+                                <h2><i class="fa fa-user"></i> Created By: </h2>
+                            </div>
+                            <div class="description">
+                                <h2><i class="fa fa-user"></i> </h2>
+                                <h4>Name Arabic : </h4>
+                                <h4>Departments : </h4>
+                                <p> Unit : </p>
+                                <button (click)="PreviewUser.hide()">Close</button>
+                                <button>login Details</button>
                             </div>
                         </div>
 

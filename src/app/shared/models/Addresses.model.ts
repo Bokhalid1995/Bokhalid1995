@@ -9,5 +9,6 @@ export class Addresses {
    housenumber:string = ""
    postalcode:string = ""
    pobox:string = ""
+   id:number = null
 
 }

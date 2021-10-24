@@ -1,6 +1,7 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CollapseDirective } from 'ngx-bootstrap/collapse';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -29,6 +30,7 @@ export class DataentryComponent implements OnInit {
   Status:string="Requested";
   NameRecieption:string;
   IDRecieption:string;
+  lang:string;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
@@ -37,9 +39,14 @@ export class DataentryComponent implements OnInit {
 
   @ViewChild('ConfirmVaccine') modal1: ModalDirective;
   @ViewChild('PreviewData') modal2: ModalDirective;
-  constructor(public service: BookingService,private rout:Router,private toastr:ToastrService) { }
+  constructor(public translate: TranslateService,public service: BookingService,private rout:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
+
+    this.lang = localStorage.getItem('lang') || 'en';
+    this.translate.use(this.lang);
+    document.documentElement.lang = this.lang;
+
     this.getDataPgination(this.pager , this.Status);
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;

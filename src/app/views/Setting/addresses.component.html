@@ -46,7 +46,7 @@
                         <div class="col-md-3">
                             <label for="name" class="mb-1">{{ 'LOCALAREA' |  translate }}</label>
                             <div class="input-group ">
-                                <select class="form-control p-1" name="localityid" #localityid="ngModel" [(ngModel)]="service1.AddressData.localityid" autocomplete="new-password" (click)="getUnitByLocal(localityid.value)" required>
+                                <select class="form-control p-1" name="localityid" #localityid="ngModel" [(ngModel)]="service1.AddressData.localityid" autocomplete="new-password"  required>
                                             <option *ngFor="let Locality of localitiesData" value="{{ Locality.id }}">{{ Locality.nameen }}</option>
                                     </select>
                             </div>

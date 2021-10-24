@@ -13,6 +13,11 @@ export class VaccinesDoses {
   dosehour:number =  0;
   dosebyid:number =  0;
   status:string = "";
+  lastupdated:string =  "";
+  acceptedby:string =  null;  
+  healthunit:string =  null;
+  servicerecipient:string =  null;
+  vaccine:string =  null;
   
 
 }

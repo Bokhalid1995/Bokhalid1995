@@ -1,6 +1,6 @@
 <style>
     #info {
-        height: 385px;
+        height: calc(46vh + 88px);
     }
 </style>
 <div class="app-body animated fadeIn">
@@ -27,7 +27,7 @@
                     <div class="card ">
                         <div class="card-body ">
                             <!-- <h1>{{ 'REGISTERTITLE' | translate }}</h1>-->
-                            <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'Recieptiest Details' | translate }}</h4>
+                            <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'RECEPTDETAILS' | translate }}</h4>
                             <hr class="my-2">
                             <form #formRegister="ngForm" id="registerForma" class="container">
                                 <div class="row">
@@ -55,7 +55,7 @@
                                             </select>
                                         </div>
 
-                                        <label for="name" class="mb-1">{{ 'Identity Type' |  translate }}</label>
+                                        <label for="name" class="mb-1">{{ 'IDENTYPE' |  translate }}</label>
                                         <div class="input-group  mb-1">
                                             <select class="form-control p-1" name="identificationdetailid" #identificationdetailid="ngModel" [(ngModel)]="service.recieptiestDetails.identificationdetailid" (change)="checkLIdendityID(nationalnumber.value ,identificationdetailid.value)" autocomplete="new-password"
                                                 required>
@@ -75,7 +75,7 @@
                                             <input type="date" class="form-control" name="dateofbirth" #dateofbirth="ngModel" [(ngModel)]="service.recieptiestDetails.dateofbirth" value="{{ BODitilite | date:'MM/dd/yyyy'}}" autocomplete="username" required>
                                         </div>
 
-                                        <label for="name" class="mb-1">Chronic Disease</label>
+                                        <label for="name" class="mb-1">{{ 'CHRONIC' |  translate }}</label>
                                         <div class="input-group ">
                                             <ng-select class="form-control p-0 border-0" style="border: 0px solid #eee;" name="chronicDisease" [items]="list" bindLabel="name" appendTo="body" [multiple]="true">
                                             </ng-select>
