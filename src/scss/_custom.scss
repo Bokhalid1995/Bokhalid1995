@@ -15,16 +15,18 @@
         p,
         b,
         table,
-        form {
+        form,input ,select {
             text-align: right;
-            font-family: 'Tajwal'!important;
+            font-family: 'Cairo'!important;
         }
         #button-login {
             text-align: left !important;
         }
+        
         nav,
         nav ul li a {
             text-align: center;
+            font-family: 'Cairo'!important;
         }
         .toast-container {
             text-align: right;
@@ -33,8 +35,9 @@
         select,
         label,
         button {
-            font-family: 'Tajwal'!important;
-            font-size: 13px;
+            font-family: 'Cairo'!important;
+         
+            font-size: 11.5px;
         }
         .form-check-input {
             padding-right: 0px!important;
@@ -50,6 +53,7 @@
                 border-bottom-right-radius: 5px!important;
             }
             .form-control {
+               
                 border-radius: 0px;
                 border-top-left-radius: 5px!important;
                 border-bottom-left-radius: 5px!important;
@@ -159,7 +163,7 @@
         padding: 0;
         background-image: url('https://rxa.ca/wp-content/uploads/2021/04/AdobeStock_400896612-scaled.jpeg');
         background-size: 100% 120%;
-        font-family: 'Tajwal'!important;
+        font-family: 'Cairo'!important;
     }
     
     #nextStep {
@@ -300,6 +304,7 @@
         font-weight: normal;
         padding: 0px !important;
         transition: all 0.5s;
+        border-bottom: 3px solid rgb(252, 251, 250);
     }
     
     #Requseted:hover {
@@ -311,6 +316,7 @@
         font-weight: normal;
         padding: 0px !important;
         transition: all 0.5s;
+        border-bottom: 3px solid rgb(252, 251, 250);
     }
     
     #confirmed:hover {
@@ -370,6 +376,7 @@
         box-shadow: none !important;
         border-bottom: 4px solid #eee;
         transition: all 0.7s;
+        height: 35px !important;
     }
     
     #registerForma .form-control:focus {

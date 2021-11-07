@@ -31,6 +31,8 @@ export class DataentryComponent implements OnInit {
   NameRecieption:string;
   IDRecieption:string;
   lang:string;
+  leftArrow:string ="fa fa-chevron-left";
+  rightArrow:string ="fa fa-chevron-right";
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
@@ -46,7 +48,10 @@ export class DataentryComponent implements OnInit {
     this.lang = localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
-
+if(this.lang === 'ar'){
+  this.leftArrow ="fa fa-chevron-right";
+  this.rightArrow ="fa fa-chevron-left";
+}
     this.getDataPgination(this.pager , this.Status);
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;

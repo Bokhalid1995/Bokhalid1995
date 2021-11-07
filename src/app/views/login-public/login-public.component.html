@@ -38,7 +38,7 @@
                                     <p class="text-muted" id="header-login">{{ 'LOGIN-HEADER' | translate }}</p>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">ID</span>
+                                            <span class="input-group-text"><i class="fa fa-pencil-square-o"></i></span>
                                         </div>
                                         <input type="" class="form-control" placeholder="{{ 'NATIOORPHONR' | translate}}" name="nationalNumber" #id="ngModel" [(ngModel)]="service.loginPublic.nationalnumber" (keyup.enter)="findName(id.value)" required>
                                     </div>

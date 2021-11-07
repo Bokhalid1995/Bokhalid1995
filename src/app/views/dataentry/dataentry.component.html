@@ -48,7 +48,7 @@
     <div id="header" class="fixed-top">
 
         <div class="d-flex justify-content-left">
-            <img class=" mr-auto" src="assets/img/headerlogo.png" alt="">
+            <img class=" mr-auto" src="assets/img/headerlogo.png" alt="" id="logoDataEntry">
             <nav class="navbar navbar-expand-md navbar-light bg-none ">
 
                 <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
@@ -171,16 +171,16 @@
                             <div class="col-md-6 d-flex justify-content-end">
                                 <form action="" method="post" class="form-inline">
                                     <div class="form-group">
-                                        <label class="form-check-label mx-1" for="inlineRadio1"><b>Status:</b></label>
+                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'STATUS' | translate }}</b></label>
                                         <div class="form-check form-check-inline mx-2" id="inline-radios" id="Requseted">
                                             <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value)" [checked]="isRequseted" value="Requested">
-                                            <label class="form-check-label" for="inlineRadio1">Requested</label>
+                                            <label class="form-check-label" for="inlineRadio1">{{ 'REQ' | translate }}</label>
                                         </div>
                                         <div class="form-check form-check-inline  mx-2" id="confirmed">
                                             <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value)" [checked]="isConfirmed" value="DoseTaken">
-                                            <label class="form-check-label" for="inlineRadio2">Confirmed</label>
+                                            <label class="form-check-label" for="inlineRadio2">{{ 'CONF' | translate }}</label>
                                         </div>
-                                        <input #filterBy type="email" class="form-control mx-1" placeholder="Search by Username or ID" (change)="filterBy.value?getDataByNatid(filterBy.value):getDataByNatid(filterBy.value) " autocomplete="email" required>
+                                        <input #filterBy type="email" class="form-control mx-1" placeholder="{{ 'SEARCHIDORNID' | translate }}" (change)="filterBy.value?getDataByNatid(filterBy.value):getDataByNatid(filterBy.value) " autocomplete="email" required>
                                         <button type="button" (click)="searchEmpty?filterStatus(Requseted.value) : getDataByNatid(filterBy.value)" class="btn  btn-info"><i class="fa fa-search mx-2" style="color: aliceblue;"></i></button>
                                     </div>
                                 </form>
@@ -223,8 +223,8 @@
                             </table>
                             <div class="d-flex align-content-end mx-auto">
                                 <ul class="pagination">
-                                    <li class="page-item "><a class="page-link bg-info " (click)="counterMinus()"><i class="fa fa-chevron-left"></i> Prev </a></li>
-                                    <li class="page-item "><a class="page-link bg-info " (click)="counterPlus()"> Next <i class="fa fa-chevron-right"></i></a></li>
+                                    <li class="page-item "><a class="page-link bg-info " (click)="counterMinus()"><i [class]="leftArrow"></i> {{ 'PREV' | translate }} </a></li>
+                                    <li class="page-item "><a class="page-link bg-info " (click)="counterPlus()"> {{ 'NEXT' | translate }} <i [class]="rightArrow"></i></a></li>
 
                                 </ul>
                             </div>

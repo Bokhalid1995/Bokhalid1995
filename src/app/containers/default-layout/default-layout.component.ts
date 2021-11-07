@@ -20,7 +20,7 @@ export class DefaultLayoutComponent implements OnInit{
   ngOnInit(): void {
     this.useractive = localStorage.getItem('username')
     this.lang=localStorage.getItem('lang') || 'en';
-  /*  this.isAuthenticated = localStorage.getItem('token');*/
+  /*  this.isAuthenticated = localStorage.getItem('token');
     if (this.useractive == null) {
       this.rout.navigateByUrl('/login');
     }
@@ -32,7 +32,7 @@ export class DefaultLayoutComponent implements OnInit{
       }
 }else {
   this.navItemsRender = navItemsArabic ;
-}
+}*/
   }
 
   toggleMinimize(e) {

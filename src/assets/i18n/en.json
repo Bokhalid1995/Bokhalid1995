@@ -102,7 +102,13 @@
     "MWITHUHREJ": "Members Canceled",
     "MWITHUHBOOK": "Members Booking Today",
     "STATICSDE": "Statics For All Members",
-    "LISTWAIT": "List Booking"
+    "LISTWAIT": "List Booking",
+    "STATUS": "Status",
+    "REQ": "Requested",
+    "CONF": "Confirmed",
+    "SEARCHIDORNID": "National ID or ID-Code",
+    "NEXT": "Next",
+    "PREV": "Prev"
 
 
 
