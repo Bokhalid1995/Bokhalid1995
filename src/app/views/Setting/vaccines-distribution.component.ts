@@ -16,8 +16,8 @@ import { PublicServiciesService } from '../../shared/public-servicies.service';
   templateUrl: './vaccines-distribution.component.html'
 })
 export class VaccinesDistributionComponent implements OnInit {
-  Reset:string="Reset";
-  submitt:string = "Create New";
+  Reset:string;
+  submitt:string;
   statesData:States = new States();
   citiesData:Cities = new Cities();
   localitiesData:Localities = new Localities();
@@ -30,10 +30,13 @@ export class VaccinesDistributionComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.lang=localStorage.getItem('lang') || 'en';
-    this.translate.use(this.lang);
-    document.documentElement.lang = this.lang;
-
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Reset"
+      this.submitt = "Create New";
+    } else {
+      this.Reset = "إعادة تعيين"
+      this.submitt = "إضافة جديد";
+    }
    this.service.getStates().subscribe((res: {}) => {
       this.statesData = res as States;
     })
@@ -68,14 +71,21 @@ export class VaccinesDistributionComponent implements OnInit {
   
   }
   onSaveVaccinesDist(formVaccinesDist:NgForm){
-    if(this.submitt == "Update"){
+    if(formVaccinesDist.value.id != null){
      
         return this.service1.UpdateVaccinesDist(formVaccinesDist.value , formVaccinesDist.value.id).subscribe(
           response => {
             formVaccinesDist.reset();
-            this.submitt = "Create New";
-            this.Reset = "Reset"
-            this.toastr.success("VaccinesDist Updated Successfully", "Done!");
+            if (localStorage.getItem('lang') == 'en') {
+              this.Reset = "Reset"
+              this.submitt = "Create New";
+              this.toastr.success("VaccinesDist Updated Successfully", "Done!");
+            } else {
+              this.Reset = "إعادة تعيين"
+              this.submitt = "إضافة جديد";
+              this.toastr.success("تم تعديل البيانات بنجاح" ,"تم!");
+            }
+            
             this.ShowAll();
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
@@ -85,9 +95,12 @@ export class VaccinesDistributionComponent implements OnInit {
       this.service1.addVaccinesDistResponse(formVaccinesDist.value).subscribe(
         (res) => {
           formVaccinesDist.reset();
-          this.toastr.success("Added VaccinesDist Sucssed", "Done!");
+          if (localStorage.getItem('lang') == 'en') {
+            this.toastr.success("Added Sucssed", "Done!");
+          } else {
+            this.toastr.success("تم حفظ البيانات بنجاح" ,"تم!");
+          }
           this.ShowAll();
-          console.log(res);
         },
         err => {
           if (localStorage.getItem('lang') == 'en') {
@@ -104,7 +117,11 @@ export class VaccinesDistributionComponent implements OnInit {
 
     return this.service1.deleteVaccinesDist(id).subscribe(
       response => {
-        this.toastr.warning("Vaccine deleted Successfully", "Done!");
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.warning("Vaccine deleted Successfully", "Done!");
+        } else {
+          this.toastr.warning("تم حذف البيانات" ,"تم!");
+        }
         this.ShowAll();
       },
       error => { this.toastr.error("Data cant be deleted", "error!"); }
@@ -112,9 +129,14 @@ export class VaccinesDistributionComponent implements OnInit {
 
   }
   resetForm(form:NgForm){
-    if(this.Reset == "Cancel Update"){
-    this.submitt = "Create New";
-    this.Reset = "Reset"
+    if(form.value.id != null){
+      if (localStorage.getItem('lang') == 'en') {
+        this.Reset = "Reset"
+        this.submitt = "Create New";
+      } else {
+        this.Reset = "إعادة تعيين"
+        this.submitt = "إضافة جديد";
+      }
     form.reset();
   }
     else { form.reset(); }
@@ -127,9 +149,19 @@ export class VaccinesDistributionComponent implements OnInit {
     })
   }
   fillForm(VaccinesDistData:VaccinesDistribution){
-    this.submitt = "Update";
-    this.Reset = "Cancel Update"
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Cancel Update"
+      this.submitt = "Update";
+    } else {
+      this.submitt = "تعديل"
+      this.Reset = "إلغاء التعديل";
+    }
 this.service1.VaccinesDistData = Object.assign({} , VaccinesDistData) ;
+  window.scrollTo({
+    top : 70,
+    behavior : 'smooth'
+  });
+
   }
 
 }

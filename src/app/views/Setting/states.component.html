@@ -12,34 +12,18 @@
         <div class="card " id="RegistryForma">
             <div class="card-header">
                 <strong><i class="icon-plus"></i>{{ 'ADDNEWSTATE' | translate }}</strong>
-                <div class="card-header-actions">
-                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
-                        <small className="text-muted">docs</small>
-                    </a>
-                </div>
+              
             </div>
             <div class="card-body">
                 <form #formState="ngForm">
 
                     <div class="row">
 
-                        <div class="col-md-3">
-                            <label for="name" class="mx-1">ID</label>
+                        <div class="col-md-4">
+                            <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
+                            <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.statesData.id" autocomplete="username" hidden required>
                             <div class="input-group mb-3">
-
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class=""></i>ID</span>
-                                </div>
-                                <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.statesData.id" autocomplete="username" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="name" class="mx-1">State Name Arabic</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class=""></i>Ar</span>
-                                </div>
-                                <input type="text" name="name" class="form-control" placeholder="State Name Arabic" #name="ngModel" [(ngModel)]="service.statesData.name" autocomplete="username" required>
+                                <input type="text" name="name" class="form-control"  #name="ngModel" [(ngModel)]="service.statesData.name" autocomplete="off" required>
                             </div>
                         </div>
                         <!--  <div class="input-group mb-2">
@@ -54,22 +38,19 @@
 
 
 
-                        <div class="col-md-3">
-                            <label for="name" class="mx-1">State Name English</label>
+                        <div class="col-md-4">
+                            <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
 
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">En</span>
-                                </div>
-                                <input type="text" name="nameen" class="form-control" placeholder="State Name English" autocomplete="" #nameen="ngModel" [(ngModel)]="service.statesData.nameen" required>
+                                <input type="text" name="nameen" class="form-control"  autocomplete="off" #nameen="ngModel" [(ngModel)]="service.statesData.nameen" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="name" class="mx-1"> </label>
 
                             <div class="input-group mt-1">
                                 <div class="col-md-6">
-                                    <button type="button" (click)="ShowAll()" class="btn btn-block btn-outline-info">All States</button>
+                                    <button type="button" (click)="resetForm(formState)" class="btn btn-block btn-outline-info">{{Reset}}</button>
 
                                 </div>
                                 <div class="col-md-6">
@@ -83,16 +64,20 @@
 
                 </form>
             </div>
+            <hr  class="my-0">
             <div class="card-body">
-                <div class="">
+                <div class="mx-3">
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>{{ 'ALLDETAILS' | translate }}</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">{{ 'SHOWALL' | translate }}<i class="icon-refresh mx-2"></i></button>
+                    </h4>
                     <table class="table table-sm table-hover">
                         <thead class="">
                             <tr class="text-center mt-2">
-                                <th>State ID</th>
-                                <th>name Arabic</th>
-                                <th>name English</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th>#</th>
+                                <th>{{ 'NAMEENGLIAH' | translate }}</th>
+                                <th>{{ 'NAMEARABIC' | translate }}</th>
+                              
+                                <th>{{ 'UPDATE' | translate }}</th>
+                                <th>{{ 'DELETE' | translate }}</th>
 
                             </tr>
                         </thead>

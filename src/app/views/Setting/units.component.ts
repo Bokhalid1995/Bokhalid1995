@@ -16,11 +16,15 @@ export class UnitsComponent implements OnInit {
 
   submitt:string = "Create Unit";
   unitsData:Units = new Units();
+  lang: string;
   
  
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
+    this.lang=localStorage.getItem('lang') || 'en';
+    this.translate.use(this.lang);
+    document.documentElement.lang = this.lang;
   this.ShowAll();
   }
   onSaveUnit(formUnit:NgForm){

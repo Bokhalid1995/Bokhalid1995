@@ -69,7 +69,7 @@ export class LoginProcessService {
     return this.http.post(this.baseURL + "Register" , registerDetails );
   }
   registerAdminResponse(registerDetails:any,enteredbyid:any) {
-    const params = {'enteredbyid' : enteredbyid };
+    const params = {'enteredbyid' : enteredbyid,'lastupdatedbyid' : enteredbyid };
      const Data = Object.assign(registerDetails, params);
      return this.http.post(this.baseURL + "Register" , Data );
    }

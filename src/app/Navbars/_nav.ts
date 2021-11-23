@@ -20,7 +20,7 @@ export const navItems: INavData[] = [
     icon: 'icon-settings',
     children: [
       {
-        name: 'States',
+        name: 'STATE',
         url: '/Setting/States',
         icon: 'caret-right'
       },

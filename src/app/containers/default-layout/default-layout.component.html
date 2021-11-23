@@ -1,31 +1,26 @@
 <app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="true" [navbarBrandFull]="{src: 'assets/img/headerlogo.png', width: 190, height: 60, alt: 'CoreUI Logo'}" [navbarBrandMinimized]="{src: 'assets/img/headerlogo.png', width: 150, height: 60, alt: 'CoreUI Logo'}"
     [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
-    <ul class="nav navbar-nav d-md-down-none mx-auto">
+    <ul class="nav navbar-nav d-md-down-none mx-auto" >
         <li class="nav-item px-3">
 
         </li>
 
     </ul>
-    <ul class="nav navbar-nav ml-auto">
+    <ul class="nav navbar-nav me-auto">
 
         <li class="nav-item dropdown" dropdown placement="bottom right">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
         {{useractive}} <i src="" class="icon icon-user" ></i>
       </a>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-                <div class="dropdown-header text-center"><strong>Account</strong></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span class="badge badge-warning">42</span></a>
-                <div class="dropdown-header text-center"><strong>Settings</strong></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
-                <div class="divider"></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>
-                <a class="dropdown-item" (click)="logOut()"><i class="fa fa-lock"></i> Logout</a>
+            <div class="dropdown-menu dropdown-menu-left" *dropdownMenu aria-labelledby="simple-dropdown">
+                <div class="dropdown-header text-center"><strong> {{ 'ACCOUNT' | translate }}</strong></div>
+                <a class="dropdown-item" href="#">Updates<span class="badge badge-info">42</span><i class="fa fa-bell-o"></i> </a>
+                <a class="dropdown-item" href="#"> Messages<span class="badge badge-success">42</span> <i class="fa fa-envelope-o"></i> </a>
+                <a class="dropdown-item" href="#"> Tasks<span class="badge badge-danger">42</span> <i class="fa fa-tasks"></i> </a>
+                <a class="dropdown-item" href="#"> Comment<span class="badge badge-warning">42</span> <i class="fa fa-comments"></i> </a>
+               
+                <a class="dropdown-item" href="#"> Lock account <i class="fa fa-shield"></i> </a>
+                <a class="dropdown-item" href (click)="logOut()"> {{ 'LOGOUT' | translate }} <i class="fa fa-logout"></i></a>
             </div>
         </li>
     </ul>
@@ -36,11 +31,11 @@
         <app-sidebar-minimizer></app-sidebar-minimizer>
     </app-sidebar>
     <!-- Main content -->
-    <main class="main">
+    <main class="main" id="main">
         <!-- Breadcrumb -->
         <!-- breaking change 'cui-breadcrumb' -->
         <cui-breadcrumb>
-            <!-- Breadcrumb Menu-->
+            <!-- Breadcrumb Menu
             <li class="breadcrumb-menu d-md-down-none">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <a class="btn" href="#"><i class="icon-speech"></i></a>
@@ -48,6 +43,7 @@
                     <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
                 </div>
             </li>
+            -->
         </cui-breadcrumb>
         <!-- deprecation warning for 'app-breadcrumb' -->
         <!--<ol class="breadcrumb">-->

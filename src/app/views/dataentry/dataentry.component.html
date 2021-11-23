@@ -13,6 +13,13 @@
     #Statics .card:hover {
         top: 10px;
     }
+    #logoDataEntry {
+        background-color:  #eee;
+        padding: 10 px;
+        border: 1px rgb(34, 115, 136);
+        margin: 10px;
+        border-radius: 15px;
+    }
     
     table {
         transition: background-color 0.5s;
@@ -47,8 +54,8 @@
 <div class="container-fluid animated fadeIn">
     <div id="header" class="fixed-top">
 
-        <div class="d-flex justify-content-left">
-            <img class=" mr-auto" src="assets/img/headerlogo.png" alt="" id="logoDataEntry">
+        <div class="d-flex justify-content-start">
+            <img class="ml-auto" src="assets/img/headerlogo.png" alt="" id="logoDataEntry">
             <nav class="navbar navbar-expand-md navbar-light bg-none ">
 
                 <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
@@ -56,10 +63,10 @@
                 </button>
 
                 <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav mr-auto">
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"><i class="icon-map mx-2"></i>Center <span
+                            <a class="nav-link" href="#"><i class="icon-map mx-2"></i>الوحدة الصحية <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown" dropdown>
@@ -67,9 +74,9 @@
                             </a>
                             <div id="your-dropdown" class="dropdown-menu animated fadeIn" aria-labelledby="link-dropdown" *dropdownMenu>
                                 <a class="dropdown-item" style="color: black!important;" href="#"><i
-                                        class="icon-screen-desktop mx-2"></i>Employee Panel</a>
+                                        class="icon-screen-desktop mx-2"></i>{{ 'EMPDETAILS' |  translate }} </a>
                                 <a class="dropdown-item" style="color: black!important;" routerLink="/login-public"><i
-                                        class="icon-logout mx-2"></i>Log Out</a>
+                                        class="icon-logout mx-2"></i>{{ 'LOGOUT' |  translate }} </a>
 
                             </div>
                         </li>
@@ -163,45 +170,49 @@
             <hr>
             <div class="container-fluid">
                 <div class="card row">
-                    <div class="card-body col-md-11 mx-auto">
+                    <div class="card-body mx-auto">
                         <div class="row" id="searchArea">
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-2 mt-3">
                                 <h4> <b>{{ 'LISTWAIT' | translate }}</b></h4>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-end">
+                            <div class="col-md-10 d-flex justify-content-end">
                                 <form action="" method="post" class="form-inline">
                                     <div class="form-group">
+                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'ATTDATE' | translate }}</b></label>
+                                        <input #FromDate type="date" class="form-control mx-1" placeholder=""  autocomplete="email" required>
+                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'ATTDATE' | translate }}</b></label>
+                                        <input #ToDate type="date" class="form-control mx-1" placeholder=""  autocomplete="email" required>
                                         <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'STATUS' | translate }}</b></label>
                                         <div class="form-check form-check-inline mx-2" id="inline-radios" id="Requseted">
-                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value)" [checked]="isRequseted" value="Requested">
+                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" #Requseted (click)="filterStatus(Requseted.value,FromDate.value,ToDate.value)" [checked]="isRequseted" value="Requested">
                                             <label class="form-check-label" for="inlineRadio1">{{ 'REQ' | translate }}</label>
                                         </div>
                                         <div class="form-check form-check-inline  mx-2" id="confirmed">
-                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value)" [checked]="isConfirmed" value="DoseTaken">
+                                            <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value,FromDate.value,ToDate.value)" [checked]="isConfirmed" value="DoseTaken">
                                             <label class="form-check-label" for="inlineRadio2">{{ 'CONF' | translate }}</label>
                                         </div>
-                                        <input #filterBy type="email" class="form-control mx-1" placeholder="{{ 'SEARCHIDORNID' | translate }}" (change)="filterBy.value?getDataByNatid(filterBy.value):getDataByNatid(filterBy.value) " autocomplete="email" required>
-                                        <button type="button" (click)="searchEmpty?filterStatus(Requseted.value) : getDataByNatid(filterBy.value)" class="btn  btn-info"><i class="fa fa-search mx-2" style="color: aliceblue;"></i></button>
+                                        <input #filterBy type="text" class="form-control mx-1" placeholder="{{ 'SEARCHIDORNID' | translate }}" (change)="getDataByNatid(filterBy.value,Requseted.checked,Confirmed.checked) " autocomplete="email" required>
+                                        <button type="button" (click)="getDataByNatid(filterBy.value,Requseted.checked,Confirmed.checked)" class="btn  btn-info"><i class="fa fa-search mx-2" style="color: aliceblue;"></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
 
-                        <div class="row pt-3">
+                        <div class="row p-2">
                             <table class="table table-sm table-hover">
                                 <thead class="">
                                     <tr class="text-center mt-2">
-                                        <th> ID</th>
-                                        <th>National Number</th>
-                                        <th>Full Name Arabic</th>
-                                        <th>Full Name English</th>
-                                        <th>Vaccine needed</th>
-                                        <th>Date Booking</th>
-                                        <th>Accepted Date</th>
-                                        <th>Status</th>
-                                        <th>Preview</th>
-                                        <th>confirm</th>
-                                        <th>Cancel</th>
+                                        <th> #</th>
+                                        <th>{{ 'NATNO' |  translate }} </th>
+                                        <th>{{ 'FULLNAME' |  translate }} </th>
+                                        <th>{{ 'FULLNAME' |  translate }} </th>
+                                        <th>{{ 'VACCINE' |  translate }} </th>
+                                        <th>{{ 'ATTDATE' |  translate }} </th>
+                                        <th>{{ 'DOSEDATE' |  translate }}</th>
+                                        <th>{{ 'STATUS' |  translate }}</th>
+                                        <th>{{ 'PREVIEW' |  translate }}</th>
+                                        <th>{{ 'CONFIRM' |  translate }}</th>
+                                        <th>{{ 'CANCEL' |  translate }}</th>
 
                                     </tr>
                                 </thead>
@@ -215,13 +226,16 @@
                                         <td>{{data.bookingdate | date:'mediumDate'}}</td>
                                         <td>{{data.dosedate | date:'mediumDate'}}</td>
                                         <td [class]="statusColor">{{data.status}}</td>
-                                        <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(data)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
-                                        <td><button class="btn btn-outline-success  p-1 h-50" (click)="confirmShow(data)" [disabled]="disableConfirm"><i class="fa fa-check"></i> Confirm</button></td>
-                                        <td><button class="btn btn-danger  p-1 h-50"><i class="fa fa-trash" ></i> Cancel</button></td>
+                                        <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(data)"><i class="fa fa-address-card-o" ></i> {{ 'PREVIEW' |  translate }}</button></td>
+                                        <td><button class="btn btn-outline-success  p-1 h-50" (click)="confirmShow(data)" [disabled]="disableConfirm"><i class="fa fa-check"></i> {{ 'CONFIRM' |  translate }}</button></td>
+                                        <td><button class="btn btn-danger  p-1 h-50"><i class="fa fa-trash" ></i> {{ 'CANCEL' |  translate }}</button></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="d-flex align-content-end mx-auto">
+                                <pagination [boundaryLinks]="true" [totalItems]="77"  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+ 
+                                </pagination>
                                 <ul class="pagination">
                                     <li class="page-item "><a class="page-link bg-info " (click)="counterMinus()"><i [class]="leftArrow"></i> {{ 'PREV' | translate }} </a></li>
                                     <li class="page-item "><a class="page-link bg-info " (click)="counterPlus()"> {{ 'NEXT' | translate }} <i [class]="rightArrow"></i></a></li>
@@ -244,14 +258,14 @@
                     <div class="modal-body">
                         <div class="cardUser">
                             <nav>
-                                <i class="fa fa-check mx-2"></i> Confirm Vaccine Doses :
+                                <i class="fa fa-check mx-2"></i> {{ 'VAACCINEDODESCONFIRM' |  translate }} :
 
                             </nav>
                             <div class="px-5 py-2">
                                 <form #formConfirm="ngForm" id="registerForma" class="container">
                                     <div class="row">
                                         <div class="col-md-12 py-0">
-                                            <label for="name" class="mb-1">{{ 'Full Name' |  translate }}</label>
+                                            <label for="name" class="mb-1">{{ 'FULLNAME' |  translate }} </label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" value="{{ nameConfirm }}" placeholder="" autocomplete="Username" disabled required>
                                             </div>
@@ -264,18 +278,18 @@
                                             <label for="name" class="mb-1">{{ 'DOSEN' |  translate }}</label>
                                             <div class="input-group mb-2">
                                                 <select class="form-control p-1" name="vaccineid" #vaccineid="ngModel" [(ngModel)]="service.bookingDetails.vaccineid" autocomplete="new-password" required>
-                                                   
                                                     <option *ngFor="let vaccine of vaccinesData" value="{{ vaccine.id }}">{{ vaccine.nameen }}</option>
-                                         
                                                 </select>
                                             </div>
 
-                                            <label class="mb-1">{{ 'Dose Date' | translate }}</label>
-
+                                            <label class="mb-1">{{ 'DOSEDATE' | translate }}</label>
                                             <div class="input-group">
                                                 <input type="date" class="form-control" name="dosedate" #dosedate="ngModel" [(ngModel)]="service.bookingDetails.dosedate" autocomplete="username" required>
-                                                <input type="time" class="form-control" name="dosehour" #dosehour (change)="getHours(dosehour.value)" id="appt" min="09:00" max="18:00" required>
+                                            </div>
 
+                                            <label class="mb-1">{{ 'DOSETIME' | translate }}</label>
+                                            <div class="input-group">
+                                                <input type="time" class="form-control" name="dosehour" #dosehour (change)="getHours(dosehour.value)" id="appt" min="09:00" max="18:00" required>
                                             </div>
                                         </div>
 
@@ -284,28 +298,34 @@
                                             <label for="name" class="mb-1">{{ 'DOSET' |  translate }}</label>
                                             <div class="input-group mb-2">
                                                 <select class="form-control p-1" name="dosenumber" #dosenumber="ngModel" [(ngModel)]="service.bookingDetails.dosenumber" autocomplete="new-password" required>
-                                                
-                                                    <option value="1">Dose 1</option>
-                                                    <option value="2">Dose 2</option>
+                                                    <option value="1">{{ 'DOSE1' |  translate }}</option>
+                                                    <option value="2">{{ 'DOSE2' |  translate }}</option>
                                                 </select>
                                             </div>
 
-                                            <label for="name" class="mb-1">{{ 'Batch Number' |  translate }}</label>
+                                            <label for="name" class="mb-1">{{ 'BATCH' |  translate }}</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="batchnumber" #batchnumber="ngModel" [(ngModel)]="service.bookingDetails.batchnumber" placeholder="" autocomplete="Username" required>
+                                            </div>
+
+                                            
+                                            <div class="input-group mt-4">
+                                                <button type="button" class="btn btn-danger col-sm-5 mx-auto" (click)="ConfirmVaccine.hide()"><i class="fa fa-close mx-2"></i>{{ 'CANCEL' | translate }}</button>
+                                                <button type="button" (click)="confirmVaccineDose(formConfirm)" class="btn btn-success col-sm-6 mx-auto" [disabled]="formConfirm.invalid"><i class="fa fa-check mx-2"></i> {{ 'CONFIRM' |
+                                                    translate }}</button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row mt-3">
 
-                                        <div class="col-md-12">
+                                     <!--  <div class="col-md-12">
                                             <div class="row mx-auto">
                                                 <button type="button" class="btn btn-danger col-sm-5 mx-auto" (click)="ConfirmVaccine.hide()"><i class="fa fa-close mr-3"></i>{{ 'Close' | translate }}</button>
                                                 <button type="button" (click)="confirmVaccineDose(formConfirm)" class="btn btn-success col-sm-5 mx-auto" [disabled]="formConfirm.invalid">{{ 'Confirm' |
                                                     translate }}<i class="fa fa-check ml-3"></i></button>
                                             </div>
-                                        </div>
+                                        </div>--> 
 
                                     </div>
                                 </form>

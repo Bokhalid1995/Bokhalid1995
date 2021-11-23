@@ -12,35 +12,35 @@ export const navItemsArabic: INavData[] = [
   },
   {
     title: true,
-    name: 'CONTROL PANEL',
+    name: 'لوحة التحكم',
   },
   {
-    name: 'Settings',
+    name: 'الإعدادات',
     url: '/Setting',
     icon: 'icon-settings',
     children: [
       {
-        name: 'States',
+        name: 'الولايات',
         url: '/Setting/States',
         icon: 'caret-right'
       },
       {
-        name: 'Cities',
+        name: 'المدن',
         url: '/Setting/cities',
         icon: 'caret-right'
       },
       {
-        name: 'Localities',
+        name: 'المحليات',
         url: '/Setting/Localities',
         icon: 'caret-right'
       },
       {
-        name: 'Health Unit',
+        name: 'الوحدات الصحية',
         url: '/Setting/Health-Units',
         icon: 'caret-right'
       },
       {
-        name: 'Addresses',
+        name: 'العناوين',
         url: '/Setting/Addresses',
         icon: 'caret-right'
       },
@@ -63,24 +63,24 @@ export const navItemsArabic: INavData[] = [
         icon: 'caret-right'
       },*/
       {
-        name: 'Vaccines',
+        name: 'اللقاحات',
         url: '/Setting/Vaccines',
         icon: 'caret-right'
       },
       {
-        name: 'Vaccines Distribution',
+        name: ' توزيع اللقاحات',
         url: '/Setting/Vaccine-Distribution',
         icon: 'caret-right'
       }
     ]
   },
   {
-    name: 'Users Management',
+    name: ' ادارة المستخدمين',
     url: '/userManagement',
     icon: 'icon-cursor',
     children: [
       {
-        name: 'New User',
+        name: ' مستخدم جديد',
         url: '/userManagement/register-admin',
         icon: 'icon-caret-right'
       }

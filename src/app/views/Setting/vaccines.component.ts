@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,25 +11,40 @@ import { PublicServiciesService } from '../../shared/public-servicies.service';
   templateUrl: './vaccines.component.html'
 })
 export class VaccinesComponent implements OnInit {
-  Reset:string="Reset"
-  submitt:string = "Create New";
+  Reset:string;
+  submitt:string;
   VaccinesData:Vaccines = new Vaccines();
+  lang: string;
   
  
-  constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
+  constructor(private el:ElementRef, private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Reset"
+      this.submitt = "Create New";
+    } else {
+      this.Reset = "إعادة تعيين"
+      this.submitt = "إضافة جديد";
+    }
      this.ShowAll();
   }
   onSaveVaccine(formVaccine:NgForm){
-    if(this.submitt == "Update"){
+    if(formVaccine.value.id != null){
      
         return this.service.UpdateVaccine(formVaccine.value , formVaccine.value.id).subscribe(
           response => {
             formVaccine.reset();
-            this.Reset = "Reset"
-            this.submitt = "Create New";
-            this.toastr.success("Vaccine Updated Successfully", "Done!");
+            if (localStorage.getItem('lang') == 'en') {
+              this.Reset = "Reset"
+              this.submitt = "Create New";
+              this.toastr.success("Vaccine Updated Successfully", "Done!");
+            } else {
+              this.Reset = "إعادة تعيين"
+              this.submitt = "إضافة جديد";
+              this.toastr.success("تم تعديل البيانات بنجاح" ,"تم!");
+            }
+        
             this.ShowAll();
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
@@ -39,13 +54,17 @@ export class VaccinesComponent implements OnInit {
       this.service.addVaccineResponse(formVaccine.value).subscribe(
         (res) => {
           formVaccine.reset();
-          this.toastr.success("Added Sucssed", "Done!");
+          if (localStorage.getItem('lang') == 'en') {
+            this.toastr.success("Added Sucssefully", "Done!");
+          } else {
+            this.toastr.success("تم حفظ البيانات بنجاح" ,"تم!");
+          }
           this.ShowAll();
           console.log(res);
         },
         err => {
           if (localStorage.getItem('lang') == 'en') {
-            this.toastr.error("Error Enserting Data", "Warning!");
+            this.toastr.error("Error Inserting Data", "Warning!");
           } else {
             this.toastr.error("خطأ في ادخال البيانات" ,"خطأ!");
           }
@@ -58,7 +77,11 @@ export class VaccinesComponent implements OnInit {
 
     return this.service.deleteVaccine(id).subscribe(
       response => {
-        this.toastr.warning("Vaccine deleted Successfully", "Done!");
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.warning("Vaccine deleted Successfully", "Done!");
+        } else {
+          this.toastr.warning("تم حذف البيانات" ,"تم!");
+        }
         this.ShowAll();
       },
       error => { this.toastr.error("Data cant be deleted", "error!"); }
@@ -66,9 +89,14 @@ export class VaccinesComponent implements OnInit {
 
   }
   resetForm(form:NgForm){
-    if(this.Reset == "Cancel Update"){
-    this.submitt = "Create New";
-    this.Reset = "Reset"
+    if(form.value.id != null){
+      if (localStorage.getItem('lang') == 'en') {
+        this.Reset = "Reset"
+        this.submitt = "Create New";
+      } else {
+        this.Reset = "إعادة تعيين"
+        this.submitt = "إضافة جديد";
+      }
     form.reset();
   }
     else { form.reset(); }
@@ -82,9 +110,19 @@ export class VaccinesComponent implements OnInit {
     })
   }
   fillForm(Vaccines:Vaccines){
-    this.submitt = "Update";
-    this.Reset = "Cancel Update"
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Cancel  Update"
+      this.submitt = "Update";
+    } else {
+      this.submitt = "تعديل"
+      this.Reset = "إلغاء التعديل";
+    }
     this.service.VaccinesData = Object.assign({} , Vaccines);
+    
+    window.scrollTo({
+      top : 70,
+      behavior : 'smooth'
+    });
   }
 
 }

@@ -71,22 +71,24 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="name" class="mb-1">{{ 'CENTERS' |  translate }}</label>
+                                        <label for="name" class="mb-1 w-100 mr-auto">{{ 'CENTERS' |  translate }}  <small style="color: tomato; float: left; cursor: pointer; " (click)="getCenterDetails(healthunitid.value)"> {{ 'CENTDET' |  translate }} <i class="icon-info"></i></small></label>
                                         <div class="input-group  mb-2">
                                             <select class="form-control p-1" name="healthunitid" #healthunitid="ngModel" [(ngModel)]="service.bookingDetails.healthunitid" autocomplete="new-password" required>
                                                    
                                                     <option *ngFor="let center of CentersData" value="{{ center.id }}">{{ center.nameen }}</option>
                                                 </select>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" (click)="getCenterDetails(healthunitid.value)"><i class="icon-info "></i> <!--{{ 'CENTDET' |  translate }}--></span>
-                                            </div>
+      
                                         </div>
 
                                         <label for="name" class="mb-1">{{ 'DOSEN' |  translate }}</label>
                                         <div class="input-group mb-2">
                                             <select class="form-control p-1" name="vaccineid" #vaccineid="ngModel" [(ngModel)]="service.bookingDetails.vaccineid" autocomplete="new-password" required>
-                                               
-                                                <option *ngFor="let vaccine of vaccinesData" value="{{ vaccine.id }}">{{ vaccine.nameen }}</option>
+                                                <ng-container *ngIf="lang === 'ar'">
+                                                <option *ngFor="let vaccine of vaccinesData" value="{{ vaccine.id }}">{{ vaccine.name }}</option>
+                                                </ng-container>
+                                                <ng-container *ngIf="lang === 'en'">
+                                                    <option *ngFor="let vaccine of vaccinesData" value="{{ vaccine.id }}">{{ vaccine.nameen }}</option>
+                                                </ng-container>
                                      
                                             </select>
                                         </div>
@@ -95,8 +97,8 @@
                                         <div class="input-group">
                                             <select class="form-control p-1" name="dosenumber" #dosenumber="ngModel" [(ngModel)]="service.bookingDetails.dosenumber" autocomplete="new-password" required>
                                             
-                                                <option value="1">Dose 1</option>
-                                                <option value="2">Dose 2</option>
+                                                <option value="1">{{ 'DOSE1' |  translate }}</option>
+                                                <option value="2">{{ 'DOSE2' |  translate }}</option>
                                             </select>
 
                                         </div>
@@ -105,12 +107,19 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-12 py-0">
+                                    <div class="col-md-6 py-0">
 
-                                        <label class="d-flex">{{ 'ATTDATE' | translate }} <small class="ml-auto float-right errorValidationMessage"> {{validMessage }}</small></label>
+                                        <label class="d-flex">{{ 'ATTDATE' | translate }} <small [ngClass]="{'mr-auto float-left':true, 'errorValidationMessage' : classInvalid}" [hidden]="!classInvalid"> {{ 'VALIDDATE' | translate }} </small></label>
 
                                         <div class="input-group">
-                                            <input type="date" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalid}" name="bookingdate" #bookingdate="ngModel" [(ngModel)]="service.bookingDetails.bookingdate" (change)="checkDate(bookingdate.value)" autocomplete="username" required>
+                                            <input type="date" [ngClass]="{'form-control': true ,'classInvalidRegist' : classInvalid}" name="bookingdate" #bookingdate="ngModel" [(ngModel)]="service.bookingDetails.bookingdate" (change)="checkDate(bookingdate.value)" autocomplete="username" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-0">
+
+                                        <label class="d-flex">{{ 'ATTTIME' | translate }} <small [ngClass]="{'mr-auto float-left':true, 'errorValidationMessage' : classInvalid}"></small></label>
+                                        <div class="input-group">
                                             <input type="time" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalid}" name="bookinghour" #bookinghour (change)="getHours(bookinghour.value)" id="appt" min="09:00" max="18:00" required>
 
                                         </div>

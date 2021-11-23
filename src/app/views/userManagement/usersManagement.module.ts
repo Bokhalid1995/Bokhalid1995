@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { usersManagmentRoutingModule } from './users-management-routing.module';
 
 import { UserAdminComponent } from './user-admin.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 // Angular
@@ -28,6 +29,7 @@ import { UserAdminComponent } from './user-admin.component';
     usersManagmentRoutingModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    PaginationModule.forRoot(),
     FormsModule
   ],
   declarations: [  UserAdminComponent ]

@@ -50,8 +50,8 @@
                                         <label for="name" class="mb-1">{{ 'NATIONALITY' |  translate }}</label>
                                         <div class="input-group  mb-1">
                                             <select [ngClass]=" {'form-control' : true , 'p-1' : true , 'filled' : isFilled }" name="nationalityid" #nationalityid="ngModel" [(ngModel)]="service.recieptiestDetails.nationalityid" autocomplete="new-password" required>
-                                                <option value="1">Sudanese</option>
-                                                <option value="2">Others</option>
+                                                <option value="1">{{ 'SUDANESE' |  translate }}</option>
+                                                <option value="2">{{ 'FORIEGN' |  translate }}</option>
                                             </select>
                                         </div>
 
@@ -59,12 +59,12 @@
                                         <div class="input-group  mb-1">
                                             <select class="form-control p-1" name="identificationdetailid" #identificationdetailid="ngModel" [(ngModel)]="service.recieptiestDetails.identificationdetailid" (change)="checkLIdendityID(nationalnumber.value ,identificationdetailid.value)" autocomplete="new-password"
                                                 required>
-                                                <option *ngFor="let idtype of IdTypes"  value="{{ idtype.id }}">{{ idtype.nameen }}</option>
+                                                <option *ngFor="let idtype of IdTypes"  value="{{ idtype.id }}">{{ idtype.name }}</option>
                                                 
                                             </select>
                                         </div>
 
-                                        <label for="name" class="d-flex mb-1">{{ 'NATID' |  translate }} <small class="ml-auto float-right errorValidationMessage"> {{validIdendityID }}</small></label>
+                                        <label for="name" class="d-flex mb-1">{{ 'NATID' |  translate }} <small class="mr-auto float-right errorValidationMessage" [hidden]="classInvalidIdendityID"> {{validIdendityID }}</small></label>
                                         <div class="input-group  mb-1">
                                             <input type="text" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalidIdendityID}" name="nationalnumber" #nationalnumber="ngModel" [(ngModel)]="service.recieptiestDetails.nationalnumber" (change)="checkLIdendityID(nationalnumber.value ,identificationdetailid.value)"
                                                 autocomplete="new-password" required>
@@ -72,7 +72,7 @@
 
                                         <label for="name" class="mb-1">{{ 'DOB' |  translate }}</label>
                                         <div class="input-group mb-1">
-                                            <input type="date" class="form-control" name="dateofbirth" #dateofbirth="ngModel" [(ngModel)]="service.recieptiestDetails.dateofbirth" value="{{ BODitilite | date:'MM/dd/yyyy'}}" autocomplete="username" required>
+                                            <input type="date" class="form-control" name="dateofbirth" #dateofbirth="ngModel" [(ngModel)]="service.recieptiestDetails.dateofbirth" value="1996-06-08" autocomplete="username" required>
                                         </div>
 
                                         <label for="name" class="mb-1">{{ 'CHRONIC' |  translate }}</label>
@@ -84,13 +84,13 @@
 
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="name" class="d-flex mb-1">{{ 'PHONE' |  translate }} <small class="ml-auto float-right errorValidationMessage"> {{ validPhone }}</small></label>
+                                        <label for="name" class="d-flex mb-1">{{ 'PHONE' |  translate }} <small class="mr-auto float-left errorValidationMessage " [hidden]="!classInvalidPhone"> {{ 'VALIDPHONE' |  translate }}</small></label>
                                         <div class="input-group  mb-1">
                                             <input type="number" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalidPhone}" name="mobilenumber" #mobilenumber="ngModel" [(ngModel)]="service.recieptiestDetails.mobilenumber" (change)="checkPhone(mobilenumber.value)" autocomplete="username"
                                                 required>
                                         </div>
 
-                                        <label for="name" class="d-flex mb-1">{{ 'EMAIL' | translate }} <small class="ml-auto float-right errorValidationMessage"> {{validEmail }}</small></label>
+                                        <label for="name" class="d-flex mb-1">{{ 'EMAIL' | translate }} <small class="mr-auto float-left errorValidationMessage" [hidden]="!classInvalidEmail">{{ 'VALIDEMAIL' | translate }}</small></label>
                                         <div class="input-group  mb-1">
                                             <input type="email" [ngClass]="{'form-control': true , 'classInvalidRegist' : classInvalidEmail}" name="email" #email="ngModel" [(ngModel)]="service.recieptiestDetails.email" (change)="checkEmail(email.value)" autocomplete="new-password" required>
                                         </div>
@@ -98,8 +98,8 @@
                                         <label for="name" class="mb-1">{{ 'GENDER' | translate }}</label>
                                         <div class="input-group  mb-1">
                                             <select class="form-control p-1" name="gender" #gender="ngModel" [(ngModel)]="service.recieptiestDetails.gender" autocomplete="new-password" required>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                    <option value="Male">{{ 'MALE' | translate }}</option>
+                                                    <option value="Female">{{ 'FEMALE' | translate }}</option>
                                                 </select>
                                         </div>
 
@@ -108,7 +108,7 @@
                                             <input type="text" class="form-control" autocomplete="new-password" name="password" #password="ngModel" [(ngModel)]="service.recieptiestDetails.password" (change)="checkRetypePassword(repasswordcheck.value)" required>
                                         </div>
 
-                                        <label for="name" class="d-flex mb-1">{{ 'REGISTREPPASS' | translate }} <small class="ml-auto float-right errorValidationMessage"> {{validPassword }}</small></label>
+                                        <label for="name" class="d-flex mb-1">{{ 'REGISTREPPASS' | translate }} <small class="mr-auto float-left errorValidationMessage" [hidden]="!classInvalidPass"> {{ 'VALIDREGISTREPPASS' | translate }}</small></label>
                                         <div class="input-group mb-1">
                                             <input type="text" name="repasswordcheck" #repasswordcheck [ngClass]="{'form-control': true, 'classInvalidRegist': classInvalidPass}" (change)="checkRetypePassword(repasswordcheck.value)" autocomplete="new-password" required>
                                         </div>
@@ -139,12 +139,12 @@
         <div class="modal-content">
 
             <div class="modal-body bg-success">
-                <h4 class="modal-title">Your Data Has Been Registred :</h4>
+                <h4 class="modal-title">تمت بنجاح :</h4>
                 <hr>
-                <p>{{ 'REGISTUSERNAME' | translate }} : welcome {{ service.recieptiestDetails.nameen }} you are registred now , you can choose your nerby center and book a day to take your vaccien </p>
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-secondary ml-2" (click)="ContinuBookig.hide()">Close</button>
-                    <button type="button" routerLink="/patientdata" class="btn btn-success">Continu</button>
+                <p>لقد تم تسجيل بياناتك بنجاح يمكنك الان متابعة الخطوات باجراء الحجز واخذ اللقاح</p>
+                <div class="d-flex justify-content-start">
+                    <button type="button" class="btn btn-secondary ml-2" routerLink="/login-public" (click)="ContinuBookig.hide()">لاحقا</button>
+                    <button type="button" routerLink="/patientdata" class="btn btn-success">متابعة</button>
 
                 </div>
             </div>

@@ -16,10 +16,12 @@ export class SectionsComponent implements OnInit {
   submitt:string = "Create Section";
   deptsData:Departments = new Departments();
   sectionsData:Sections = new Sections();
+  lang: string;
  
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
+  
     this.service.getDepts().subscribe((res: {}) => {
       this.deptsData = res as Departments;
     })

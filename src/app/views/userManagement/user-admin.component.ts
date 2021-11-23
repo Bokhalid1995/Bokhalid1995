@@ -6,6 +6,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { LoginProcessService } from '../../shared/login-process.service';
 import { Departments } from '../../shared/models/Departments.model';
+import { Pagination } from '../../shared/models/Pagination.model';
 import { registerProcess } from '../../shared/models/Register-process.model';
 import { Sections } from '../../shared/models/Sections.model';
 import { Units } from '../../shared/models/Units.model';
@@ -19,8 +20,8 @@ export class UserAdminComponent implements OnInit {
   repasswordcheck:string = '';
   classInvalid:boolean = false;
   searchEmpty:boolean = true;
-  disableFirst:string ;
-  disableLast:string ;
+  isUpdate:boolean = false;
+
   lang:string = '';
   submitt:string='Create Account'
   Reset:string="Reset"
@@ -28,14 +29,14 @@ export class UserAdminComponent implements OnInit {
   useractive: string;
   pager: number = 1;
   namePrev: string; nameArPrev: string; sectionPrev: string; deptPrev: string; unitPrev: string; createdOnPrev: string; createdByPrev: string;
-
+  Pagination :Pagination = new Pagination();
 
 
   unitsData: Units = new Units();
   sectionData: Sections = new Sections();
   deptsData: Departments = new Departments();
   usersData: registerProcess = new registerProcess();
-  lastPage: registerProcess = new registerProcess();
+
   userlist: registerProcess[];
   @ViewChild('PreviewUser') modal: ModalDirective;
 
@@ -53,6 +54,14 @@ export class UserAdminComponent implements OnInit {
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
 
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Reset"
+      this.submitt = "Create New";
+    } else {
+      this.Reset = "إعادة تعيين"
+      this.submitt = "إضافة جديد";
+    }
+
     this.service1.getUnits().subscribe((res: {}) => {
       this.unitsData = res as Units;
     });
@@ -69,13 +78,21 @@ export class UserAdminComponent implements OnInit {
       this.classInvalid = true;
     } else {
       this.classInvalid = false;
-      if(this.submitt == "Update"){
+      if(formData.value.id != null){
         
         return this.service1.UpdateUser(formData.value , formData.value.id).subscribe(
           response => {
             formData.reset();
-            this.submitt = "Create Account";
-            this.toastr.success("Section Updated Successfully", "Done!");
+            if (localStorage.getItem('lang') == 'en') {
+              this.Reset = "Reset"
+              this.submitt = "Create Account";
+              this.toastr.success("Account Updated Successfully", "Done!");
+            } else {
+              this.Reset = "إعادة تعيين"
+              this.submitt = "إضافة جديد";
+              this.toastr.success("تم تعديل البيانات بنجاح" ,"تم!");
+            }
+            this.isUpdate = false;
             this.allUers();
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
@@ -85,10 +102,14 @@ export class UserAdminComponent implements OnInit {
       this.classInvalid = false;
       this.service.registerAdminResponse(formData.value , this.useractive).subscribe(
         (res: any) => {
-          this.toastr.success("Data registred Successfully", "Done!");
+          if (localStorage.getItem('lang') == 'en') {
+            this.toastr.success("Added Success", "Done!");
+          } else {
+            this.toastr.success("تم حفظ البيانات بنجاح" ,"تم!");
+          }
           this.allUers();
           formData.reset();
-          console.log(res);
+       
         },
         err => {
           if (localStorage.getItem('lang') == 'en') {
@@ -104,7 +125,7 @@ export class UserAdminComponent implements OnInit {
   }
 
   allUers() {
-    this.service1.getUsers().subscribe((res: {}) => {
+    this.service1.getUsers().subscribe((res: any) => {
       this.usersData = res as registerProcess;
     });
   }
@@ -126,7 +147,7 @@ export class UserAdminComponent implements OnInit {
         this.unitPrev = userInfo.unitName;
       });
     });
-    console.log(this.userlist);
+  /* console.log(this.userlist);*/
     this.modal.show();
     this.userlist = [];
   }
@@ -134,64 +155,70 @@ export class UserAdminComponent implements OnInit {
 
     return this.service1.deleteUser(id).subscribe(
       response => {
-        this.toastr.warning("user deleted Successfully", "Done!");
+       
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.warning("user deleted Successfully", "Done!");
+        } else {
+          this.toastr.warning("تم حذف البيانات بنجاح", "تمت!");
+        }
       },
-      error => { this.toastr.success("user deleted Successfully", "Done!"); }
+      error => { 
+      if (localStorage.getItem('lang') == 'en') {
+        this.toastr.error("Can't be deleted", "Error!");
+      } else {
+        this.toastr.warning("لا يمكن حذف البيانات", "خطأ!");
+      }
+    
+    }
     );
 
   }
-  getUsersPgination(page: number) {
+  getUsersPgination(event: any) {
 
-    this.service1.getUserBypage(page).subscribe((res: {}) => {
+    this.service1.getUserBypage(event.page).subscribe((res: any) => {
 
-      this.usersData = res as registerProcess;
-      if (!Object.keys(this.usersData).length) {
-        this.usersData = this.lastPage;
-        if(this.pager <= 1 )
-        this.disableFirst = "disabled" ;
-        else
-        this.disableLast = "disabled" ;
-      }
+      this.usersData = res.users as registerProcess;
+      this.Pagination.totalCount = res.totalCount;
+      this.Pagination.currentPage = res.currentPage;
+      this.Pagination.pageSize = res.pageSize;
+      this.Pagination.totalPages = res.totalPages;
+    
     });
 
 
   }
   fillForm(users:registerProcess){
-    this.submitt = "Update";
-    
-    this.Reset = "Cancel Update"
+    this.isUpdate = true;
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Cancel Update"
+      this.submitt = "Update";
+    } else {
+      this.submitt = "تعديل"
+      this.Reset = "إلغاء التعديل";
+    }
 this.service.registerDetails = Object.assign({} , users) ;
+window.scrollTo({
+  top : 70,
+  behavior : 'smooth'
+});
   }
   resetForm(form:NgForm){
-    if(this.Reset == "Cancel Update"){
-    this.submitt = "Create Account";
-    this.Reset = "Reset"
+    if(form.value.id != null){
+      this.isUpdate = false;
+      if (localStorage.getItem('lang') == 'en') {
+        this.Reset = "Reset"
+        this.submitt = "Create New";
+      } else {
+        this.Reset = "إعادة تعيين"
+        this.submitt = "إضافة جديد";
+      }
     form.reset();
   }
     else { form.reset(); }
     
 
   }
-  counterPlus() {
 
-    if (this.pager < 1) {
-      this.pager = 1;
-    } else {
-      this.pager = this.pager + 1;
-      this.disableLast = "enabled" ;
-      this.getUsersPgination(this.pager);
-    }
-    this.lastPage = this.usersData;
-  }
-  counterMinus() {
-    if (this.pager < 1) {
-      this.pager = 1;
-    } else {
-      this.pager = this.pager - 1;
-      this.disableFirst ="enabled";
-      this.getUsersPgination(this.pager);
-    }
-    this.lastPage = this.usersData;
-  }
+
 
 }

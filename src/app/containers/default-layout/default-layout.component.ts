@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { navItems } from '../../Navbars/_nav';
 import { navItemsArabic } from '../../Navbars/_navArabic';
 import { navItemsAdmin } from '../../Navbars/_navAdmin';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,13 +15,16 @@ export class DefaultLayoutComponent implements OnInit{
   useractive:string;
   lang:string;
   isAuthenticated:string;
-  constructor(private rout:Router){
+  constructor(private rout:Router,private translate:TranslateService){
 
   }
   ngOnInit(): void {
-    this.useractive = localStorage.getItem('username')
     this.lang=localStorage.getItem('lang') || 'en';
-  /*  this.isAuthenticated = localStorage.getItem('token');
+    this.translate.use(this.lang);
+    document.documentElement.lang = this.lang;
+    this.useractive = localStorage.getItem('username')
+   
+   this.isAuthenticated = localStorage.getItem('token');
     if (this.useractive == null) {
       this.rout.navigateByUrl('/login');
     }
@@ -32,7 +36,7 @@ export class DefaultLayoutComponent implements OnInit{
       }
 }else {
   this.navItemsRender = navItemsArabic ;
-}*/
+}
   }
 
   toggleMinimize(e) {
@@ -40,7 +44,7 @@ export class DefaultLayoutComponent implements OnInit{
   }
   logOut(){
     localStorage.removeItem('token');
-   
+    localStorage.removeItem('username');
     this.rout.navigateByUrl('/login');
   }
 }

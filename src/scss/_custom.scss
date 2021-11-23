@@ -1,7 +1,7 @@
     // Here you can add other styles
     /* You can add global styles to this file, and also import other style files */
     
-    html:lang(ar) *,
+    html:lang(ar),
     nav ul li a {
         direction: rtl;
     }
@@ -164,6 +164,7 @@
         background-image: url('https://rxa.ca/wp-content/uploads/2021/04/AdobeStock_400896612-scaled.jpeg');
         background-size: 100% 120%;
         font-family: 'Cairo'!important;
+        scroll-behavior: smooth;
     }
     
     #nextStep {
@@ -344,8 +345,11 @@
     
     .errorValidationMessage {
         color: #BD362F;
+       
     }
-    
+    .display-status{
+        display: none;
+    }
     .img-header {
         width: 100%;
         transition: all 0.7s;
@@ -375,7 +379,7 @@
         outline: none;
         box-shadow: none !important;
         border-bottom: 4px solid #eee;
-        transition: all 0.7s;
+        transition: all 0.3s;
         height: 35px !important;
     }
     
@@ -417,6 +421,10 @@
             color: deepskyblue;
             border: 0px solid #000 !important;
         }
+    }
+    .table th{
+        border: 0px !important;
+        height: 20px;
     }
     
     .card-header {

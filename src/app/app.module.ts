@@ -62,6 +62,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { LoginPublicComponent } from './views/login-public/login-public.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { LoginPublicComponent } from './views/login-public/login-public.componen
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
+    PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,

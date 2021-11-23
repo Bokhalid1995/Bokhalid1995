@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { AfterViewChecked, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -38,12 +39,16 @@ export class DataentryComponent implements OnInit {
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
   lastPage:VaccinesDoses  = new VaccinesDoses();
   vaccinesData:Vaccines = new Vaccines();
+  fromDate:string;
+  toDate:string;
 
   @ViewChild('ConfirmVaccine') modal1: ModalDirective;
   @ViewChild('PreviewData') modal2: ModalDirective;
   constructor(public translate: TranslateService,public service: BookingService,private rout:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
+    this.fromDate = formatDate(new Date(), 'yyyy/MM/dd', 'en')
+    this.toDate = formatDate(new Date(), 'yyyy/MM/dd', 'en')
 
     this.lang = localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
@@ -52,7 +57,7 @@ if(this.lang === 'ar'){
   this.leftArrow ="fa fa-chevron-right";
   this.rightArrow ="fa fa-chevron-left";
 }
-    this.getDataPgination(this.pager , this.Status);
+    this.getDataPgination(this.pager , this.Status ,this.fromDate , this.toDate);
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;
     })
@@ -65,13 +70,13 @@ if(this.lang === 'ar'){
       this.serviceReciepsData = res as VaccinesDoses;
     })
   }
-  getDataPgination(page: number , status:string) {
+  getDataPgination(page: number , status:string , dateFrom:string ,dateto:string ) {
 if (status == "Requested"){
 this.statusColor = "statusYellow"
 }else {
 this.statusColor = "statusGreen"
 }
-    this.service.getListBypage(page ,status).subscribe((res: {}) => {
+    this.service.getListBypage(page ,status ,dateFrom,dateto).subscribe((res: {}) => {
 
       this.serviceReciepsData = res as VaccinesDoses;
       if (!Object.keys(this.serviceReciepsData).length) {
@@ -83,15 +88,22 @@ this.statusColor = "statusGreen"
 
 
   }
-  getDataByNatid(natid:string ) {
+  getDataByNatid(natid:string ,status1:boolean,status2:boolean,) {
+    if (status1) {
+      this.service.getVaccineDoseByNatID(natid , "Requested").subscribe((res: {}) => {
+        this.serviceReciepsData = res as VaccinesDoses;
+      });
+    }else{
+      this.service.getVaccineDoseByNatID(natid , "DoseTaken").subscribe((res: {}) => {
+        this.serviceReciepsData = res as VaccinesDoses;
+      });
+    }
 
-    this.service.getVaccineDoseByNatID(natid).subscribe((res: {}) => {
-      this.serviceReciepsData = res as VaccinesDoses;
-    });
+   
   }
-  filterStatus(status:string){
+  filterStatus(status:string,dateFrom:string,dateTo:string){
     this.pager = 1;
-    this.getDataPgination(this.pager , status);
+    this.getDataPgination(this.pager , status ,dateFrom,dateTo);
     if (status == "DoseTaken"){
       this.isRequseted = false;
       this.isConfirmed = true;
@@ -108,17 +120,30 @@ this.statusColor = "statusGreen"
     return this.service.confirmVaccineDose(form.value , this.idConfirm ).subscribe(
       response => {
         form.reset();
-        this.toastr.success("Section Updated Successfully", "Done!");
-        this.getDataPgination(this.pager , this.Status);
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.success("Vaccine Dose has been confirmed Succefully", "Warning!");
+        } else {
+          this.toastr.success("تم تأكيد اخذ اللقاح" ," تمت  !");
+        }
+      
+        this.getDataPgination(this.pager , this.Status ,this.fromDate ,this.toDate);
         this.modal1.hide();
       },
-      error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
+      error => { 
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.error("wrong Editing Data", "Error!");
+        } else {
+          this.toastr.error("خطأ في إدخال البيانات الرجاء المراجعة" ," خطأ  !");
+        }
+     
+      form.reset();
+    }
     );
   
   }
  
   showData(data: any) {
-    this.service.getVaccineDoseByNatID(data.nationalNumber).subscribe((res: {}) => {
+    this.service.getVaccineDoseByNatID(data.nationalNumber , data.status).subscribe((res: {}) => {
       this.datalist = res as VaccinesDoses;
       console.log(res);
     });
@@ -136,10 +161,10 @@ this.statusColor = "statusGreen"
     } else {
       if(this.isConfirmed == true){
         this.pager = this.pager + 1;
-        this.getDataPgination(this.pager, 'DoseTaken');
+        this.getDataPgination(this.pager, 'DoseTaken' ,this.fromDate ,this.toDate);
       }else{
         this.pager = this.pager + 1;
-        this.getDataPgination(this.pager, 'Requested');
+        this.getDataPgination(this.pager, 'Requested' ,this.fromDate ,this.toDate);
       }
      
     }
@@ -151,10 +176,10 @@ this.statusColor = "statusGreen"
     } else {
       if(this.isConfirmed == true){
         this.pager = this.pager - 1;
-        this.getDataPgination(this.pager, 'DoseTaken');
+        this.getDataPgination(this.pager, 'DoseTaken' ,this.fromDate ,this.toDate);
       }else{
         this.pager = this.pager - 1;
-        this.getDataPgination(this.pager, 'Requested');
+        this.getDataPgination(this.pager, 'Requested' ,this.fromDate ,this.toDate) ;
       }  
     }
     this.lastPage = this.serviceReciepsData;

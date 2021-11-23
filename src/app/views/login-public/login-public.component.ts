@@ -29,9 +29,9 @@ export class LoginPublicComponent implements OnInit {
   onSubmitt(formData:NgForm){
     this.service.loginPublicResponse(formData.value).subscribe(
       (res:any) => {
-      
-        this.rout.navigateByUrl('/patientdata');
         formData.reset();
+        this.rout.navigateByUrl('/patientdata');
+  
         console.log(res); },
       err => {
         if (this.lang == 'en'){
@@ -45,8 +45,6 @@ export class LoginPublicComponent implements OnInit {
   findName(searchid:string){
     return this.service.getNameRecieption(searchid).subscribe((res: {}) => {
      this.userselected = res as string;
-    
-
      if (this.userselected == "Username Not Found"){
       this.service.loginDetails.nameen = ""
       this.toastr.error(this.userselected as string, "Warning!");

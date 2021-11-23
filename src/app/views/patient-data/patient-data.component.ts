@@ -113,7 +113,12 @@ export class PatientDataComponent implements OnInit {
       this.service.registerRecieptionBook(formData.value , this.hours , this.IDRecieption).subscribe(
         (res: any) => {
           formData.reset();
-          this.toastr.success("Confirmed Successfully", "Done!");
+          if (localStorage.getItem('lang') == 'en') {
+            this.toastr.success("Confirmed Successfully", "Done!");
+          } else {
+            this.toastr.success("تم" ,"تمت عملية الحجز بنجاح!");
+          }
+         
           console.log(res);
         },
         err => {
@@ -130,10 +135,10 @@ export class PatientDataComponent implements OnInit {
   checkDate(date:Date){
   
 if( new Date(date) <= this.currentDate ){
-  this.validMessage = "Your date is incorrect please check!";
+
   this.classInvalid = true ;
 }else {
-  this.validMessage = ""
+
   this.classInvalid = false ;
 }
   }

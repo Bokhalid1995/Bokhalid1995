@@ -21,15 +21,22 @@ export class CitiesComponent implements OnInit {
   statesData:States = new States();
   citiesData:Cities = new Cities();
   localitiesData:Localities = new Localities();
+  Reset: string;
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
-    this.useractive = localStorage.getItem('username')
-    this.lang=localStorage.getItem('lang') || 'en';
+   
   /*  this.isAuthenticated = localStorage.getItem('token');*/
-    if (this.useractive == null) {
-      this.rout.navigateByUrl('/login');
-    }
+
+  if (localStorage.getItem('lang') == 'en') {
+    this.Reset = "Reset"
+    this.submitt = "Create New";
+  } else {
+    this.Reset = "إعادة تعيين"
+    this.submitt = "إضافة جديد";
+  }
+  
+   
     this.service.getStates().subscribe((res: {}) => {
       this.statesData = res as States;
     })
@@ -40,13 +47,20 @@ export class CitiesComponent implements OnInit {
   this.ShowAll();
   }
   onSavecity(formCity:NgForm){
-    if(this.submitt == "Update"){
+    if(formCity.value.id != null){
      
         return this.service.UpdateCity(formCity.value , formCity.value.id).subscribe(
           response => {
             formCity.reset();
-            this.submitt = "Create City";
-            this.toastr.success("City Updated Successfully", "Done!");
+            if (localStorage.getItem('lang') == 'en') {
+              this.Reset = "Reset"
+              this.submitt = "Create New";
+              this.toastr.success("Data Updated Successfully", "Done!");
+            } else {
+              this.Reset = "إعادة تعيين"
+              this.submitt = "إضافة جديد";
+              this.toastr.success("تم تعديل البيانات بنجاح" ,"تم!");
+            }
             this.ShowAll();
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
@@ -56,9 +70,12 @@ export class CitiesComponent implements OnInit {
       this.service.addCityResponse(formCity.value).subscribe(
         (res) => {
           formCity.reset();
-          this.toastr.success("Added Sucssed", "Done!");
+          if (localStorage.getItem('lang') == 'en') {
+            this.toastr.success("Added Sucssed", "Done!");
+          } else {
+            this.toastr.success("تم الحفظ بنجاح ", "تمت!");
+          }
           this.ShowAll();
-          console.log(res);
         },
         err => {
           if (localStorage.getItem('lang') == 'en') {
@@ -75,7 +92,11 @@ export class CitiesComponent implements OnInit {
 
     return this.service.deleteCity(id).subscribe(
       response => {
-        this.toastr.warning("City deleted Successfully", "Done!");
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.warning("Data Deleted Successfully", "Done!");
+        } else {
+          this.toastr.warning("تم حذف البيانات" ,"تم!");
+        }
         this.ShowAll();
       },
       error => { this.toastr.error("Data cant be deleted", "error!"); }
@@ -88,8 +109,35 @@ export class CitiesComponent implements OnInit {
       this.citiesData = res as Cities;
     })
   }
+  resetForm(form:NgForm){
+    if(form.value.id != null){
+      if (localStorage.getItem('lang') == 'en') {
+        this.Reset = "Reset"
+        this.submitt = "Create New";
+      } else {
+        this.Reset = "إعادة تعيين"
+        this.submitt = "إضافة جديد";
+      }
+    form.reset();
+  }
+    else { form.reset(); }
+    
+
+  }
   fillForm(cities:Cities){
-    this.submitt = "Update";
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Cancel  Update"
+      this.submitt = "Update";
+    } else {
+      this.submitt = "تعديل"
+      this.Reset = "إلغاء التعديل";
+    }
 this.service.citiesData = Object.assign({} , cities) ;
+
+window.scrollTo({
+  top : 70,
+  behavior : 'smooth'
+});
+
   }
 }

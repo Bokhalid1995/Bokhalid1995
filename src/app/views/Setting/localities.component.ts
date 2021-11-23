@@ -18,26 +18,43 @@ export class LocalitiesComponent implements OnInit {
   statesData:States = new States();
   citiesData:Cities = new Cities();
   localitiesData:Localities = new Localities();
+  lang: string;
   constructor(private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Reset"
+      this.submitt = "Create New";
+    } else {
+      this.Reset = "إعادة تعيين"
+      this.submitt = "إضافة جديد";
+    }
     this.service.getStates().subscribe((res: {}) => {
       this.statesData = res as States;
     })
-  
+  this.service.getStates().subscribe((res: {}) => {
+      this.statesData = res as States;
+    })
     this.service.getLocalities().subscribe((res: {}) => {
       this.localitiesData = res as Localities;
     })
   this.ShowAll();
   }
   onSaveLocality(formLocality:NgForm){
-    if(this.submitt == "Update"){
+    if(formLocality.value.id != null){
      
         return this.service.UpdateLocality(formLocality.value , formLocality.value.id).subscribe(
           response => {
             formLocality.reset();
-            this.submitt = "Create New";
-            this.toastr.success("Locality Updated Successfully", "Done!");
+            if (localStorage.getItem('lang') == 'en') {
+              this.Reset = "Reset"
+              this.submitt = "Create New";
+              this.toastr.success("Data Updated Successfully", "Done!");
+            } else {
+              this.Reset = "إعادة تعيين"
+              this.submitt = "إضافة جديد";
+              this.toastr.success("تم تعديل البيانات بنجاح" ,"تم!");
+            }
             this.ShowAll();
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
@@ -47,9 +64,12 @@ export class LocalitiesComponent implements OnInit {
       this.service.addLocalityResponse(formLocality.value).subscribe(
         (res) => {
           formLocality.reset();
-          this.toastr.success("Added Locality Sucssed", "Done!");
+          if (localStorage.getItem('lang') == 'en') {
+            this.toastr.success("Added Sucssed", "Done!");
+          } else {
+            this.toastr.success("تم الحفظ بنجاح ", "تمت!");
+          }
           this.ShowAll();
-          console.log(res);
         },
         err => {
           if (localStorage.getItem('lang') == 'en') {
@@ -66,7 +86,11 @@ export class LocalitiesComponent implements OnInit {
 
     return this.service.deleteLocality(id).subscribe(
       response => {
-        this.toastr.warning("Locality deleted Successfully", "Done!");
+        if (localStorage.getItem('lang') == 'en') {
+          this.toastr.warning("Data Deleted Successfully", "Done!");
+        } else {
+          this.toastr.warning("تم حذف البيانات" ,"تم!");
+        }
         this.ShowAll();
       },
       error => { this.toastr.error("Data cant be deleted", "error!"); }
@@ -80,8 +104,20 @@ export class LocalitiesComponent implements OnInit {
     })
   }
   fillForm(Localities:Localities){
-    this.submitt = "Update";
+    if (localStorage.getItem('lang') == 'en') {
+      this.Reset = "Cancel  Update"
+      this.submitt = "Update";
+    } else {
+      this.submitt = "تعديل"
+      this.Reset = "إلغاء التعديل";
+    }
 this.service.localitiesData = Object.assign({} , Localities) ;
+
+window.scrollTo({
+  top : 70,
+  behavior : 'smooth'
+});
+
   }
   getCitiesByState(Stateid:string){
     if(Stateid != ""){
@@ -91,9 +127,14 @@ this.service.localitiesData = Object.assign({} , Localities) ;
   }
   }
   resetForm(form:NgForm){
-    if(this.Reset == "Cancel Update"){
-    this.submitt = "Create New";
-    this.Reset = "Reset"
+    if(form.value.id != null){
+      if (localStorage.getItem('lang') == 'en') {
+        this.Reset = "Reset"
+        this.submitt = "Create New";
+      } else {
+        this.Reset = "إعادة تعيين"
+        this.submitt = "إضافة جديد";
+      }
     form.reset();
   }
     else { form.reset(); }

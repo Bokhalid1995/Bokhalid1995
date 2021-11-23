@@ -7,16 +7,12 @@
         margin: 0px;
     }
 </style>
-<div class="app-body animated fadeIn ">
+<div class="app-body animated fadeIn " id="top">
     <main class="d-block align-items-center container">
         <div class="card row" id="RegistryForma">
             <div class="card-header">
-                <strong><i class="icon-plus"></i> Add new Health Unit</strong>
-                <div class="card-header-actions">
-                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
-                        <small className="text-muted">docs</small>
-                    </a>
-                </div>
+                <strong><i class="icon-plus"></i> {{ 'ADDHELTHUNIT' | translate }}</strong>
+               
             </div>
             <div class="card-body col-md-12 mx-auto">
                 <form #formUnitHealth="ngForm" class="container">
@@ -24,26 +20,26 @@
                     <div class="row">
                         <input type="text" name="id" class="form-control" #id="ngModel" [(ngModel)]="service.HealthUnitsData.id" autocomplete="username" hidden>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Health Unit Name Arabic</label>
+                            <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
                             <div class="input-group ">
 
                                 <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="service.HealthUnitsData.name" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Health Unit Name English</label>
+                            <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="service.HealthUnitsData.nameen" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Capacity</label>
+                            <label for="name" class="mx-1">{{ 'CAP' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="capacity" class="form-control" autocomplete="" #capacity="ngModel" [(ngModel)]="service.HealthUnitsData.capacity" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Health Unit Classfication</label>
+                            <label for="name" class="mx-1">{{ 'HUC' | translate }}</label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="healtunitclassficationid" autocomplete="new-password" #healtunitclassficationid="ngModel" [(ngModel)]="service.HealthUnitsData.healtunitclassficationid" required>
                                     <option value="1" selected>1 </option>
@@ -55,50 +51,50 @@
 
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Working All Days</label>
+                            <label for="name" class="mx-1">{{ 'WORKINALLD' | translate }}</label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="workingalldays" autocomplete="new-password" #workingalldays="ngModel" [(ngModel)]="service.HealthUnitsData.workingalldays" required>
-                                    <option value="Yes" selected>Yes </option>
-                                    <option value="No">No</option>
+                                    <option value="Yes" selected>{{ 'YES' | translate }}  </option>
+                                    <option value="No">{{ 'NO' | translate }} </option>
                                
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Working All Hours</label>
+                            <label for="name" class="mx-1">{{ 'WORKINALLH' | translate }}</label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="workingallhours" autocomplete="new-password" #workingallhours="ngModel" [(ngModel)]="service.HealthUnitsData.workingallhours" required>
-                                    <option value="Yes" selected>Yes </option>
-                                    <option value="No">No</option>
+                                    <option value="Yes" selected>{{ 'YES' | translate }} </option>
+                                    <option value="No">{{ 'NO' | translate }} </option>
                                
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">From Day </label>
+                            <label for="name" class="mx-1">{{ 'FROMD' | translate }}  </label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="fromday" autocomplete="new-password" #fromday="ngModel" [(ngModel)]="service.HealthUnitsData.fromday" required>
-                                    <option value="1" selected>Saturday </option>
-                                    <option value="2" selected>Sunday </option>
-                                    <option value="3" selected>Monday </option>
-                                    <option value="4" selected>Tuesday </option>
-                                    <option value="5" selected>Wednesday </option>
-                                    <option value="6" selected>Thursday </option>
-                                    <option value="7" selected>Friday </option>
+                                    <option value="1" selected>{{ 'SAT' | translate }}  </option>
+                                    <option value="2" selected>{{ 'SUN' | translate }}  </option>
+                                    <option value="3" selected>{{ 'MON' | translate }}  </option>
+                                    <option value="4" selected>{{ 'TUE' | translate }}  </option>
+                                    <option value="5" selected>{{ 'WEN' | translate }}  </option>
+                                    <option value="6" selected>{{ 'THR' | translate }}  </option>
+                                    <option value="7" selected>{{ 'FRI' | translate }} </option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">To Day </label>
+                            <label for="name" class="mx-1">{{ 'TOD' | translate }} </label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="today" autocomplete="new-password" #today="ngModel" [(ngModel)]="service.HealthUnitsData.today" required>
-                                    <option value="1" selected>Saturday </option>
-                                    <option value="2" selected>Sunday </option>
-                                    <option value="3" selected>Monday </option>
-                                    <option value="4" selected>Tuesday </option>
-                                    <option value="5" selected>Wednesday </option>
-                                    <option value="6" selected>Thursday </option>
-                                    <option value="7" selected>Friday </option>
+                                    <option value="1" selected>{{ 'SAT' | translate }}  </option>
+                                    <option value="2" selected>{{ 'SUN' | translate }}  </option>
+                                    <option value="3" selected>{{ 'MON' | translate }}  </option>
+                                    <option value="4" selected>{{ 'TUE' | translate }}  </option>
+                                    <option value="5" selected>{{ 'WEN' | translate }}  </option>
+                                    <option value="6" selected>{{ 'THR' | translate }}  </option>
+                                    <option value="7" selected>{{ 'FRI' | translate }} </option>
                                 </select>
                             </div>
                         </div>
@@ -106,25 +102,25 @@
 
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">From Hour</label>
+                            <label for="name" class="mx-1">{{ 'FROMH' | translate }} </label>
                             <div class="input-group ">
                                 <input type="time" class="form-control" name="fromhour" #fromhour="ngModel" [(ngModel)]="service.HealthUnitsData.fromhour" (change)="getHoursFrom(fromhour.value)" autocomplete="username" min="09:00" max="18:00" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">To Hour</label>
+                            <label for="name" class="mx-1">{{ 'TOH' | translate }} </label>
                             <div class="input-group ">
                                 <input type="time" class="form-control" name="tohour" #tohour="ngModel" [(ngModel)]="service.HealthUnitsData.tohour" (change)="getHoursTo(tohour.value)" autocomplete="username" min="09:00" max="18:00" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Phone Number</label>
+                            <label for="name" class="mx-1">{{ 'PHONE' | translate }}</label>
                             <div class="input-group ">
                                 <input type="number" name="phonenumber" class="form-control" autocomplete="" #phonenumber="ngModel" [(ngModel)]="service.HealthUnitsData.phonenumber" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Address</label>
+                            <label for="name" class="mx-1">{{ 'ADDRESS' | translate }}</label>
                             <div class="input-group ">
                                 <select class="form-control p-1" name="addressid" autocomplete="new-password" #addressid="ngModel" [(ngModel)]="service.HealthUnitsData.addressid" required>
                                     <option *ngFor="let Localit of LocalityData" value="{{ Localit.id }}">{{ Localit.nameen }}</option>
@@ -161,20 +157,20 @@
             <hr>
             <div class="card-body p-0 ">
                 <div class="row m-2">
-                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>  All Health Units Details</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">Show All<i class="icon-refresh mx-2"></i></button>
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>{{ 'HELTHUNITDETAILS' | translate }}</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">{{ 'SHOWALL' | translate }}<i class="icon-refresh mx-2"></i></button>
                     </h4>
                     <table class="table table-sm table-hover">
                         <thead class="">
                             <tr class="text-center mt-2">
                                 <th>#</th>
-                                <th>name Arabic</th>
-                                <th>name English</th>
-                                <th>Capacity</th>
-                                <th>Phone</th>
-                                <th>Working All Days</th>
+                                <th>{{ 'NAMEARABIC' | translate }}</th>
+                                <th>{{ 'NAMEENGLIAH' | translate }}</th>
+                                <th>{{ 'CAP' | translate }}</th>
+                                <th>{{ 'PHONE' | translate }}</th>
+                                <th>{{ 'WORKINALLD' | translate }}</th>
                                 <th>Preview</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th>{{ 'UPDATE' | translate }}</th>
+                                <th>{{ 'DELETE' | translate }}</th>
 
                             </tr>
                         </thead>
@@ -187,8 +183,8 @@
                                 <td>{{UnitHealth.phonenumber}}</td>
                                 <td>{{UnitHealth.workingalldays}}</td>
                                 <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(UnitHealth)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
-                                <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(UnitHealth)"><i class="fa fa-pencil-square"></i> Update</button></td>
-                                <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(UnitHealth.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                                <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(UnitHealth)"><i class="fa fa-pencil-square"></i> {{ 'UPDATE' | translate }}</button></td>
+                                <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(UnitHealth.id)"><i class="fa fa-trash" ></i> {{ 'DELETE' | translate }}</button></td>
                             </tr>
                         </tbody>
                     </table>

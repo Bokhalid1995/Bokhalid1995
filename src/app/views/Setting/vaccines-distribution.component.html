@@ -11,12 +11,8 @@
     <main class="d-block align-items-center container">
         <div class="card " id="RegistryForma">
             <div class="card-header">
-                <strong><i class="icon-plus"></i>New Vaccines Distribution</strong>
-                <div class="card-header-actions">
-                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
-                        <small className="text-muted">docs</small>
-                    </a>
-                </div>
+                <strong><i class="icon-plus"></i>{{ 'ADDNEWVACCINEDIS' | translate }}</strong>
+              
             </div>
             <div class="card-body">
                 <form #formVaccinesDist="ngForm">
@@ -28,7 +24,7 @@
                                 <div class="input-group mb-3">
 
                                     <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service1.VaccinesDistData.id" autocomplete="username" hidden required>
-                                    <label for="name" class="mx-1">{{ 'VACCINES' | translate }} </label>
+                                    <label for="name" class="mx-1">{{ 'VACCINE' | translate }} </label>
 
                                     <div class="input-group mb-1">
                                         <select class="form-control p-1" name="vaccineid" autocomplete="new-password" #vaccineid="ngModel" [(ngModel)]="service1.VaccinesDistData.vaccineid" required>
@@ -39,19 +35,19 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label for="name" class="mx-1">Batch Number</label>
+                                <label for="name" class="mx-1">{{ 'BATCH' | translate }} </label>
                                 <div class="input-group mb-3">
                                     <input type="text" name="batchnumber" class="form-control" autocomplete="" #batchnumber="ngModel" [(ngModel)]="service1.VaccinesDistData.batchnumber" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label for="name" class="mx-1">Quantity</label>
+                                <label for="name" class="mx-1">{{ 'QUANT' | translate }} </label>
                                 <div class="input-group mb-3">
                                     <input type="text" name="quantity" class="form-control" autocomplete="" #quantity="ngModel" [(ngModel)]="service1.VaccinesDistData.quantity" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label for="name" class="mx-1">Place Ditrbute</label>
+                                <label for="name" class="mx-1">{{ 'DISTPLACE' | translate }} </label>
                                 <div class="input-group mb-3">
                                     <input type="text" name="distributeplace" class="form-control" autocomplete="" #distributeplace="ngModel" [(ngModel)]="service1.VaccinesDistData.distributeplace" required>
                                 </div>
@@ -86,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label for="name" class="mx-1 mb-1">{{ 'Health Unit' | translate }} </label>
+                                <label for="name" class="mx-1 mb-1">{{ 'HEALTHUNIT' | translate }} </label>
                                 <div class="input-group mb-1">
                                     <select class="form-control p-1" name="healthunitid" autocomplete="new-password" #healthunitid="ngModel" [(ngModel)]="service1.VaccinesDistData.healthunitid" required>
                                         <option *ngFor="let healthunitid of healthunitidsData" value="{{ healthunitid.id }}">{{ healthunitid.nameen }}</option>
@@ -105,18 +101,21 @@
                     </div>
                 </form>
             </div>
+            <hr>
             <div class="card-body">
                 <div class="">
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>{{ 'ALLDETAILS' | translate }}</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">{{ 'SHOWALL' | translate }}<i class="icon-refresh mx-2"></i></button>
+                    </h4>
                     <table class="table table-sm table-hover">
                         <thead class="">
                             <tr class="text-center  mt-2">
-                                <th>ID</th>
-                                <th>Vaccine </th>
-                                <th>Batch Number</th>
-                                <th>Quantity </th>
-                                <th>Distribut Place </th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th>#</th>
+                                <th>{{ 'VACCINE' | translate }}  </th>
+                                <th>{{ 'BATCH' | translate }} </th>
+                                <th>{{ 'QUANT' | translate }} </th>
+                                <th>{{ 'DISTPLACE' | translate }}</th>
+                                <th>{{ 'UPDATE' | translate }}</th>
+                                <th>{{ 'DELETE' | translate }}</th>
 
                             </tr>
                         </thead>
@@ -127,8 +126,8 @@
                                 <td>{{VaccinesDist.batchnumber}}</td>
                                 <td>{{VaccinesDist.quantity}}</td>
                                 <td>{{VaccinesDist.distributeplace}}</td>
-                                <td><button class="btn btn-success p-1 h-50" (click)="fillForm(VaccinesDist)"><i class="fa fa-pencil-square"></i> Update</button></td>
-                                <td><button class="btn btn-danger p-1 h-50" (click)="onDelete(VaccinesDist.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                                <td><button class="btn btn-success p-0 h-50" (click)="fillForm(VaccinesDist)"><i class="fa fa-pencil-square mx-1"></i></button></td>
+                                <td><button class="btn btn-danger p-0 h-50" (click)="onDelete(VaccinesDist.id)"><i class="fa fa-trash mx-1" ></i></button></td>
                             </tr>
                         </tbody>
                     </table>

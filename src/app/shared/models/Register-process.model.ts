@@ -13,5 +13,6 @@ export class registerProcess {
     enteredbyName:string="";
     lastupdatedbyid:number=null;
     creationdate:string="";
+    status:string="";
 
 }

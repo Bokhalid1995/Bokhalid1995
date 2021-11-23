@@ -11,12 +11,8 @@
     <main class="d-block align-items-center container">
         <div class="card row" id="RegistryForma">
             <div class="card-header">
-                <strong><i class="icon-plus"></i> Add new Vaccine</strong>
-                <div class="card-header-actions">
-                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
-                        <small className="text-muted">docs</small>
-                    </a>
-                </div>
+                <strong><i class="icon-plus"></i>{{ 'ADDNEWVACCINE' | translate }}</strong>
+              
             </div>
             <div class="card-body col-md-12 mx-auto">
                 <form #formVaccine="ngForm" class="container">
@@ -25,27 +21,27 @@
 
 
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Vaccine Name Arabic</label>
+                            <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.VaccinesData.id" autocomplete="username" hidden>
                                 <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="service.VaccinesData.name" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Vaccine Name English</label>
+                            <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="service.VaccinesData.nameen" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Sientific Name</label>
+                            <label for="name" class="mx-1">{{ 'SIENTIFICNAME' | translate }}</label>
 
                             <div class="input-group ">
                                 <input type="text" name="scientificname" class="form-control" autocomplete="" #scientificname="ngModel" [(ngModel)]="service.VaccinesData.scientificname" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="">Disease Prohibit</label>
+                            <label for="name" class="">{{ 'DISEASEPROHIBIT' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="diseaseprohibit" class="form-control" #diseaseprohibit="ngModel" [(ngModel)]="service.VaccinesData.diseaseprohibit" autocomplete="username" required>
 
@@ -56,13 +52,13 @@
                     <div class="row">
 
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Manufacturing Country</label>
+                            <label for="name" class="mx-1">{{ 'MANUFACTURINGCOUNTRY' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="manufacturingcountry" class="form-control" #manufacturingcountry="ngModel" [(ngModel)]="service.VaccinesData.manufacturingcountry" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Number Of Doses</label>
+                            <label for="name" class="mx-1">{{ 'NUMBEROFDOSES' | translate }}</label>
                             <div class="input-group ">
 
                                 <select class="form-control p-1" name="numberofdoses" autocomplete="new-password" #numberofdoses="ngModel" [(ngModel)]="service.VaccinesData.numberofdoses" required>
@@ -74,7 +70,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Miniumum Period Dose Days</label>
+                            <label for="name" class="mx-1">{{ 'MINIMUMPERIODDOSEDAYS' | translate }}</label>
 
                             <div class="input-group ">
 
@@ -82,7 +78,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Maxiumum Period Dose Days</label>
+                            <label for="name" class="mx-1">{{ 'MAXIMUMPERIODDOSEDAYS' | translate }}</label>
 
                             <div class="input-group ">
 
@@ -94,26 +90,26 @@
                     <div class="row">
 
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Minimum Temprature</label>
+                            <label for="name" class="mx-1">{{ 'MINIMUMTEMPRATURE' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="minimumtemprature" class="form-control" #minimumtemprature="ngModel" [(ngModel)]="service.VaccinesData.minimumtemprature" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Maximum Temprature</label>
+                            <label for="name" class="mx-1">{{ 'MAXIMUMTEMPRATURE' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="maximumtemprature" class="form-control" #maximumtemprature="ngModel" [(ngModel)]="service.VaccinesData.maximumtemprature" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Minimum Age</label>
+                            <label for="name" class="mx-1">{{ 'MINIMUMAGE' | translate }}</label>
                             <div class="input-group ">
 
                                 <input type="number" name="minimumage" class="form-control" autocomplete="" #minimumage="ngModel" [(ngModel)]="service.VaccinesData.minimumage" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Maximum Age</label>
+                            <label for="name" class="mx-1">{{ 'MAXIMUMAGE' | translate }}</label>
 
                             <div class="input-group ">
 
@@ -126,26 +122,26 @@
                     <div class="row">
 
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Valid Type Period Determine</label>
+                            <label for="name" class="mx-1">{{ 'VALIDTYPEPERIODDETERMINE' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="validityperioddetermine" class="form-control" #validityperioddetermine="ngModel" [(ngModel)]="service.VaccinesData.validityperioddetermine" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Valid Type Period </label>
+                            <label for="name" class="mx-1">{{ 'VALIDTYPEPERIOD' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="validityperiod" class="form-control" #validityperiod="ngModel" [(ngModel)]="service.VaccinesData.validityperiod" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Instructions</label>
+                            <label for="name" class="mx-1">{{ 'INSTRUCTIONS' | translate }}</label>
                             <div class="input-group ">
 
                                 <input type="text" name="instructions" class="form-control" autocomplete="" #instructions="ngModel" [(ngModel)]="service.VaccinesData.instructions" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="mx-1">Side Effect</label>
+                            <label for="name" class="mx-1">{{ 'SIDEEFFECT' | translate }}</label>
 
                             <div class="input-group ">
 
@@ -183,17 +179,21 @@
             <hr>
             <div class="card-body p-0 ">
                 <div class="row m-2">
-                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>  All Vaccines Details</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">Show All<i class="icon-refresh mx-2"></i></button>
+                    <h4> <b class="mx-2"><i class="icon-notebook mx-2"></i>{{ 'ALLDETAILS' | translate }}</b><button type="button" (click)="ShowAll()" class="btn btn-ghost-info">{{ 'SHOWALL' | translate }}<i class="icon-refresh mx-2"></i></button>
                     </h4>
                     <table class="table table-sm table-hover">
                         <thead class="">
                             <tr class="text-center mt-2">
-                                <th>Vaccine ID</th>
-                                <th>name Arabic</th>
-                                <th>name English</th>
-                                <th>Preview</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th>#</th>
+                                <th>{{ 'NAMEENGLIAH' | translate }}</th>
+                                <th>{{ 'NAMEARABIC' | translate }}</th>
+                                <th>{{ 'NUMBEROFDOSES' | translate }}</th>
+                                <th>{{ 'MINIMUMAGE' | translate }}</th>
+                                <th>{{ 'MAXIMUMAGE' | translate }}</th>
+                                <th>{{ 'SIDEEFFECT' | translate }}</th>
+                                <th>{{ 'PREVIEW' | translate }}</th>
+                                <th>{{ 'UPDATE' | translate }}</th>
+                                <th>{{ 'DELETE' | translate }}</th>
 
                             </tr>
                         </thead>
@@ -202,9 +202,13 @@
                                 <td>{{Vaccine.id}}</td>
                                 <td>{{Vaccine.nameen}}</td>
                                 <td>{{Vaccine.name}}</td>
+                                <td>{{Vaccine.numberofdoses}}</td>
+                                <td>{{Vaccine.minimumage}}</td>
+                                <td>{{Vaccine.maximumage}}</td>
+                                <td>{{Vaccine.sideeffect}}</td>
                                 <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(Vaccine)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
-                                <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(Vaccine)"><i class="fa fa-pencil-square"></i> Update</button></td>
-                                <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(Vaccine.id)"><i class="fa fa-trash" ></i> Delete</button></td>
+                                <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(Vaccine)"><i class="fa fa-pencil-square"></i> {{ 'UPDATE' | translate }}</button></td>
+                                <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(Vaccine.id)"><i class="fa fa-trash" ></i>      {{ 'DELETE' | translate }}</button></td>
                             </tr>
                         </tbody>
                     </table>

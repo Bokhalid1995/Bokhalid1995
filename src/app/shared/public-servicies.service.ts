@@ -74,7 +74,7 @@ export class PublicServiciesService {
   return this.http.put(this.baseURL + "UserLogin/UpdatUser?Id=" + id, Data ,{responseType : "blob"});
 }
  getUserBypage(page:any){
-  let params = new HttpParams().set('Id',page);
+  if (page === undefined) page = 1 
   return this.http.get(this.baseURL + "UserLogin/UsersPagenation",{params:{'PageNumber': page , 'PageSize' : '7'}});
  }
 

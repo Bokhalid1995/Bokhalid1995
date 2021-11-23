@@ -29,6 +29,9 @@ export class BookingService {
   getVaccines(){
     return this.http.get(this.baseURL + "Vaccine/Vaccines");
   }
+  getIcds(){
+    return this.http.get(this.baseURL + "Icd/Icds");
+  }
   getCitiesState(stateid:any){
     
     return this.http.get(this.baseURL + "City/GetCityStateId?Id=" + stateid);
@@ -56,14 +59,14 @@ export class BookingService {
    getVacinneDoses(){
     return this.http.get(this.baseURL + "Servicerecipientvaccinedose/Servicerecipientvaccinedose");
    }
-   getListBypage(page:any ,status:any){
-    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/ServiceRecipientVaccineDosePagedList",{params:{'PageNumber': page , 'PageSize' : '10' ,'status' : status}});
+   getListBypage(page:any ,status:any , dateFrom:any , dateTo:any){
+    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/ServiceRecipientVaccineDosePagedList",{params:{'PageNumber': page , 'PageSize' : '10' ,'status' : status ,'fromDate' : dateFrom , 'toDate':dateTo}});
    }
-   getVaccineDoseByNatID(natid:any){
-    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/GetServicerecipientvaccinedoseNationalNumber?nationalNumber=" + natid);
+   getVaccineDoseByNatID(natid:any ,status:any){
+    return this.http.get(this.baseURL + "Servicerecipientvaccinedose/GetServicerecipientvaccinedoseNationalNumber" ,{params:  {'nationalNumber':natid , 'status' : status}});
    }
    getIdType(){
-    return this.http.get(this.baseURL + "IdType/IdTypes");
+    return this.http.get(this.baseURL + "IdType/IdTypes"); 
   }
   confirmVaccineDose(form:any ,serviceseciptid:any){
     const params = {'acceptedbyid' : localStorage.getItem('userid')};

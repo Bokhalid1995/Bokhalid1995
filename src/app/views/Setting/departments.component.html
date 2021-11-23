@@ -12,11 +12,7 @@
         <div class="card row" id="RegistryForma">
             <div class="card-header">
                 <strong><i class="icon-plus"></i> Add new Department</strong>
-                <div class="card-header-actions">
-                    <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
-                        <small className="text-muted">docs</small>
-                    </a>
-                </div>
+            
             </div>
             <div class="card-body col-md-12 mx-auto">
                 <form #formDept="ngForm" class="container">
@@ -26,19 +22,12 @@
                         <div class="col-md-3">
                             <label for="name" class="mx-1">ID</label>
                             <div class="input-group mb-3">
-
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class=""></i>ID</span>
-                                </div>
                                 <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.DeptsData.id" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="name" class="mx-1">Department Name Arabic</label>
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class=""></i>Ar</span>
-                                </div>
                                 <input type="text" name="name" class="form-control" placeholder="Department Name Arabic" #name="ngModel" [(ngModel)]="service.DeptsData.name" autocomplete="username" required>
                             </div>
                         </div>
@@ -58,9 +47,6 @@
                             <label for="name" class="mx-1">Department Name English</label>
 
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">En</span>
-                                </div>
                                 <input type="text" name="nameen" class="form-control" placeholder="Department Name English" autocomplete="" #nameen="ngModel" [(ngModel)]="service.DeptsData.nameen" required>
                             </div>
                         </div>
