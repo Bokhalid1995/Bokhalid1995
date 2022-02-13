@@ -1,6 +1,13 @@
 <style>
     #info {
-        height: 301px;
+        height: 350px;
+        background-color: transparent;
+        overflow: hidden; 
+        padding:0px !important;
+         border-radius:10px;
+    }
+    .slide {
+        height: 350px !important;
     }
     
     .input-group-append:hover {
@@ -15,14 +22,36 @@
                 <div class="col-md-6 mx-auto mb-2">
 
                     <div class="card-group">
-                        <div class="card p-4">
+                        <div class="card p-4" >
                             <img class="img-header" src="assets/img/header1.png" alt="">
                         </div>
                     </div>
                     <div class="card-group mt-2">
-                        <div class="card bg-info p-4">
+                        <div class="card"  style="background-color: transparent;">
                             <div id="info">
-                                <h3>we need your real info so be awarense</h3>
+                                <carousel [interval]="3000" >
+                                    <slide  >
+                                      <img src="../../../assets/img/CornaBg.jpg" alt="First slide" style="display: block; width: 100%; ">
+                                      <div class="carousel-caption d-none d-md-block">
+                                        <h3>First slide label</h3>
+                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                      </div>
+                                    </slide>
+                                    <slide>
+                                      <img src="https://picsum.photos/id/1036/900/650" alt="Second slide" style="display: block; width: 100%; ">
+                                      <div class="carousel-caption d-none d-md-block">
+                                        <h3>Second slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                      </div>
+                                    </slide>
+                                    <slide>
+                                      <img src="https://picsum.photos/id/1043/900/650" alt="Third slide" style="display: block; width: 100%; ">
+                                      <div class="carousel-caption d-none d-md-block">
+                                        <h3>Third slide label</h3>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                      </div>
+                                    </slide>
+                                  </carousel>
                             </div>
 
                         </div>
@@ -74,7 +103,6 @@
                                         <label for="name" class="mb-1 w-100 mr-auto">{{ 'CENTERS' |  translate }}  <small style="color: tomato; float: left; cursor: pointer; " (click)="getCenterDetails(healthunitid.value)"> {{ 'CENTDET' |  translate }} <i class="icon-info"></i></small></label>
                                         <div class="input-group  mb-2">
                                             <select class="form-control p-1" name="healthunitid" #healthunitid="ngModel" [(ngModel)]="service.bookingDetails.healthunitid" autocomplete="new-password" required>
-                                                   
                                                     <option *ngFor="let center of CentersData" value="{{ center.id }}">{{ center.nameen }}</option>
                                                 </select>
       

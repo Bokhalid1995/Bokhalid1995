@@ -1,7 +1,8 @@
 import { style } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import {  ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -34,12 +35,23 @@ export class LoginComponent implements OnInit {
     this.lang = localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
+    if(this.lang == "ar"){
+      document.documentElement.dir = "rtl";
+    }else{
+      document.documentElement.dir = "ltr";
+    }
+    
   }
 
   changeLang(lang) {
     localStorage.setItem('lang', lang);
     this.translate.use(lang);
     document.documentElement.lang = lang;
+    if(this.lang == "ar"){
+      document.documentElement.dir = "rtl";
+    }else{
+      document.documentElement.dir = "ltr";
+    }
   }
   onSubmitt(formData:NgForm){
     this.service.loginResponse(formData.value).subscribe(

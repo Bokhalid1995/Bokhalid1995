@@ -20,8 +20,8 @@
                         <p class="text-muted col-md-6">{{ 'REGISTERDETAILS' | translate }}</p>
                       
                           <div class="col-md-6 d-flex justify-content-end form-inline" *ngIf="isUpdate">
-                            <label class="mx-2">{{ 'STATUS' | translate }}</label>
-                            <select class="form-control" name="status" #status="ngModel" [(ngModel)]="service.registerDetails.status" autocomplete="username" required>
+                            <label class="mx-4">{{ 'STATUS' | translate }}</label>
+                            <select class="form-control mx-3" name="status" #status="ngModel" [(ngModel)]="service.registerDetails.status" autocomplete="username" required>
                                 <option value=""   disabled ng-selected>--Select Status--</option>
                                 <option value="Active" >{{ 'ACTIVE' | translate }}</option>
                                 <option value="Deleted">{{ 'DELETED' | translate }}</option>
@@ -33,7 +33,7 @@
                         
 
                     </div>
-                    <hr>
+                    <hr class="my-2">
                     <div class="row pb-3">
 
                         <div class="col-md-4">
@@ -43,13 +43,12 @@
                                 <input type="text" name="nameen" class="form-control"  #nameen="ngModel" [(ngModel)]="service.registerDetails.nameen" autocomplete="username" required>
                             </div>
 
-                            <label for="name" class="mx-1">{{ 'UNIT' | translate }}</label>
+                          
+                            <label for="name" class="mx-1">{{ 'REGISTPASS' | translate }}</label>
                             <div class="input-group mb-2">
-                                <select class="form-control" name="unitid" #repassword="ngModel" [(ngModel)]="service.registerDetails.unitid" autocomplete="username" required>
-                                   <option value="0"   disabled ng-selected>--Select Unit--</option>
-                                   <option *ngFor="let unit of unitsData" value="{{unit.id}}"> {{unit.name}}</option>
-                                 </select>
+                                <input type="text" name="password" class="form-control"  #password="ngModel" [(ngModel)]="service.registerDetails.password" autocomplete="new-password" required>
                             </div>
+
                            
 
                         </div>
@@ -61,6 +60,34 @@
                             </div>
 
                         
+                         
+                            <label for="name" class="mx-1">{{ 'REGISTREPPASS' | translate }}</label>
+                            <div class="input-group mb-2">
+                                <input type="text" name="repasswordcheck" [ngClass]="{'form-control': true, 'classInvalid': classInvalid}"  [(ngModel)]="repasswordcheck" autocomplete="new-password" required>
+                            </div>
+                           
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="mx-1">{{ 'UNIT' | translate }}</label>
+                            <div class="input-group mb-2">
+                                <select class="form-control" name="unitid" #repassword="ngModel" [(ngModel)]="service.registerDetails.unitid" autocomplete="username" required>
+                                   <option value="0"   disabled ng-selected>--Select Unit--</option>
+                                   <option *ngFor="let unit of unitsData" value="{{unit.id}}"> {{unit.name}}</option>
+                                 </select>
+                            </div>
+
+
+                            <label for="name" class="mx-1">{{ 'DEPT' | translate }}</label>
+                            <div class="input-group mb-2">
+                                <select class="form-control" name="depatmentid" #repassword="ngModel" [(ngModel)]="service.registerDetails.depatmentid" autocomplete="username" required>
+                                  <option value="0" selected disabled>--Select Department--</option>
+                                  <option *ngFor="let dept of deptsData" value="{{dept.id}}"> {{dept.name}}</option>
+                                </select>
+                            </div>
+
+                           
+
                             <label for="name" class="mx-1">{{ 'SECT' | translate }}</label>
                             <div class="input-group mb-2">
                                 <select class="form-control" name="sectionid" #sectionid="ngModel" [(ngModel)]="service.registerDetails.sectionid" autocomplete="username" required>
@@ -70,27 +97,6 @@
                             </div>
                            
 
-                        </div>
-                        <div class="col-md-4">
-                            <label for="name" class="mx-1">{{ 'DEPT' | translate }}</label>
-                            <div class="input-group mb-2">
-                                <select class="form-control" name="depatmentid" #repassword="ngModel" [(ngModel)]="service.registerDetails.depatmentid" autocomplete="username" required>
-                                  <option value="0" selected disabled>--Select Department--</option>
-                                  <option *ngFor="let dept of deptsData" value="{{dept.id}}"> {{dept.name}}</option>
-                                </select>
-                            </div>
-
-                         
-
-                            <label for="name" class="mx-1">{{ 'REGISTPASS' | translate }}</label>
-                            <div class="input-group mb-2">
-                                <input type="text" name="password" class="form-control"  #password="ngModel" [(ngModel)]="service.registerDetails.password" autocomplete="new-password" required>
-                            </div>
-
-                            <label for="name" class="mx-1">{{ 'REGISTREPPASS' | translate }}</label>
-                            <div class="input-group mb-2">
-                                <input type="text" name="repasswordcheck" [ngClass]="{'form-control': true, 'classInvalid': classInvalid}"  [(ngModel)]="repasswordcheck" autocomplete="new-password" required>
-                            </div>
                     
 
                             <div class="input-group mb-2 ">
@@ -156,8 +162,7 @@
                                     [totalItems]="Pagination.totalCount" 
                                     [itemsPerPage]="Pagination.pageSize"
                                     [(ngModel)]="Pagination.currentPage"
-                                    (pageChanged)="getUsersPgination($event)"
-                        
+                                    (pageChanged)="getUsersPgination($event )"
                                     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
  
                         </pagination>

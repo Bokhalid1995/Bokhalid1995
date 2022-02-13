@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { AuthGuardService } from '../../shared/auth-guard.service';
 import { LoginProcessService } from '../../shared/login-process.service';
 import { Departments } from '../../shared/models/Departments.model';
 import { Pagination } from '../../shared/models/Pagination.model';
@@ -26,12 +27,12 @@ export class UserAdminComponent implements OnInit {
   submitt:string='Create Account'
   Reset:string="Reset"
   isAuthenticated: string;
-  useractive: string;
+  userCode: string;
   pager: number = 1;
   namePrev: string; nameArPrev: string; sectionPrev: string; deptPrev: string; unitPrev: string; createdOnPrev: string; createdByPrev: string;
   Pagination :Pagination = new Pagination();
 
-
+  AuthData: AuthGuardService = new AuthGuardService();
   unitsData: Units = new Units();
   sectionData: Sections = new Sections();
   deptsData: Departments = new Departments();
@@ -44,9 +45,10 @@ export class UserAdminComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.AuthData.getToken();
+    this.userCode =this.AuthData.userId;
     this.getUsersPgination(this.pager);
-    this.isAuthenticated = localStorage.getItem('token');
-    this.useractive = localStorage.getItem('userid');
+   
     if (this.isAuthenticated == null) {
       this.rout.navigateByUrl('/login');
     }
@@ -74,12 +76,10 @@ export class UserAdminComponent implements OnInit {
   }
 
   onSaveRecords(formData:NgForm) {
-    if (this.repasswordcheck != this.service.registerDetails.password) {
-      this.classInvalid = true;
-    } else {
-      this.classInvalid = false;
+ 
       if(formData.value.id != null){
-        
+      
+        this.classInvalid = false;
         return this.service1.UpdateUser(formData.value , formData.value.id).subscribe(
           response => {
             formData.reset();
@@ -97,10 +97,13 @@ export class UserAdminComponent implements OnInit {
           },
           error => { this.toastr.warning("wrong Editing Data", "Warn!"); }
         );
-      
+        
     }else{
+      if (this.repasswordcheck != this.service.registerDetails.password) {
+        this.classInvalid = true;
+      } else {
       this.classInvalid = false;
-      this.service.registerAdminResponse(formData.value , this.useractive).subscribe(
+      this.service.registerAdminResponse(formData.value , this.userCode).subscribe(
         (res: any) => {
           if (localStorage.getItem('lang') == 'en') {
             this.toastr.success("Added Success", "Done!");
@@ -120,8 +123,9 @@ export class UserAdminComponent implements OnInit {
         }
       );
     }
+  }
  
-    }
+    
   }
 
   allUers() {
@@ -178,11 +182,10 @@ export class UserAdminComponent implements OnInit {
     this.service1.getUserBypage(event.page).subscribe((res: any) => {
 
       this.usersData = res.users as registerProcess;
-      this.Pagination.totalCount = res.totalCount;
+      this.Pagination.totalCount = res.Pagination.totalCount;
       this.Pagination.currentPage = res.currentPage;
       this.Pagination.pageSize = res.pageSize;
       this.Pagination.totalPages = res.totalPages;
-    
     });
 
 

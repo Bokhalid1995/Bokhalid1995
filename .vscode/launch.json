@@ -6,32 +6,11 @@
     "configurations": [
         {
             "name": "Attach to Chrome",
-            "port": 9222,
+            "port": 4200,
             "request": "attach",
             "type": "pwa-chrome",
             "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "pwa-chrome",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
-        },
-        
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "pwa-chrome",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "type": "pwa-chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
         }
+       
     ]
 }

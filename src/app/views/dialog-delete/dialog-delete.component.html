@@ -1,0 +1,69 @@
+<style>
+    .custom-alert {  
+    width:300px;  
+}  
+  
+.modal-backdrop.in {  
+    opacity: 0.9;  
+}  
+  
+.modal-body {  
+    background-color: whitesmoke;  
+    border-radius: 11px;  
+}  
+  
+.modal {  
+    background-color: rgba(58, 51, 51, 0.4);  
+    padding-top:5px;  
+}  
+  
+.confirm-message {  
+    font-family:'Times New Roman', Times, serif;  
+    font-size:20px;  
+    font-weight:bold;  
+    margin-bottom:0px;  
+    margin-top:5px;  
+}  
+  
+.confirm-button {  
+    text-align: center;  
+    margin: 15px 0px 15px 0px;  
+}  
+  
+.btn-no {  
+    background-color: #f4516c;  
+    color:white;  
+}  
+  
+.btn-yes {  
+    background-color: #35c423;  
+    color:white;  
+}  
+</style>
+<div bsModal #ConfirmVaccine="bs-modal" *ngIf="message" class="modal fade" tabindex="-1" role="dialog" style="display:block!important" aria-labelledby="myModalLabel" aria-hidden="true">
+   
+    <div class="modal-dialog custom-alert" role="document">    
+        <div class="modal-content">    
+    
+            <div *ngIf="message?.type == 'confirm'" class="modal-body">    
+                <div class="row">    
+                    <div class="col-md-12">    
+                        <p class="text-center confirm-message">{{message.text}}</p>    
+                    </div>    
+                </div>    
+                <div class="row">    
+                    <div class="col-md-12">    
+                        <p class="confirm-button">    
+                            <a class="mr-2" (click)="message.yesFn()">    
+                                <button class="btn btn-yes">Yes</button>    
+                            </a>    
+                            <a (click)="message.noFn()">    
+                                <button class="btn btn-no">No</button>    
+                            </a>    
+                        </p>    
+                    </div>    
+                </div>    
+            </div>    
+        </div>    
+    </div>    
+</div>    

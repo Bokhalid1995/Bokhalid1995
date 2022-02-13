@@ -73,4 +73,8 @@ export class BookingService {
     const data = Object.assign(params , form)
     return this.http.put(this.baseURL + "Servicerecipientvaccinedose/Confirm?Id=" + serviceseciptid, data ,{responseType : "blob"});
   }
+  updateStatusDeleted(id:number){
+    return this.http.put(this.baseURL + "Servicerecipientvaccinedose/UpdateStatusDeleted?Id=" + id ,{params :{'Id' : id}},{responseType : "blob"});
+
+  }
 }

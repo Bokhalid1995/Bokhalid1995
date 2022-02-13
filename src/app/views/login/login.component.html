@@ -60,7 +60,7 @@
                                     <p class="text-muted" id="header-login">{{ 'LOGIN-HEADER' | translate }}</p>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">ID</span>
+                                            <span class="input-group-text"><i class="icon-note"></i></span>
                                         </div>
                                         <input type="" class="form-control" placeholder="{{ 'USERID' | translate}}" name="id" #id="ngModel" [(ngModel)]="service.loginDetails.id" (keyup.enter)="findUserName(id.value)" required>
                                     </div>

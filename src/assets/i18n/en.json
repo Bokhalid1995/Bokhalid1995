@@ -169,6 +169,11 @@
     "ACTIVE" : "Active",
     "DELETED":"Deleted",
     "CLOSED" :"Closed",
-    "ACCOUNT" :"Acount"
+    "CLOSE" :"Close",
+    "ACCOUNT" :"Acount",
+    "PREVDATA" :"Preview Data",
+    "F" : "From",
+    "T" : "To",
+    "SURE" : "Are You Sure To cancel booking ?"
 
 }

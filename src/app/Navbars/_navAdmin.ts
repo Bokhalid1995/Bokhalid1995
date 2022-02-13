@@ -29,7 +29,7 @@ export const navItemsAdmin: INavData[] = [
         url: '/Setting/cities',
         icon: 'caret-right'
       },
-      {
+    {
         name: 'Localities',
         url: '/Setting/Localities',
         icon: 'caret-right'

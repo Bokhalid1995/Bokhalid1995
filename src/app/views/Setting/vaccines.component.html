@@ -24,13 +24,13 @@
                             <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
                             <div class="input-group ">
                                 <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="service.VaccinesData.id" autocomplete="username" hidden>
-                                <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="service.VaccinesData.name" autocomplete="username" required>
+                                <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="service.VaccinesData.name" autocomplete="username" required >
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
                             <div class="input-group ">
-                                <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="service.VaccinesData.nameen" required>
+                                <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="service.VaccinesData.nameen" required >
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -54,7 +54,9 @@
                         <div class="col-md-3">
                             <label for="name" class="mx-1">{{ 'MANUFACTURINGCOUNTRY' | translate }}</label>
                             <div class="input-group ">
-                                <input type="text" name="manufacturingcountry" class="form-control" #manufacturingcountry="ngModel" [(ngModel)]="service.VaccinesData.manufacturingcountry" autocomplete="username" required>
+                                <select type="text" name="manufacturingcountry" class="form-control" #manufacturingcountry="ngModel" [(ngModel)]="service.VaccinesData.manufacturingcountry" autocomplete="username" required>
+                                    <option *ngFor="let country of CountriesData" value="{{ country.id }}">{{ country.name }}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -206,37 +208,170 @@
                                 <td>{{Vaccine.minimumage}}</td>
                                 <td>{{Vaccine.maximumage}}</td>
                                 <td>{{Vaccine.sideeffect}}</td>
-                                <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(Vaccine)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
+                                <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(Vaccine)"><i class="fa fa-address-card-o" ></i> {{ 'PREVIEW' | translate }}</button></td>
                                 <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(Vaccine)"><i class="fa fa-pencil-square"></i> {{ 'UPDATE' | translate }}</button></td>
                                 <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(Vaccine.id)"><i class="fa fa-trash" ></i>      {{ 'DELETE' | translate }}</button></td>
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
-
         </div>
-
-
     </main>
-
 </div>
-<div bsModal #successModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" #confirmRegisterModal>
-    <div class="modal-dialog modal-success" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Are you sure ?</h4>
 
+<!-- /.Preview modal -->
+<div bsModal #PreviewModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-info modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title mb-0">{{ 'PREVDATA' | translate }}</h4>
             </div>
             <div class="modal-body">
-                <p>{{ 'REGISTUSERNAME' | translate }} : </p>
-                <p>{{ 'REGISTNATID' | translate }} : </p>
+                  <form #formVaccine="ngForm" class="container">
+
+                    <div class="row">
+
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="id" class="form-control" placeholder="ID" #id="ngModel" [(ngModel)]="VaccinesPreview.id" autocomplete="username" hidden>
+                                <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="VaccinesPreview.name" autocomplete="username" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="VaccinesPreview.nameen" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'SIENTIFICNAME' | translate }}</label>
+
+                            <div class="input-group ">
+                                <input type="text" name="scientificname" class="form-control" autocomplete="" #scientificname="ngModel" [(ngModel)]="VaccinesPreview.scientificname" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="">{{ 'DISEASEPROHIBIT' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="diseaseprohibit" class="form-control" #diseaseprohibit="ngModel" [(ngModel)]="VaccinesPreview.diseaseprohibit" autocomplete="username" required disabled>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MANUFACTURINGCOUNTRY' | translate }}</label>
+                            <div class="input-group ">
+                                <select type="text" name="manufacturingcountry" class="form-control" #manufacturingcountry="ngModel" [(ngModel)]="VaccinesPreview.manufacturingcountry" autocomplete="username" required disabled>
+                                    <option *ngFor="let country of CountriesData" value="{{ country.id }}">{{ country.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'NUMBEROFDOSES' | translate }}</label>
+                            <div class="input-group ">
+
+                                <select class="form-control p-1" name="numberofdoses" autocomplete="new-password" #numberofdoses="ngModel" [(ngModel)]="VaccinesPreview.numberofdoses" required disabled>
+                                    <option value="1" selected>1 </option>
+                                    <option value="2">2</option>
+                               
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MINIMUMPERIODDOSEDAYS' | translate }}</label>
+
+                            <div class="input-group ">
+
+                                <input type="number" name="miniumumperioddosedays" class="form-control" autocomplete="" #miniumumperioddosedays="ngModel" [(ngModel)]="VaccinesPreview.miniumumperioddosedays" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MAXIMUMPERIODDOSEDAYS' | translate }}</label>
+
+                            <div class="input-group ">
+
+                                <input type="number" name="maxiumumperioddosedays" class="form-control" autocomplete="" #maxiumumperioddosedays="ngModel" [(ngModel)]="VaccinesPreview.maxiumumperioddosedays" required disabled>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MINIMUMTEMPRATURE' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="minimumtemprature" class="form-control" #minimumtemprature="ngModel" [(ngModel)]="VaccinesPreview.minimumtemprature" autocomplete="username" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MAXIMUMTEMPRATURE' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="maximumtemprature" class="form-control" #maximumtemprature="ngModel" [(ngModel)]="VaccinesPreview.maximumtemprature" autocomplete="username" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MINIMUMAGE' | translate }}</label>
+                            <div class="input-group ">
+
+                                <input type="number" name="minimumage" class="form-control" autocomplete="" #minimumage="ngModel" [(ngModel)]="VaccinesPreview.minimumage" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'MAXIMUMAGE' | translate }}</label>
+
+                            <div class="input-group ">
+
+                                <input type="number" name="maximumage" class="form-control" autocomplete="" #maximumage="ngModel" [(ngModel)]="VaccinesPreview.maximumage" required disabled>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'VALIDTYPEPERIODDETERMINE' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="validityperioddetermine" class="form-control" #validityperioddetermine="ngModel" [(ngModel)]="VaccinesPreview.validityperioddetermine" autocomplete="username" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'VALIDTYPEPERIOD' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="validityperiod" class="form-control" #validityperiod="ngModel" [(ngModel)]="VaccinesPreview.validityperiod" autocomplete="username" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'INSTRUCTIONS' | translate }}</label>
+                            <div class="input-group ">
+
+                                <input type="text" name="instructions" class="form-control" autocomplete="" #instructions="ngModel" [(ngModel)]="VaccinesPreview.instructions" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'SIDEEFFECT' | translate }}</label>
+
+                            <div class="input-group ">
+
+                                <input type="text" name="sideeffect" class="form-control" autocomplete="" #sideeffect="ngModel" [(ngModel)]="VaccinesPreview.sideeffect" required disabled>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary ml-2" (click)="successModal.hide()">No</button>
-                <button type="button" class="btn btn-success">Yes</button>
+                <button type="button" class="btn btn-secondary ml-2" (click)="PreviewModal.hide()">{{'CLOSE' | translate}}</button>
+                
             </div>
         </div>
         <!-- /.modal-content -->
@@ -246,36 +381,3 @@
 <!-- /.modal -->
 
 <!-- /.Preview modal -->
-<div bsModal #PreviewUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="cardUser">
-                    <nav>
-
-                        Active
-
-                    </nav>
-                    <div class="photo text-left">
-                        <h2><i class="fa fa-time"></i> Created On:</h2>
-                        <h2><i class="fa fa-user"></i> Created By: </h2>
-                    </div>
-                    <div class="description">
-                        <h2><i class="fa fa-user"></i> </h2>
-                        <h4>Name Arabic :</h4>
-                        <h4>Departments : </h4>
-                        <p> Vaccine : </p>
-                        <button (click)="PreviewUser.hide()">Close</button>
-                        <button>login Details</button>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

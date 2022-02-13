@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { HealthUnits } from '../../shared/models/HealthUnits.model';
 import { Localities } from '../../shared/models/Localities.model';
@@ -19,7 +20,9 @@ export class HealthUnitComponent implements OnInit {
   lang:string;
   LocalityData:Localities = new Localities();
   HealthUnitsData:HealthUnits = new HealthUnits();
+  HealthUnitsPreview:HealthUnits = new HealthUnits();
   formDataUpdate:HealthUnits = new HealthUnits();
+  @ViewChild('PreviewModal') PreviewModal:ModalDirective;
   constructor(private el:ElementRef, private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
   ngOnInit(): void {
@@ -121,6 +124,10 @@ export class HealthUnitComponent implements OnInit {
     this.service.getHealthUnits().subscribe((res: {}) => {
       this.HealthUnitsData = res as HealthUnits;
     })
+  }
+  showData(UnithealthDetails:HealthUnits){
+    this.HealthUnitsPreview = Object.assign({} , UnithealthDetails);
+    this.PreviewModal.show();
   }
   fillForm(HealthUnits:HealthUnits){
     if (localStorage.getItem('lang') == 'en') {

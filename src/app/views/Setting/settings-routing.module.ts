@@ -14,6 +14,7 @@ import { Localities } from '../../shared/models/Localities.model';
 import { LocalitiesComponent } from './localities.component';
 import { VaccinesDistributionComponent } from './vaccines-distribution.component';
 import { AddressesComponent } from './addresses.component';
+import { AuthenticationGuard } from '../../shared/guard/authentication.guard';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       {
         path: 'cities',
         component: CitiesComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Cities Control'
         }
@@ -36,6 +38,7 @@ const routes: Routes = [
       {
         path: 'States',
         component: StatesComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'States Control'
         }
@@ -43,6 +46,7 @@ const routes: Routes = [
       {
         path: 'Units',
         component: UnitsComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Units Control'
         }
@@ -50,6 +54,7 @@ const routes: Routes = [
       {
         path: 'Departments',
         component: DepartmentsComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Departments Control'
         }
@@ -58,6 +63,7 @@ const routes: Routes = [
       {
         path: 'Sections',
         component: SectionsComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Sections Control'
         }
@@ -65,6 +71,7 @@ const routes: Routes = [
       {
         path: 'Vaccines',
         component: VaccinesComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Vaccines Control'
         }
@@ -72,6 +79,7 @@ const routes: Routes = [
       {
         path: 'Health-Units',
         component: HealthUnitComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Health Units Control'
         }
@@ -79,6 +87,7 @@ const routes: Routes = [
       {
         path: 'Localities',
         component: LocalitiesComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Localities Control'
         }
@@ -86,6 +95,7 @@ const routes: Routes = [
       {
         path: 'Vaccine-Distribution',
         component: VaccinesDistributionComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Vaccine Distribution Control'
         }
@@ -93,6 +103,7 @@ const routes: Routes = [
       {
         path: 'Addresses',
         component: AddressesComponent,
+        canActivate:[AuthenticationGuard],
         data: {
           title: 'Addresses Control'
         }

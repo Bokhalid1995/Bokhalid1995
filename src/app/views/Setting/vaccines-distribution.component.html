@@ -126,8 +126,8 @@
                                 <td>{{VaccinesDist.batchnumber}}</td>
                                 <td>{{VaccinesDist.quantity}}</td>
                                 <td>{{VaccinesDist.distributeplace}}</td>
-                                <td><button class="btn btn-success p-0 h-50" (click)="fillForm(VaccinesDist)"><i class="fa fa-pencil-square mx-1"></i></button></td>
-                                <td><button class="btn btn-danger p-0 h-50" (click)="onDelete(VaccinesDist.id)"><i class="fa fa-trash mx-1" ></i></button></td>
+                                <td><button class="btn btn-success p-1 h-75" (click)="fillForm(VaccinesDist)"><i class="fa fa-pencil-square mx-1"></i>{{ 'UPDATE' | translate }}</button></td>
+                                <td><button class="btn btn-danger p-1 h-75" (click)="onDelete(VaccinesDist.id)"><i class="fa fa-trash mx-1" ></i>     {{ 'DELETE' | translate }}</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -140,7 +140,7 @@
     <div class="modal-dialog modal-success" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Are you sure ?</h4>
+                <h4 class="modal-title mb-0">Are you sure ?</h4>
 
             </div>
             <div class="modal-body">

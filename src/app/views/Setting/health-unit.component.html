@@ -181,8 +181,8 @@
                                 <td>{{UnitHealth.name}}</td>
                                 <td>{{UnitHealth.capacity}}</td>
                                 <td>{{UnitHealth.phonenumber}}</td>
-                                <td>{{UnitHealth.workingalldays}}</td>
-                                <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(UnitHealth)"><i class="fa fa-address-card-o" ></i> Preview</button></td>
+                                <td> {{  UnitHealth.workingalldays | translate}}</td>
+                                <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(UnitHealth)"><i class="fa fa-address-card-o" ></i> {{ 'PREVIEW' | translate }}</button></td>
                                 <td><button class="btn btn-success  p-1 h-50" (click)="fillForm(UnitHealth)"><i class="fa fa-pencil-square"></i> {{ 'UPDATE' | translate }}</button></td>
                                 <td><button class="btn btn-danger  p-1 h-50" (click)="onDelete(UnitHealth.id)"><i class="fa fa-trash" ></i> {{ 'DELETE' | translate }}</button></td>
                             </tr>
@@ -198,21 +198,133 @@
     </main>
 
 </div>
-<div bsModal #successModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" #confirmRegisterModal>
-    <div class="modal-dialog modal-success" role="document">
-        <div class="modal-content">
+<div bsModal #PreviewModal="bs-modal" id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-info modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content ">
             <div class="modal-header">
-                <h4 class="modal-title">Are you sure ?</h4>
-
+                <h4 class="modal-title mb-0">{{ 'PREVDATA' | translate }}</h4>
             </div>
             <div class="modal-body">
-                <p>{{ 'REGISTUSERNAME' | translate }} : </p>
-                <p>{{ 'REGISTNATID' | translate }} : </p>
+                <form #formUnitHealth="ngForm" class="container">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'NAMEARABIC' | translate }}</label>
+                            <div class="input-group ">
+
+                                <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="HealthUnitsPreview.name" autocomplete="username" required readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'NAMEENGLIAH' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="nameen" class="form-control" autocomplete="" #nameen="ngModel" [(ngModel)]="HealthUnitsPreview.nameen" required readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'CAP' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="text" name="capacity" class="form-control" autocomplete="" #capacity="ngModel" [(ngModel)]="HealthUnitsPreview.capacity" required readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'HUC' | translate }}</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="healtunitclassficationid" autocomplete="new-password" #healtunitclassficationid="ngModel" [(ngModel)]="HealthUnitsPreview.healtunitclassficationid" disabled required>
+                                    <option value="1" >1 </option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'WORKINALLD' | translate }}</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="workingalldays" autocomplete="new-password" #workingalldays="ngModel" [(ngModel)]="HealthUnitsPreview.workingalldays" disabled required>
+                                    <option value="Yes" >{{ 'YES' | translate }}  </option>
+                                    <option value="No">{{ 'NO' | translate }} </option>
+                               
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'WORKINALLH' | translate }}</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="workingallhours" autocomplete="new-password" #workingallhours="ngModel" [(ngModel)]="HealthUnitsPreview.workingallhours" disabled required>
+                                    <option value="Yes" selected>{{ 'YES' | translate }} </option>
+                                    <option value="No">{{ 'NO' | translate }} </option>
+                               
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'FROMD' | translate }}  </label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="fromday" autocomplete="new-password" #fromday="ngModel" [(ngModel)]="HealthUnitsPreview.fromday" disabled required>
+                                    <option value="1" selected>{{ 'SAT' | translate }}  </option>
+                                    <option value="2" selected>{{ 'SUN' | translate }}  </option>
+                                    <option value="3" selected>{{ 'MON' | translate }}  </option>
+                                    <option value="4" selected>{{ 'TUE' | translate }}  </option>
+                                    <option value="5" selected>{{ 'WEN' | translate }}  </option>
+                                    <option value="6" selected>{{ 'THR' | translate }}  </option>
+                                    <option value="7" selected>{{ 'FRI' | translate }} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'TOD' | translate }} </label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="today" autocomplete="new-password" #today="ngModel" [(ngModel)]="HealthUnitsPreview.today" disabled required>
+                                <option value="1" selected>{{ 'SAT' | translate }}  </option>
+                                <option value="2" selected>{{ 'SUN' | translate }}  </option>
+                                <option value="3" selected>{{ 'MON' | translate }}  </option>
+                                <option value="4" selected>{{ 'TUE' | translate }}  </option>
+                                <option value="5" selected>{{ 'WEN' | translate }}  </option>
+                                <option value="6" selected>{{ 'THR' | translate }}  </option>
+                                <option value="7" selected>{{ 'FRI' | translate }} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'FROMH' | translate }} </label>
+                            <div class="input-group ">
+                                <input type="time" class="form-control" name="fromhour" #fromhour="ngModel" [(ngModel)]="HealthUnitsPreview.fromhour"  autocomplete="username" min="09:00" max="18:00" readonly required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'TOH' | translate }} </label>
+                            <div class="input-group ">
+                                <input type="time" class="form-control" name="tohour" #tohour="ngModel" [(ngModel)]="HealthUnitsPreview.tohour" (change)="getHoursTo(tohour.value)" autocomplete="username" min="09:00" max="18:00" readonly required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'PHONE' | translate }}</label>
+                            <div class="input-group ">
+                                <input type="number" name="phonenumber" class="form-control" autocomplete="" #phonenumber="ngModel" [(ngModel)]="HealthUnitsPreview.phonenumber" readonly required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name" class="mx-1">{{ 'ADDRESS' | translate }}</label>
+                            <div class="input-group ">
+                                <select class="form-control p-1" name="addressid" autocomplete="new-password" #addressid="ngModel" [(ngModel)]="HealthUnitsPreview.addressid" disabled required>
+                                    <option *ngFor="let Localit of LocalityData" value="{{ Localit.id }}">{{ Localit.nameen }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary ml-2" (click)="successModal.hide()">No</button>
-                <button type="button" class="btn btn-success">Yes</button>
+                <button type="button" class="btn btn-secondary ml-2" (click)="PreviewModal.hide()">{{'CLOSE' | translate}}</button>
+                
             </div>
         </div>
         <!-- /.modal-content -->
@@ -222,36 +334,3 @@
 <!-- /.modal -->
 
 <!-- /.Preview modal -->
-<div bsModal #PreviewUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="cardUser">
-                    <nav>
-
-                        Active
-
-                    </nav>
-                    <div class="photo text-left">
-                        <h2><i class="fa fa-time"></i> Created On:</h2>
-                        <h2><i class="fa fa-user"></i> Created By: </h2>
-                    </div>
-                    <div class="description">
-                        <h2><i class="fa fa-user"></i> </h2>
-                        <h4>Name Arabic :</h4>
-                        <h4>Departments : </h4>
-                        <p> Health Unit : </p>
-                        <button (click)="PreviewUser.hide()">Close</button>
-                        <button>login Details</button>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

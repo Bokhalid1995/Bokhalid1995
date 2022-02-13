@@ -1,8 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Countires } from '../../shared/models/Countries.model';
 import { Vaccines } from '../../shared/models/Vaccines.model';
 import { PublicServiciesService } from '../../shared/public-servicies.service';
 
@@ -14,8 +16,10 @@ export class VaccinesComponent implements OnInit {
   Reset:string;
   submitt:string;
   VaccinesData:Vaccines = new Vaccines();
+  VaccinesPreview:Vaccines = new Vaccines();
+  CountriesData:Countires = new Countires();
   lang: string;
-  
+  @ViewChild('PreviewModal') PreviewModal:ModalDirective;
  
   constructor(private el:ElementRef, private rout: Router, public service: PublicServiciesService,  private toastr: ToastrService,public translate:TranslateService ) { }
 
@@ -27,6 +31,9 @@ export class VaccinesComponent implements OnInit {
       this.Reset = "إعادة تعيين"
       this.submitt = "إضافة جديد";
     }
+    this.service.getCountries().subscribe(res => {
+      this.CountriesData = res as Countires 
+    })
      this.ShowAll();
   }
   onSaveVaccine(formVaccine:NgForm){
@@ -108,6 +115,10 @@ export class VaccinesComponent implements OnInit {
     this.service.getVaccines().subscribe((res: {}) => {
       this.VaccinesData = res as Vaccines;
     })
+  }
+  showData(VaccinesDetails:Vaccines){
+    this.VaccinesPreview = Object.assign({} , VaccinesDetails);
+    this.PreviewModal.show();
   }
   fillForm(Vaccines:Vaccines){
     if (localStorage.getItem('lang') == 'en') {

@@ -7,6 +7,8 @@
     }
     
     html:lang(ar) {
+        $enable-ltr: true;
+        $enable-rtl: true;
         h1,
         h2,
         h3,
@@ -82,17 +84,17 @@
         .tab-area tabset ul {
             padding: 0px;
         }
-        .main .container-fluid {
-            margin-left: 0px !important;
-            margin-right: 200px !important;
-            text-align: right;
-        }
-        cui-breadcrumb .breadcrumb {
-            margin-left: 0px !important;
-            margin-right: 200px !important;
-            text-align: right;
-            width: 100%;
-        }
+        // .main .container-fluid {
+        //     margin-left: 0px !important;
+        //     margin-right: 200px !important;
+        //     text-align: right;
+        // }
+        // cui-breadcrumb .breadcrumb {
+        //     margin-left: 0px !important;
+        //     margin-right: 200px !important;
+        //     text-align: right;
+        //     width: 100%;
+        // }
         .sidebar-nav {
             text-align: right;
             direction: rtl;
@@ -113,11 +115,11 @@
             content: none;
             position: absolute;
         }
-        app-footer {
-            margin-left: 0px !important;
-            margin-right: 200px !important;
-            text-align: right;
-        }
+        // app-footer {
+        //     margin-left: 0px !important;
+        //     margin-right: 200px !important;
+        //     text-align: right;
+        // }
     }
     
     input::-webkit-outer-spin-button,
@@ -751,6 +753,18 @@
         background-color: #000000;
         opacity: 0.4;
     }
+
+    h4.text-muted {
+        
+    position: absolute !important;
+    right: 12px !important;
+    top: -13px !important;
+    padding: 10px !important;
+    background: #08a2b8 !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+
+    }
     /* Responsive Design */
     
     @media all and (max-width: 240px) {
@@ -797,5 +811,13 @@
             #card-2 {
                 border-radius: 15px !important;
             }
+
+        }
+
+        #info {
+            height:320px !important;
+        }
+        .slide {
+            height: 340px !important;
         }
     }

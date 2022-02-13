@@ -149,6 +149,7 @@ export class VaccinesDistributionComponent implements OnInit {
     })
   }
   fillForm(VaccinesDistData:VaccinesDistribution){
+    this.healthunitidsData  = new Centers();
     if (localStorage.getItem('lang') == 'en') {
       this.Reset = "Cancel Update"
       this.submitt = "Update";
@@ -156,12 +157,20 @@ export class VaccinesDistributionComponent implements OnInit {
       this.submitt = "تعديل"
       this.Reset = "إلغاء التعديل";
     }
-this.service1.VaccinesDistData = Object.assign({} , VaccinesDistData) ;
+  
+    this.service1.getHealthUnits().subscribe((res: {}) => {
+      this.healthunitidsData = res as Centers;
+      this.service1.VaccinesDistData = Object.assign({} , VaccinesDistData);
+    })
+
+  
   window.scrollTo({
     top : 70,
     behavior : 'smooth'
   });
-
+  
+ 
+ 
   }
 
 }

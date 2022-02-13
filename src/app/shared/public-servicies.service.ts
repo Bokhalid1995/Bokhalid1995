@@ -69,7 +69,7 @@ export class PublicServiciesService {
     return this.http.put(this.baseURL + "UserLogin/UpdateUserDeleted?id=" + id, {responseType : "text"});
  }
  UpdateUser(form:any,id:any){
-  const params = {'id' : id , 'status' : 'Active'};
+  const params = {'id' : id };
   const Data = Object.assign(form, params);
   return this.http.put(this.baseURL + "UserLogin/UpdatUser?Id=" + id, Data ,{responseType : "blob"});
 }
@@ -77,7 +77,9 @@ export class PublicServiciesService {
   if (page === undefined) page = 1 
   return this.http.get(this.baseURL + "UserLogin/UsersPagenation",{params:{'PageNumber': page , 'PageSize' : '7'}});
  }
-
+ getCountries(){
+  return this.http.get(this.baseURL + "Country/Countries");
+ }
  getStates(){
   return this.http.get(this.baseURL + "State/States");
 }

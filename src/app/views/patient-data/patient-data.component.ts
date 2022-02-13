@@ -22,7 +22,6 @@ import { VaccinesDoses } from '../../shared/models/VaccinesDoses.model';
 })
 export class PatientDataComponent implements OnInit {
   lang:string;
-  list :any[];
   dropdownSettings:IDropdownSettings={};
   currentDate:Date = new Date();
   hours:number;
@@ -41,12 +40,7 @@ export class PatientDataComponent implements OnInit {
   constructor(public translate:TranslateService , public service:BookingService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.list = 
-    [
-      {name :'Sugar',checked : false},
-      {name :'Presure',checked : false},
     
-    ];
     this.lang=localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
@@ -57,8 +51,8 @@ export class PatientDataComponent implements OnInit {
     this.service.getVaccines().subscribe((res: {}) => {
       this.vaccinesData = res as Vaccines;
     })
-    this.NameRecieption = localStorage.getItem('fullname')
-    this.IDRecieption = localStorage.getItem('userid')
+    this.NameRecieption = localStorage.getItem('fullname');
+    this.IDRecieption = localStorage.getItem('userid');
    /* this.service.getCities().subscribe((res: {}) => {
       this.citiesData = res as Cities;
     })

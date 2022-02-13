@@ -73,7 +73,7 @@
                             <a id="link-dropdown" class="nav-link dropdown-toggle" dropdownToggle (click)="false" aria-controls="your-dropdown"><i class="icon-user mx-2"></i> {{ NameRecieption }}
                             </a>
                             <div id="your-dropdown" class="dropdown-menu animated fadeIn" aria-labelledby="link-dropdown" *dropdownMenu>
-                                <a class="dropdown-item" style="color: black!important;" href="#"><i
+                                <a class="dropdown-item" style="color: black!important;" (click)="PreviewData.show()"><i
                                         class="icon-screen-desktop mx-2"></i>{{ 'EMPDETAILS' |  translate }} </a>
                                 <a class="dropdown-item" style="color: black!important;" routerLink="/login-public"><i
                                         class="icon-logout mx-2"></i>{{ 'LOGOUT' |  translate }} </a>
@@ -170,7 +170,7 @@
             <hr>
             <div class="container-fluid">
                 <div class="card row">
-                    <div class="card-body mx-auto">
+                    <div class="card-body container-fluid mx-auto">
                         <div class="row" id="searchArea">
                             <div class="col-md-2 mt-3">
                                 <h4> <b>{{ 'LISTWAIT' | translate }}</b></h4>
@@ -178,9 +178,9 @@
                             <div class="col-md-10 d-flex justify-content-end">
                                 <form action="" method="post" class="form-inline">
                                     <div class="form-group">
-                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'ATTDATE' | translate }}</b></label>
+                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'ATTDATE' | translate }} :  </b>  {{ 'F' | translate }}</label>
                                         <input #FromDate type="date" class="form-control mx-1" placeholder=""  autocomplete="email" required>
-                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'ATTDATE' | translate }}</b></label>
+                                        <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'T' | translate }}</b></label>
                                         <input #ToDate type="date" class="form-control mx-1" placeholder=""  autocomplete="email" required>
                                         <label class="form-check-label mx-1 p-1" for="inlineRadio1"><b>{{ 'STATUS' | translate }}</b></label>
                                         <div class="form-check form-check-inline mx-2" id="inline-radios" id="Requseted">
@@ -191,7 +191,7 @@
                                             <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" #Confirmed (click)="filterStatus(Confirmed.value,FromDate.value,ToDate.value)" [checked]="isConfirmed" value="DoseTaken">
                                             <label class="form-check-label" for="inlineRadio2">{{ 'CONF' | translate }}</label>
                                         </div>
-                                        <input #filterBy type="text" class="form-control mx-1" placeholder="{{ 'SEARCHIDORNID' | translate }}" (change)="getDataByNatid(filterBy.value,Requseted.checked,Confirmed.checked) " autocomplete="email" required>
+                                        <input #filterBy type="text" class="form-control mx-1" placeholder="{{ 'SEARCHIDORNID' | translate }}" (change)="getDataByNatid(filterBy.value,Requseted.checked,Confirmed.checked)" autocomplete="email" required>
                                         <button type="button" (click)="getDataByNatid(filterBy.value,Requseted.checked,Confirmed.checked)" class="btn  btn-info"><i class="fa fa-search mx-2" style="color: aliceblue;"></i></button>
                                     </div>
                                 </form>
@@ -228,19 +228,20 @@
                                         <td [class]="statusColor">{{data.status}}</td>
                                         <td><button class="btn btn-outline-info p-1 h-50" (click)="showData(data)"><i class="fa fa-address-card-o" ></i> {{ 'PREVIEW' |  translate }}</button></td>
                                         <td><button class="btn btn-outline-success  p-1 h-50" (click)="confirmShow(data)" [disabled]="disableConfirm"><i class="fa fa-check"></i> {{ 'CONFIRM' |  translate }}</button></td>
-                                        <td><button class="btn btn-danger  p-1 h-50"><i class="fa fa-trash" ></i> {{ 'CANCEL' |  translate }}</button></td>
+                                        <td><button class="btn btn-danger  p-1 h-50" (click)="DeleteData.show(); idToDelete.value = data.id;" [disabled]="disableConfirm"><i class="fa fa-trash"  ></i> {{ 'CANCEL' |  translate }}</button></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="d-flex align-content-end mx-auto">
-                                <pagination [boundaryLinks]="true" [totalItems]="77"  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
- 
-                                </pagination>
-                                <ul class="pagination">
-                                    <li class="page-item "><a class="page-link bg-info " (click)="counterMinus()"><i [class]="leftArrow"></i> {{ 'PREV' | translate }} </a></li>
-                                    <li class="page-item "><a class="page-link bg-info " (click)="counterPlus()"> {{ 'NEXT' | translate }} <i [class]="rightArrow"></i></a></li>
+                                <pagination [boundaryLinks]="true" 
+                                [totalItems]="Pagination.totalCount" 
+                                [itemsPerPage]="Pagination.pageSize"
+                                [(ngModel)]="Pagination.currentPage"
+                                (pageChanged)="getPginationByEvent($event ,Confirmed.value ,FromDate.value ,ToDate.value)"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 
-                                </ul>
+                                 </pagination>
+                             
                             </div>
                             <!-- <button class="btn btn-success" (click)="scrollTo('Statics')"> scrooll</button>*/-->
                         </div>
@@ -251,8 +252,8 @@
         </div>
 
         <!--MoDAAAAAAAAAAAAAAl-->
-        <div bsModal #ConfirmVaccine="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+      <div bsModal #ConfirmVaccine="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
 
                     <div class="modal-body">
@@ -341,30 +342,55 @@
         </div>
 
         <div bsModal #PreviewData="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
 
-                    <div class="modal-body">
-                        <div class="cardUser" *ngFor="let deatils of datalist">
-                            <nav>
-
-                                Preview Data :
-
-                            </nav>
-                            <div class="photo text-left">
-                                <h2><i class="fa fa-time"></i> Created On: </h2>
-                                <h2><i class="fa fa-user"></i> Created By: </h2>
-                            </div>
-                            <div class="description">
-                                <h2><i class="fa fa-user"></i> </h2>
-                                <h4>Name Arabic : </h4>
-                                <h4>Departments : </h4>
-                                <p> Unit : </p>
-                                <button (click)="PreviewUser.hide()">Close</button>
-                                <button>login Details</button>
-                            </div>
+                    <div class="modal-body text-right">
+                        <ng-template let-item ngFor [ngForOf]="PreviewDetails">
+                       
+                        <div class="text-right">
+                            <div class="d-flex justify-content-end">  <img src="../../../assets/img/close.png" width="15" height="15" style="cursor: pointer;" (click)="PreviewData.hide()" /></div>
+                            <hr>
+                            <div class="d-flex justify-content-center"><img src="../../../assets/img/avatar-profile.png" name="aboutme" width="140" height="140" class="img-circle "></div>
+                            <h3 class="media-heading">اسم المستخدم <small> {{ item.serviceRecipientNameAr }} </small></h3>
+                            <span><strong>التفاصيل: </strong></span>
+                            <hr>
+                          
+                                <span class="label label-warning"> اسم اللقاح : {{ item.vaccineNameAr }} </span>
+                                <br>
+                                <span class="label label-info">الوحدة الصحية  :  {{ item.healthUnitNameAr }}</span>
+                                <br>
+                                <span class="label label-info">زمن الحجز   :  {{ item.bookingdate | date :'yyyy/MM/dd'}}</span>
+                               
                         </div>
+                            <hr>
+                            <div>
+                            <p class=""><strong>الحالة </strong><br>
+                                {{ item.status }} <br>
+                            </div>
+                        
+                    </ng-template>
+                    </div>
 
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div bsModal #DeleteData="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body text-center">
+                        <h5>{{ 'SURE' |  translate }}</h5>
+                        <hr>
+                        <div class="d-flex justify-content-center">
+                            <input #idToDelete type="text" hidden />
+                            <button type="button" class="btn btn-danger col-sm-5 mx-auto" (click)="DeleteData.hide()"><i class="fa fa-close mx-2"></i>{{ 'CANCEL' | translate }}</button>
+                            <button type="button" (click)="confirmDelete(idToDelete.value)" class="btn btn-success col-sm-6 mx-auto"><i class="fa fa-check mx-2"></i> {{ 'YES' |
+                                translate }}</button>
+                        </div>
                     </div>
 
                 </div>

@@ -12,6 +12,7 @@ import { freeSet } from '@coreui/icons';
 })
 export class AppComponent implements OnInit {
   isAuthenticated: string;
+  useractive: string;
   constructor(
     private router: Router,
     public iconSet: IconSetService

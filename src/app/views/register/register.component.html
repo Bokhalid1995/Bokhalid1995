@@ -1,6 +1,12 @@
 <style>
     #info {
-        height: calc(46vh + 88px);
+        height: 430px;
+        overflow: hidden; 
+        padding:0px !important;
+         border-radius:10px;
+    }
+    .slide {
+        height: 400px !important;
     }
 </style>
 <div class="app-body animated fadeIn">
@@ -14,10 +20,31 @@
                         </div>
                     </div>
                     <div class="card-group mt-2">
-                        <div class="card bg-info p-4">
-                            <div id="info" class="text-center">
-                                <h3>تسجيل بياناتك !</h3>
-                                <hr> تسجيل البيانات تسهل للمستخدم من متابعة الاجراءات اللازمه في التطبيق
+                        <div class="card" style="background-color: transparent;">
+                            <div id="info" class="text-center" >
+                              
+                                 <carousel [interval]="3000" >
+                                    <slide>
+                                        <img src="../../../assets/img/CornaBg.jpg" alt="First slide" style="display: block; width: 100%; ">  <div class="carousel-caption d-none d-md-block">
+                                        <h3>First slide label</h3>
+                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                      </div>
+                                    </slide>
+                                    <slide>
+                                      <img src="https://picsum.photos/id/1036/900/750" alt="Second slide" style="display: block; width: 100%;">
+                                      <div class="carousel-caption d-none d-md-block">
+                                        <h3>Second slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                      </div>
+                                    </slide>
+                                    <slide>
+                                      <img src="https://picsum.photos/id/1043/900/750" alt="Third slide" style="display: block; width: 100%;">
+                                      <div class="carousel-caption d-none d-md-block">
+                                        <h3>Third slide label</h3>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                      </div>
+                                    </slide>
+                                  </carousel>
                             </div>
 
                         </div>
@@ -27,9 +54,8 @@
                     <div class="card ">
                         <div class="card-body ">
                             <!-- <h1>{{ 'REGISTERTITLE' | translate }}</h1>-->
-                            <h4 class="text-muted"><i class="icon-plus mx-2"></i> {{ 'RECEPTDETAILS' | translate }}</h4>
-                            <hr class="my-2">
-                            <form #formRegister="ngForm" id="registerForma" class="container">
+                            <h4 class="text-muted"><i class="icon-user mx-2"></i> {{ 'RECEPTDETAILS' | translate }}</h4>
+                            <form #formRegister="ngForm" id="registerForma" class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="name" class="mb-1">{{ 'FULLNAME' |  translate }}</label>
@@ -72,7 +98,7 @@
 
                                         <label for="name" class="mb-1">{{ 'DOB' |  translate }}</label>
                                         <div class="input-group mb-1">
-                                            <input type="date" class="form-control" name="dateofbirth" #dateofbirth="ngModel" [(ngModel)]="service.recieptiestDetails.dateofbirth" value="1996-06-08" autocomplete="username" required>
+                                            <input bsDatepicker type="text" class="form-control" name="dateofbirth" #dateofbirth="ngModel" [(ngModel)]="service.recieptiestDetails.dateofbirth" value="1996-06-08" autocomplete="username" required>
                                         </div>
 
                                         <label for="name" class="mb-1">{{ 'CHRONIC' |  translate }}</label>

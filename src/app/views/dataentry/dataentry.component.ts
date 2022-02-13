@@ -7,13 +7,14 @@ import { CollapseDirective } from 'ngx-bootstrap/collapse';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { BookingService } from '../../shared/booking.service';
+import { DialogService } from '../../shared/Dialog.service';
+import { Pagination } from '../../shared/models/Pagination.model';
 import { Vaccines } from '../../shared/models/Vaccines.model';
 import { VaccinesDoses } from '../../shared/models/VaccinesDoses.model';
 
 @Component({
   selector: 'app-dataentry',
-  templateUrl: './dataentry.component.html',
-  styleUrls: ['./dataentry.component.scss']
+  templateUrl: './dataentry.component.html'
 })
 export class DataentryComponent implements OnInit {
   collapsed = true;
@@ -27,38 +28,39 @@ export class DataentryComponent implements OnInit {
   isConfirmed:boolean = false;
   nameConfirm:string;
   datalist:VaccinesDoses = new VaccinesDoses();
+  PreviewDetails:VaccinesDoses = new VaccinesDoses();
   disableConfirm:boolean;
   Status:string="Requested";
   NameRecieption:string;
   IDRecieption:string;
   lang:string;
-  leftArrow:string ="fa fa-chevron-left";
-  rightArrow:string ="fa fa-chevron-right";
+  Pagination:Pagination = new Pagination();
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   serviceReciepsData:VaccinesDoses = new VaccinesDoses();
-  lastPage:VaccinesDoses  = new VaccinesDoses();
+  
   vaccinesData:Vaccines = new Vaccines();
-  fromDate:string;
-  toDate:string;
+  fromDate:string= "";
+  toDate:string = "";
 
   @ViewChild('ConfirmVaccine') modal1: ModalDirective;
   @ViewChild('PreviewData') modal2: ModalDirective;
-  constructor(public translate: TranslateService,public service: BookingService,private rout:Router,private toastr:ToastrService) { }
+  @ViewChild('DeleteData') modal3: ModalDirective;
+  constructor(public translate: TranslateService,public service: BookingService,private rout:Router,private toastr:ToastrService, private dialogService: DialogService) { }
 
   ngOnInit(): void {
-    this.fromDate = formatDate(new Date(), 'yyyy/MM/dd', 'en')
+    this.fromDate = "2010/01/01"
     this.toDate = formatDate(new Date(), 'yyyy/MM/dd', 'en')
 
     this.lang = localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
     document.documentElement.lang = this.lang;
 if(this.lang === 'ar'){
-  this.leftArrow ="fa fa-chevron-right";
-  this.rightArrow ="fa fa-chevron-left";
+
 }
     this.getDataPgination(this.pager , this.Status ,this.fromDate , this.toDate);
     this.service.getVaccines().subscribe((res: {}) => {
+      
       this.vaccinesData = res as Vaccines;
     })
     this.NameRecieption = localStorage.getItem('username')
@@ -67,28 +69,48 @@ if(this.lang === 'ar'){
 
   ShowAll(){
     this.service.getVacinneDoses().subscribe((res: {}) => {
+      this.serviceReciepsData = new VaccinesDoses();
       this.serviceReciepsData = res as VaccinesDoses;
     })
   }
-  getDataPgination(page: number , status:string , dateFrom:string ,dateto:string ) {
+  getDataPgination(page: number , status:string , dateFrom?:string ,dateto?:string ) {
 if (status == "Requested"){
 this.statusColor = "statusYellow"
 }else {
 this.statusColor = "statusGreen"
 }
-    this.service.getListBypage(page ,status ,dateFrom,dateto).subscribe((res: {}) => {
-
-      this.serviceReciepsData = res as VaccinesDoses;
-      if (!Object.keys(this.serviceReciepsData).length) {
-        this.serviceReciepsData = this.lastPage;
-      
-      }
-      
+this.serviceReciepsData = new VaccinesDoses();
+    this.service.getListBypage(page ,status ,dateFrom,dateto).subscribe((res: any) => {
+ 
+      this.serviceReciepsData = res.doeses as VaccinesDoses;
+      this.Pagination.totalCount = res.Pagination.totalCount;
+      this.Pagination.currentPage = res.currentPage;
+      this.Pagination.pageSize = res.pageSize;
+      this.Pagination.totalPages = res.totalPages;
     });
 
 
   }
+  getPginationByEvent(page: any , status:string , dateFrom:string ,dateto:string ) {
+    if (status == "Requested"){
+    this.statusColor = "statusYellow"
+    }else {
+    this.statusColor = "statusGreen"
+    }
+    
+        this.service.getListBypage(page.page ,status ,dateFrom,dateto).subscribe((res: any) => {
+          this.serviceReciepsData = new VaccinesDoses();
+          this.serviceReciepsData = res.doeses as VaccinesDoses;
+          this.Pagination.totalCount = res.Pagination.totalCount;
+          this.Pagination.currentPage = res.currentPage;
+          this.Pagination.pageSize = res.pageSize;
+          this.Pagination.totalPages = res.totalPages;
+        });
+    
+    
+      }
   getDataByNatid(natid:string ,status1:boolean,status2:boolean,) {
+    this.serviceReciepsData = new VaccinesDoses();
     if (status1) {
       this.service.getVaccineDoseByNatID(natid , "Requested").subscribe((res: {}) => {
         this.serviceReciepsData = res as VaccinesDoses;
@@ -143,8 +165,8 @@ this.statusColor = "statusGreen"
   }
  
   showData(data: any) {
-    this.service.getVaccineDoseByNatID(data.nationalNumber , data.status).subscribe((res: {}) => {
-      this.datalist = res as VaccinesDoses;
+    this.service.getVaccineDoseByNatID(data.nationalNumber , data.status).subscribe((res: any) => {
+      this.PreviewDetails = res as VaccinesDoses;
       console.log(res);
     });
     this.modal2.show();
@@ -154,36 +176,6 @@ this.statusColor = "statusGreen"
     this.hours = timedata.substring(0, 2);
   }
  
-  counterPlus() {
-
-    if (this.pager < 1) {
-      this.pager = 1;
-    } else {
-      if(this.isConfirmed == true){
-        this.pager = this.pager + 1;
-        this.getDataPgination(this.pager, 'DoseTaken' ,this.fromDate ,this.toDate);
-      }else{
-        this.pager = this.pager + 1;
-        this.getDataPgination(this.pager, 'Requested' ,this.fromDate ,this.toDate);
-      }
-     
-    }
-    this.lastPage = this.serviceReciepsData;
-  }
-  counterMinus() {
-    if (this.pager < 1) {
-      this.pager = 1;
-    } else {
-      if(this.isConfirmed == true){
-        this.pager = this.pager - 1;
-        this.getDataPgination(this.pager, 'DoseTaken' ,this.fromDate ,this.toDate);
-      }else{
-        this.pager = this.pager - 1;
-        this.getDataPgination(this.pager, 'Requested' ,this.fromDate ,this.toDate) ;
-      }  
-    }
-    this.lastPage = this.serviceReciepsData;
-  }
   confirmShow(data:any){
     this.idConfirm = data.id;
     this.nameConfirm = data.serviceRecipientNameEn;
@@ -194,5 +186,13 @@ this.statusColor = "statusGreen"
       scrollTo(id:any){
         let el = document.getElementById(id);
         el.scrollIntoView();
+      }
+      
+      confirmDelete(id:number){
+        this.service.updateStatusDeleted(id).subscribe((res: {}) => {
+          this.modal3.hide();
+          this.toastr.success("Deleted Succefully", "Done!");
+          console.log("DELETED" , res as string);
+        });
       }
 }

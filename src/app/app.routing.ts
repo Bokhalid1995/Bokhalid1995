@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { AuthenticationGuard } from './shared/guard/authentication.guard';
 import { DataentryComponent } from './views/dataentry/dataentry.component';
 
 import { P404Component } from './views/error/404.component';
@@ -64,6 +65,7 @@ export const routes: Routes = [
   {
     path: 'dataentry',
     component: DataentryComponent,
+    canActivate:[AuthenticationGuard],
     data: {
       title: 'Data Entry Management Page'
     }
@@ -72,6 +74,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate:[AuthenticationGuard],
     data: {
       title: 'Home'
     },

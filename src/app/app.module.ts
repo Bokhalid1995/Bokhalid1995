@@ -59,10 +59,16 @@ import { DataentryComponent } from './views/dataentry/dataentry.component';
 //import { RegisterAdminComponent } from "./views/userManagement/register-admin/RegisterAdminComponent";
 import {MatStepperModule} from '@angular/material/stepper';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule, DatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { LoginPublicComponent } from './views/login-public/login-public.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { DialogDeleteComponent } from './views/dialog-delete/dialog-delete.component';
+import { DialogService } from './shared/Dialog.service';
+import { AuthGuardService } from './shared/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -84,6 +90,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    CarouselModule.forRoot(),
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
@@ -97,8 +104,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
         deps: [HttpClient]
       },
       isolate: true
-    })
+    }),
+    BsDatepickerModule.forRoot(),
+    DatepickerModule
   ],
+  exports: [  
+    DialogDeleteComponent  
+],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
@@ -109,10 +121,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     PatientDataComponent,
     DataentryComponent,
     LoginPublicComponent,
-    
-    
-    
-  ],
+    DialogDeleteComponent,
+  ],  
   providers: [
     LoginProcessService,
     {
@@ -120,9 +130,11 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
       useClass: HashLocationStrategy,
        
     },
+    DialogService,
     IconSetService,
     TranslateService,
     BsModalRef,
+    AuthGuardService
   ],
   bootstrap: [ AppComponent ]
 })

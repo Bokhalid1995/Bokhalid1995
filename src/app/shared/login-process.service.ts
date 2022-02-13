@@ -33,8 +33,8 @@ export class LoginProcessService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodeToken= this.jwtHelper.decodeToken(user.token);
-          localStorage.setItem('username',this.decodeToken.unique_name);
-          localStorage.setItem('userid',this.decodeToken.nameid);
+          // localStorage.setItem('username',this.decodeToken.unique_name);
+          // localStorage.setItem('userid',this.decodeToken.nameid);
           console.log(this.decodeToken);
         }
       })
